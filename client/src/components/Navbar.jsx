@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import "../styles/Navbar.css";
-
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import "../styles/Navbar.css"
 
 const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
         <a href="/" className="navbar-logo">
-          Fireworks Website
+          Big P Fireworks
         </a>
       </div>
       <div className="navbar-menu">
@@ -18,21 +19,29 @@ const Navbar = () => {
             </a>
           </li>
           <li className="nav-item">
-            <a href="/products" className="nav-link">
-              Products
+            <a href="/shop" className="nav-link">
+              Shop
             </a>
           </li>
           <li className="nav-item">
-            <a href="/gallery" className="nav-link">
-              Gallery
-            </a>
-          </li>
-          <li className="nav-item">
-            <a href="/contact" className="nav-link">
+            <a href="/Contact" className="nav-link">
               Contact
             </a>
           </li>
+          <li className="nav-item">
+            <a href="/locations" className="nav-link">
+              Locations
+            </a>
+          </li>
         </ul>
+      </div>
+      <div className="navbar-right">
+        <a href="/login" className="login-link">
+          Login
+        </a>
+        <a href="/carts" className="cart-link">
+          <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" />
+        </a>
       </div>
     </nav>
   );
