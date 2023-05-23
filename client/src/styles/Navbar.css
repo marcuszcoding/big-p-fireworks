@@ -2,16 +2,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #333;
+  background-color: rgb(75, 74, 74);
   color: #fff;
   padding: 10px;
 }
 
-.navbar-logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #fff;
-  text-decoration: none;
+.navbar-logo img {
+  width: 130px;
+  height: 70px
 }
 
 .navbar-menu {
@@ -32,6 +30,7 @@
 .nav-link {
   color: #fff;
   text-decoration: none;
+  font-size: 20px;
 }
 
 .nav-link:hover {
@@ -45,7 +44,7 @@
 
 .login-link {
   color: #fff;
-  margin-right: 10px;
+  margin-right: 20px;
   text-decoration: none;
 }
 
@@ -57,6 +56,5 @@
 }
 
 .cart-icon {
-  font-size: 20px;
-  margin-right: 5px;
+  margin-right: 10px;
 }

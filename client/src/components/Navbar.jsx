@@ -1,47 +1,50 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
+import logo from "../images/bigpfireworksLogo.webp"
 import "../styles/Navbar.css"
+
 
 const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <a href="/" className="navbar-logo">
-          Big P Fireworks
-        </a>
+        <Link to="/" className="navbar-logo">
+          <img src={logo} alt="Fireworks Website Logo"/>
+        </Link>
       </div>
       <div className="navbar-menu">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <a href="/" className="nav-link">
+            <Link to="/" className="nav-link">
               Home
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a href="/shop" className="nav-link">
-              Shop
-            </a>
+            <Link to="/products" className="nav-link">
+              Products
+            </Link>
           </li>
           <li className="nav-item">
-            <a href="/Contact" className="nav-link">
+            <Link to="/gallery" className="nav-link">
+              Gallery
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/contact" className="nav-link">
               Contact
-            </a>
-          </li>
-          <li className="nav-item">
-            <a href="/locations" className="nav-link">
-              Locations
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
       <div className="navbar-right">
-        <a href="/login" className="login-link">
+        <Link to="/login" className="login-link">
           Login
-        </a>
-        <a href="/carts" className="cart-link">
+        </Link>
+        <Link to="/carts" className="cart-link">
           <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" />
-        </a>
+        </Link>
       </div>
     </nav>
   );
