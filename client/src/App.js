@@ -1,22 +1,8 @@
 import React from 'react'
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
-import { useEffect, useState } from 'react'
 import Navbar from './components/Navbar'
 
-
 function App() {
-
-  // const [backendData, setBackendData] = useState([{}])
-
-  // useEffect(() => {
-  //   fetch("/api").then(
-  //     response => response.json()
-  //   ).then(
-  //     data => {
-  //       setBackendData(data)
-  //     }
-  //   )
-  // }, [])
 
   return (
     <div className='App'>
