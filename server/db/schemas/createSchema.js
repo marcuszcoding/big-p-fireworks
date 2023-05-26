@@ -2,57 +2,58 @@ module.exports = `
 
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS products CASCADE;
-DROP TABLE IF EXISTS products_category CASCADE;
-DROP TABLE IF EXISTS products_inventory CASCADE;
+DROP TABLE IF EXISTS product_categorys CASCADE;
+DROP TABLE IF EXISTS product_inventorys CASCADE;
 DROP TABLE IF EXISTS discounts CASCADE;
-DROP TABLE IF EXISTS shopping_sessions CASCADE;
+DROP TABLE IF EXISTS orders CASCADE;
 DROP TABLE IF EXISTS order_details CASCADE;
-DROP TABLE IF EXISTS order_items CASCADE;
 DROP TABLE IF EXISTS cart_items CASCADE;
 
 
   CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
-    username VARCHAR(100) NOT NULL,
-    password VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
+    password VARCHAR(100) NOT NULL,
     phone_number VARCHAR(20) NOT NULL
-
   );
 
   CREATE TABLE products (
     product_id SERIAL PRIMARY KEY,
-    category_id INTEGER REFERENCES products_category(category_id),
+    category_id INTEGER REFERENCES product_categories(category_id),
+    inventory_id INTEGER REFERENCES product_inventorys(inventory_id)
     product_name VARCHAR(100) NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
     description TEXT NOT NULL,
-    image_url VARCHAR(200) NOT NULL
+    video_url VARCHAR(100)
   );
 
-  CREATE TABLE products_category (
+  CREATE TABLE product_categories (
     category_id SERIAL PRIMARY KEY,
     category_name VARCHAR(100) NOT NULL,
     description TEXT NOT NULL
-
   );
 
   CREATE TABLE products_inventory (
     inventory_id SERIAL PRIMARY KEY,
-    product_id INTEGER REFERENCES product(product_id),
-    quantity INTEGER NOT NULL
-
+    product_id INTEGER REFERENCES products(product_id),
+    quantity INTEGER NOT NULL,
+    created_at TIMESTAMP NOT NULL,
+    modified_at TIMESTAMP NOT NULL,
+    deleted_at TIMESTAMP NOT NULL,
   );
 
   CREATE TABLE discounts (
     discount_id SERIAL PRIMARY KEY,
-    product_id INTEGER REFERENCES product(product_id),
+    product_id INTEGER REFERENCES products(product_id),
+    category_id INTEGER REFERENCES product_categories(category_id)
     discount_percentage DECIMAL(5, 2),
+    discount_type VARCHAR(55) NOT NULL
     start_date DATE,
     end_date DATE
 
   );
 
-  CREATE TABLE order_details (
+  CREATE TABLE orders (
     order_id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES "user"(user_id),
     order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -61,8 +62,8 @@ DROP TABLE IF EXISTS cart_items CASCADE;
 
   );
 
-  CREATE TABLE order_items (
-    order_item_id SERIAL PRIMARY KEY,
+  CREATE TABLE order_details (
+    order_details_id SERIAL PRIMARY KEY,
     order_id INTEGER REFERENCES order_details(order_id),
     product_id INTEGER REFERENCES product(product_id),
     quantity INTEGER,
@@ -70,18 +71,14 @@ DROP TABLE IF EXISTS cart_items CASCADE;
 
   );
 
-  CREATE TABLE shopping_session (
-    session_id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES "user"(user_id),
-    start_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    end_time TIMESTAMP
-  );
-
   CREATE TABLE cart_items (
     cart_item_id SERIAL PRIMARY KEY,
-    session_id INTEGER REFERENCES shopping_session(session_id),
-    product_id INTEGER REFERENCES product(product_id),
+    user_id INTEGER REFERENCES users(user_id),
+    product_id INTEGER REFERENCES products(product_id),
     quantity INTEGER NOT NULL
+    created_at TIMESTAMP NOT NULL, 
+    updated_at TIMESTAMP NOT NULL, 
+    deleted_at TIMESTAMP NOT NULL
   );
 
 `
