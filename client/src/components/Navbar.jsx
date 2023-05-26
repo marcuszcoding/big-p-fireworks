@@ -22,8 +22,8 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/products" className="nav-link">
-              Products
+            <Link to="/shop" className="nav-link">
+              Shop 
             </Link>
           </li>
           <li className="nav-item">
@@ -42,7 +42,7 @@ const Navbar = () => {
         <Link to="/login" className="login-link">
           Login
         </Link>
-        <Link to="/carts" className="cart-link">
+        <Link to="/cart" className="cart-link">
           <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" />
         </Link>
       </div>

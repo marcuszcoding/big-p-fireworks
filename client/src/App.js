@@ -1,6 +1,12 @@
 import React from 'react'
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import Navbar from './components/Navbar'
+import Home from './pages/Home'
+import Shop from './pages/Shop'
+import Contact from './pages/Contact'
+import Locations from './pages/Locations'
+import Cart from './pages/Cart'
+import Login from './pages/Login'
 
 function App() {
 
@@ -11,11 +17,12 @@ function App() {
       <Navbar />
         <Routes>
           <Route path='/'/>
-          <Route path='home'/>
-          <Route path='shop'/>
-          <Route path='contact'/>
-          <Route path='locations'/>
-          <Route path='cart'/>
+          <Route path='home' element={<Home />}/>
+          <Route path='shop' element={<Shop />}/>
+          <Route path='contact' element={<Contact />}/>
+          <Route path='locations' element={<Locations />}/>
+          <Route path='cart' element={<Cart />}/>
+          <Route path='login' element={<Login />}/>
         </Routes>
       </Router>
     </div>
