@@ -17,29 +17,29 @@ const Navbar = () => {
       <div className="navbar-menu">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <Link to="/" className="nav-link">
+            <Link style={{textDecoration: 'none'}} to="/" className="nav-link">
               Home
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/shop" className="nav-link">
+            <Link style={{textDecoration: 'none'}} to="/shop" className="nav-link">
               Shop 
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/contact" className="nav-link">
+            <Link style={{textDecoration: 'none'}} to="/contact" className="nav-link">
               Contact
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/locations" className="nav-link">
+            <Link style={{textDecoration: 'none'}} to="/locations" className="nav-link">
               Locations
             </Link>
           </li>
         </ul>
       </div>
       <div className="navbar-right">
-        <Link to="/login" className="login-link">
+        <Link style={{textDecoration: 'none'}} to="/login" className="login-link">
           Login
         </Link>
         <Link to="/cart" className="cart-link">

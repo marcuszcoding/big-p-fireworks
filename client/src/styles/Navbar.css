@@ -2,59 +2,63 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(75, 74, 74);
-  color: #fff;
-  padding: 10px;
+  background-color: rgba(44, 164, 234, 0.752);
+  padding: 20px 80px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .navbar-logo img {
   width: 130px;
-  height: 70px
+  height: 70px;
 }
 
-.navbar-menu {
+.navbar-nav{
   display: flex;
-}
-
-.navbar-nav {
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 600;
+  
+  }
+.navbar-nav li{
   list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
+  padding:0 20px;
+  position: relative;
+  transition: 0.3s ease-in-out;
 }
 
-.nav-item {
-  margin: 0 10px;
+.navbar-nav :hover{
+  color: rgba(219, 22, 22, 0.78);
 }
 
-.nav-link {
-  color: #fff;
-  text-decoration: none;
-  font-size: 20px;
+.navbar-nav :hover::after{
+  content: "";
+  width: 30%;
+  height: 2px;
+  background: red;
+  position: absolute;
+  bottom: -4px;
+  left: 20px;
 }
 
-.nav-link:hover {
-  text-decoration: underline;
+.navbar-right{
+  font-size: 1.3rem;
+  font-weight: 600;
+  transition: 0.3s ease-in-out
 }
 
-.navbar-right {
-  display: flex;
-  align-items: center;
-}
-
-.login-link {
-  color: #fff;
-  margin-right: 20px;
-  text-decoration: none;
-}
-
-.cart-link {
-  color: #fff;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
+.navbar-right:hover{
+  color: rgba(219, 22, 22, 0.78);
 }
 
 .cart-icon {
-  margin-right: 10px;
+  padding-left: 1.5rem;
+}
+
+.login-link:hover{
+  color: rgba(219, 22, 22, 0.78);
+}
+
+.cart-icon:hover{
+  color: rgba(219, 22, 22, 0.78);
 }
