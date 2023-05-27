@@ -2,14 +2,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(44, 164, 234, 0.752);
+  background-color: rgba(13, 13, 14, 0.791);
   padding: 20px 80px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
 }
 
 .navbar-logo img {
   width: 130px;
   height: 70px;
+}
+
+.nav-link {
+  color:rgb(243, 240, 235);
+}
+.login-link{
+  color:rgb(243, 240, 235);
+}
+.cart-icon{
+  color:rgb(243, 240, 235);
 }
 
 .navbar-nav{
@@ -18,8 +28,8 @@
   justify-content: center;
   font-size: 1.3rem;
   font-weight: 600;
-  
-  }
+}
+
 .navbar-nav li{
   list-style: none;
   padding:0 20px;
@@ -62,3 +72,4 @@
 .cart-icon:hover{
   color: rgba(219, 22, 22, 0.78);
 }
+
