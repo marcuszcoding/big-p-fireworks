@@ -1,10 +1,10 @@
 module.exports = `
 
-DROP TABLE IF EXISTS product_categories CASCADE;
+DROP TABLE IF EXISTS products_categories CASCADE;
 
-CREATE TABLE product_categories (
+CREATE TABLE products_categories (
     id SERIAL PRIMARY KEY,
-    category_name VARCHAR(100) NOT NULL,
+    category_name VARCHAR(100) NOT NULL
   );
   
 `

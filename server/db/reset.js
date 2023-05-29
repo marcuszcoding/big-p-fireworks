@@ -1,16 +1,14 @@
 require('dotenv').config();
 const { db } = require('./index');
 
-const usersSchema = require('./schemas/usersSchema');
-
 const usersSchema = require('./schemas/users')
 const usersSeeds = require('./seeds/usersSeeds');
 
-const productsSchema = require('./schema/products')
+const productsSchema = require('./schemas/products')
 const productsSeeds = require('./seeds/productsSeeds')
 
 const productsInventorySchema = require('./schemas/products_inventory')
-const productsInventorySeeds= require('./seeds/productsInventorysSeeds')
+const productsInventorySeeds= require('./seeds/productsInventorySeeds')
 
 const productsCategoriesSchema = require('./schemas/products_categories')
 const productsCategoriesSeeds = require('./seeds/productsCategoriesSeeds')
@@ -28,17 +26,17 @@ db.connect();
 
 const promises = [
   db.query(usersSchema),
-  db.query(usersSeeds),
-  db.query(productsSchema),
-  db.query(productsSeeds),
   db.query(productsCategoriesSchema),
-  db.query(productsCategoriesSeeds),
+  db.query(productsSchema),
   db.query(productsInventorySchema),
-  db.query(productsInventorySeeds),
   db.query(discountsSchema),
   db.query(orderSchema),
   db.query(orderDetailsSchema),
   db.query(cartItemsSchema),
+  db.query(usersSeeds),
+  db.query(productsCategoriesSeeds),
+  db.query(productsSeeds),
+  db.query(productsInventorySeeds),
 
 ];
 
