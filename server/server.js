@@ -1,10 +1,6 @@
-const express = require("express");
-const app = express();
+require('dotenv').config();
+const app = require('./server');
+const port = process.env.PORT || 3001;
 
-app.get("/api", (req, res) => {
-  res.json({ "users": ["userOne", "userTwo"] });
-});
-
-app.listen(3001, () => {
-  console.log("Server started on port 3001");
-});
+// ----------------------- LISTENER
+app.listen(port, () => console.log(`Example app listening on port ${port}`));
