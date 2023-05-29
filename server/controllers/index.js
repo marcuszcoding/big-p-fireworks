@@ -1,9 +1,9 @@
 const IndexController = require('./IndexController');
 const AuthController = require('./AuthController');
-const FruitsController = require('./FruitsController');
+const ProductsController = require('./ProductsController');
 
 module.exports = {
   IndexController,
   AuthController,
-  FruitsController
+  ProductsController
 };
