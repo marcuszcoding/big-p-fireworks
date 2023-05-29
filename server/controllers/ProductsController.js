@@ -1,4 +1,4 @@
-const { FruitsModel } = require('../models');
+const { ProductsModel } = require('../models');
 
 const create = (req, res) => {
   const { userId } = req.session;
@@ -13,7 +13,7 @@ const create = (req, res) => {
       .send({ message: 'Provide name, color and emoji to create a fruit' });
   }
 
-  FruitsModel.create(userId, name, color, emoji)
+  ProductsModel.create(userId, name, color, emoji)
     .then(fruit => {
       res.status(201).send({ message: 'Created!', fruit });
     })
@@ -26,38 +26,38 @@ const create = (req, res) => {
 };
 
 const getAll = (req, res) => {
-  FruitsModel.getAll()
-    .then(fruits => {
-      if (fruits.length === 0) {
-        return res.status(200).send({ message: 'No fruits available!' });
+  ProductsModel.getAll()
+    .then(products => {
+      if (products.length === 0) {
+        return res.status(200).send({ message: 'No products available!' });
       }
 
-      res.status(200).send({ message: 'List of all fruits!', fruits });
+      res.status(200).send({ message: 'List of all products!', products });
     })
     .catch(error => {
       console.log(error.message);
       res
         .status(500)
-        .send({ message: 'Error reading fruits', error: error.message });
+        .send({ message: 'Error reading products', error: error.message });
     });
 };
 
 const getById = (req, res) => {
   const { id } = req.params;
 
-  FruitsModel.getById(id)
-    .then(fruit => {
-      if (!fruit) {
-        return res.status(404).send({ message: 'Fruit not found!' });
+  ProductsModel.getById(id)
+    .then(product => {
+      if (!product) {
+        return res.status(404).send({ message: 'Product not found!' });
       }
 
-      res.status(200).send({ message: 'Here is your fruit!', fruit });
+      res.status(200).send({ message: 'Here is your product!', product });
     })
     .catch(error => {
       console.log(error.message);
       res
         .status(500)
-        .send({ message: 'Error reading fruit', error: error.message });
+        .send({ message: 'Error reading product', error: error.message });
     });
 };
 
@@ -76,7 +76,7 @@ const update = (req, res) => {
 
   const { id } = req.params;
 
-  FruitsModel.update(name, color, emoji, id)
+  ProductsModel.update(name, color, emoji, id)
     .then(fruit => {
       if (!fruit) {
         return res.status(404).send({ message: 'Fruit not found!' });
@@ -100,7 +100,7 @@ const remove = (req, res) => {
 
   const { id } = req.params;
 
-  FruitsModel.remove(id)
+  ProductsModel.remove(id)
     .then(() => {
       res.status(204).send();
     })

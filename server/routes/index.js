@@ -2,7 +2,7 @@ const express = require('express');
 
 const IndexRoutes = require('./IndexRoutes');
 const AuthRoutes = require('./AuthRoutes');
-const FruitsRoutes = require('./FruitsRoutes');
+const ProductsRoutes = require('./ProductsRoutes');
 
 const router = express.Router();
 
@@ -13,7 +13,7 @@ router.use('/', IndexRoutes);
 router.use('/api/auth', AuthRoutes);
 
 // CRUD REST API FRUITS ROUTES
-router.use('/api/fruits', FruitsRoutes);
+router.use('/api/products', ProductsRoutes);
 
 // Catch all route
 router.use((req, res) => {

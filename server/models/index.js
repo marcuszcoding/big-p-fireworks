@@ -1,7 +1,7 @@
 const AuthModel = require('./AuthModel');
-const FruitsModel = require('./FruitsModel');
+const ProductsModel = require('./ProductsModel');
 
 module.exports = {
   AuthModel,
-  FruitsModel
+  ProductsModel
 };
