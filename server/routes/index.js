@@ -1,3 +1,5 @@
+// Manager of all routes 
+// Add restrictions for admin 
 const express = require('express');
 
 const IndexRoutes = require('./IndexRoutes');
@@ -14,6 +16,8 @@ router.use('/api/auth', AuthRoutes);
 
 // CRUD REST API FRUITS ROUTES
 router.use('/api/products', ProductsRoutes);
+
+// router.use('/api/orders, OrdersRoutes);
 
 // Catch all route
 router.use((req, res) => {
