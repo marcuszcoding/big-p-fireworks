@@ -1,12 +1,11 @@
 const { db } = require('../db');
 
 
-
-const create = (product_id, quantity) => {
+const create = (user_id, created_at, order_status) => {
   return db
     .query(
-      'INSERT INTO products_inventory (product_id, quantity) VALUES ($1, $2) RETURNING *',
-      [product_id, quantity ]
+      'INSERT INTO orders (user_id, created_at, order_status) VALUES ($1, $2, $3) RETURNING *',
+      [user_id, created_at, order_status]
     )
     .then(data => data.rows[0])
     .catch(err => console.error(err.stack));
@@ -14,23 +13,23 @@ const create = (product_id, quantity) => {
 
 const getAll = () => {
   return db
-    .query('SELECT * FROM products_inventory')
+    .query('SELECT * FROM orders')
     .then(data => data.rows)
     .catch(err => console.error(err.stack));
 };
 
 const getById = id => {
   return db
-    .query('SELECT * FROM products_inventory WHERE id = $1', [id])
+    .query('SELECT * FROM orders WHERE id = $1', [id])
     .then(data => data.rows[0])
     .catch(err => console.error(err.stack));
 };
 
-const update = (product_id, quantity, id) => {
+const update = id => {
   return db
     .query(
-      'UPDATE products_inventory SET product_id = $1, quantity = $2, WHERE id = $3 RETURNING *',
-      [product_id, quantity, id]
+      'UPDATE orders SET order_status = $1 WHERE id = 2$ RETURNING *',
+      [order_status, id]
     )
     .then(data => data.rows[0])
     .catch(err => console.error(err.stack));
@@ -38,7 +37,7 @@ const update = (product_id, quantity, id) => {
 
 const remove = id => {
   return db
-    .query('DELETE FROM products_inventory WHERE id = $1', [id])
+    .query('DELETE FROM orders WHERE id = $1', [id])
     .then(data => data.rows)
     .catch(err => console.error(err.stack));
 };

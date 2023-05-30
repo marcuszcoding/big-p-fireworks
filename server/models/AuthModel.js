@@ -17,4 +17,5 @@ const login = email => {
     .catch(err => console.error(err.stack));
 };
 
+
 module.exports = { register, login };
