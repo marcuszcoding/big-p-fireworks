@@ -1,11 +1,9 @@
 const { db } = require('../db');
 
-
-
 const create = (category_id, inventory_id, product_name, price, description, video_url) => {
   return db
     .query(
-      'INSERT INTO Products (category_id, inventory_id, product_name, price, description, video_url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+      'INSERT INTO products (category_id, inventory_id, product_name, price, description, video_url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
       [category_id, inventory_id, product_name, price, description, video_url ]
     )
     .then(data => data.rows[0])
@@ -26,11 +24,11 @@ const getById = id => {
     .catch(err => console.error(err.stack));
 };
 
-const update = (category_id, inventory_id, product_name, price, description, video_url) => {
+const update = (category_id, inventory_id, product_name, price, description, video_url, id) => {
   return db
     .query(
       'UPDATE products SET category_id = $1, inventory_id = $2, product_name = $3, price = $4, description = $5, video_url = $6  WHERE id = $7 RETURNING *',
-      [category_id, inventory_id, product_name, price, description, video_url]
+      [category_id, inventory_id, product_name, price, description, video_url, id]
     )
     .then(data => data.rows[0])
     .catch(err => console.error(err.stack));

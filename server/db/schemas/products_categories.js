@@ -8,3 +8,5 @@ CREATE TABLE products_categories (
   );
   
 `
+
+

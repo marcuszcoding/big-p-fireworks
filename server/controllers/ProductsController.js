@@ -1,27 +1,27 @@
 const { ProductsModel } = require('../models');
 
 const create = (req, res) => {
-  const { userId } = req.session;
-  if (!userId) {
-    return res.status(401).send({ message: 'User is not logged in' });
-  }
+  // const { userId } = req.session;
+  // if (!userId) {
+  //   return res.status(401).send({ message: 'User is not logged in' });
+  // }
 
-  const { name, color, emoji } = req.body;
-  if (!name || !color || !emoji) {
+  const { category_id, product_name, price, description, video_url } = req.body;
+  if (!category_id || !product_name || !price || !description || !video_url) {
     return res
       .status(400)
-      .send({ message: 'Provide name, color and emoji to create a fruit' });
+      .send({ message: 'Provide category_id, product_name, price, description, video_url' });
   }
 
-  ProductsModel.create(userId, name, color, emoji)
-    .then(fruit => {
-      res.status(201).send({ message: 'Created!', fruit });
+  ProductsModel.create(category_id, product_name, price, description, video_url)
+    .then(product => {
+      res.status(201).send({ message: 'Created product!', product });
     })
     .catch(error => {
       console.log(error.message);
       res
         .status(500)
-        .send({ message: 'Error creating fruit', error: error.message });
+        .send({ message: 'Error creating product', error: error.message });
     });
 };
 
@@ -62,41 +62,41 @@ const getById = (req, res) => {
 };
 
 const update = (req, res) => {
-  const { userId } = req.session;
-  if (!userId) {
-    return res.status(401).send({ message: 'User is not logged in' });
-  }
+  // const { userId } = req.session;
+  // if (!userId) {
+  //   return res.status(401).send({ message: 'User is not logged in' });
+  // }
 
-  const { name, color, emoji } = req.body;
-  if (!name || !color || !emoji) {
+  const { category_id, product_name, price, description, video_url } = req.body;
+  if (!category_id || !product_name || !price || !description || !video_url) {
     return res
       .status(400)
-      .send({ message: 'Provide name, color and emoji to update a fruit' });
+      .send({ message: 'Provide category_id, product_name, price, description and video_url' });
   }
 
   const { id } = req.params;
 
-  ProductsModel.update(name, color, emoji, id)
-    .then(fruit => {
-      if (!fruit) {
-        return res.status(404).send({ message: 'Fruit not found!' });
+  ProductsModel.update(category_id, product_name, price, description, video_url)
+    .then(product => {
+      if (!product) {
+        return res.status(404).send({ message: 'Product not found!' });
       }
 
-      res.status(201).send({ message: 'Updated!', fruit });
+      res.status(201).send({ message: 'Updated product!', product });
     })
     .catch(error => {
       console.log(error.message);
       res
         .status(500)
-        .send({ message: 'Error updating fruit', error: error.message });
+        .send({ message: 'Error updating product', error: error.message });
     });
 };
 
 const remove = (req, res) => {
-  const { userId } = req.session;
-  if (!userId) {
-    return res.status(401).send({ message: 'User is not logged in' });
-  }
+  // const { userId } = req.session;
+  // if (!userId) {
+  //   return res.status(401).send({ message: 'User is not logged in' });
+  // }
 
   const { id } = req.params;
 
@@ -108,7 +108,7 @@ const remove = (req, res) => {
       console.log(error.message);
       res
         .status(500)
-        .send({ message: 'Error deleting fruit', error: error.message });
+        .send({ message: 'Error deleting product', error: error.message });
     });
 };
 

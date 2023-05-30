@@ -27,7 +27,7 @@ const register = (req, res) => {
 const login = (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
-    return res.status(400).send({ message: 'Provide email and password' });
+    return res.status(400).send({ message: 'Please provide an email and password' });
   }
 
   AuthModel.login(email)

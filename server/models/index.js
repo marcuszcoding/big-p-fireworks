@@ -1,7 +1,21 @@
 const AuthModel = require('./AuthModel');
 const ProductsModel = require('./ProductsModel');
+const ProductsInventoryModel = require('./ProductsInventoryModel');
+const ProductsCategoryModel = require('./ProductsCategoryModel');
+const OrdersModel = require('./OrdersModel');
+const OrderDetailsModel = require('./OrderDetailsModel');
+const DiscountsModel = require('./DiscountsModel');
+const UsersModel = require('./UsersModel');
+const CartItemsModel = require('./CartItemsModel');
 
 module.exports = {
   AuthModel,
-  ProductsModel
+  ProductsModel,
+  ProductsInventoryModel,
+  ProductsCategoryModel,
+  OrdersModel,
+  OrderDetailsModel,
+  DiscountsModel,
+  UsersModel,
+  CartItemsModel
 };
