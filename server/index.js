@@ -3,6 +3,8 @@ const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const cookieSession = require('cookie-session');
+const cors = require('cors');
+
 
 const { db } = require('./db');
 const routes = require('./routes');
@@ -24,6 +26,8 @@ app.use(
     maxAge: 10 * 60 * 1000 // 10 min
   })
 );
+
+app.use(cors());
 
 // ----------------------- ROUTES / ENDPOINTS
 app.use('/', routes);
