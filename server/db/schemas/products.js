@@ -8,6 +8,7 @@ CREATE TABLE products (
     product_name VARCHAR(255) NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
     description TEXT NOT NULL,
-    video_url VARCHAR(100)
+    video_url VARCHAR(100),
+    image_url TEXT NOT NULL
   );
 `

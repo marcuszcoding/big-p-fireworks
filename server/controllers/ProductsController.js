@@ -6,14 +6,14 @@ const create = (req, res) => {
   //   return res.status(401).send({ message: 'User is not logged in' });
   // }
 
-  const { category_id, product_name, price, description, video_url } = req.body;
-  if (!category_id || !product_name || !price || !description || !video_url) {
+  const { category_id, product_name, price, description, video_url, image_url } = req.body;
+  if (!category_id || !product_name || !price || !description || !video_url || !image_url) {
     return res
       .status(400)
-      .send({ message: 'Provide category_id, product_name, price, description, video_url' });
+      .send({ message: 'Provide category_id, product_name, price, description, video_url, image_url' });
   }
 
-  ProductsModel.create(category_id, product_name, price, description, video_url)
+  ProductsModel.create(category_id, product_name, price, description, video_url, image_url)
     .then(product => {
       res.status(201).send({ message: 'Created product!', product });
     })
@@ -67,16 +67,16 @@ const update = (req, res) => {
   //   return res.status(401).send({ message: 'User is not logged in' });
   // }
 
-  const { category_id, product_name, price, description, video_url } = req.body;
-  if (!category_id || !product_name || !price || !description || !video_url) {
+  const { category_id, product_name, price, description, video_url, image_url } = req.body;
+  if (!category_id || !product_name || !price || !description || !video_url || !image_url) {
     return res
       .status(400)
-      .send({ message: 'Provide category_id, product_name, price, description and video_url' });
+      .send({ message: 'Provide category_id, product_name, price, description, video_url and image_url' });
   }
 
   const { id } = req.params;
 
-  ProductsModel.update(category_id, product_name, price, description, video_url)
+  ProductsModel.update(category_id, product_name, price, description, video_url, image_url)
     .then(product => {
       if (!product) {
         return res.status(404).send({ message: 'Product not found!' });
