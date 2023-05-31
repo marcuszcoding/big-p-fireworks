@@ -20,14 +20,14 @@ useEffect( () => {
       {
         products.map((product) => {
           return (
-          <spam>
+          <span key={product.id}>
             <img 
             src={product.image_url}>
             </img>
             {product.product_name}
             {product.price}
-            {/* {product.description} */}
-          </spam>
+            {product.description}
+          </span>
           )
         })
       }
