@@ -5,7 +5,8 @@ import "../styles/Shop.css"
 
 function Shop() {
 
-const [products, setProducts] = useState([])
+const [products, setProducts] = useState([]);
+const [categories, setCategories] = useState([])
 
 useEffect( () => {
   axios.get('/api/products')
@@ -13,35 +14,63 @@ useEffect( () => {
     setProducts(response.data.products)
   })
   .catch( () => {} )
-}, [])
+}, []);
+
+useEffect( () => {
+  axios.get('/api/products_category')
+  .then( (response) => {
+    setCategories(response.data.products_categories)
+  })
+  .catch( () => {} )
+}, []);
+
 
   return (
-
-    <div className='product'>
+    <section className="shop-section">
+      <div className='sidebar-category'>
       {
-        products.map((product) => {
+        categories.map((category) => {
           return (
-          <span className="product-box" key={product.id}>
-            <img className='image'
-            src={product.image_url}>
-            </img>
-            <div className='product_name'>
-            {product.product_name}
+          <span className="category-box" key={category.id}>
+            <div className='category-name'>
+            {category.category_name}
             </div>
-            {product.price}
-            <div className='description'>
+          </span>
+          )
+        })
+      }
+      </div>
+
+      <div className='product'>
+       {
+         products.map((product) => {
+           return (
+           <span className="product-box" key={product.id}>
+             <img className='image'
+              src={product.image_url}>
+             </img>
+             <div className='product_name'>
+              {product.product_name}
+             </div>
+              {product.price}
+            <div>
             <button>Add to Cart</button>
-            {/* {product.description} */}
             </div>
-            
           </span>
           )
         })
       }
     </div>
+
+    </section>
   )
     
   
 }
 
 export default Shop
+        
+
+    
+    
+            
