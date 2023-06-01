@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import "../styles/Shop.css"
 
 
 function Shop() {
@@ -16,17 +17,23 @@ useEffect( () => {
 
   return (
 
-    <div>
+    <div className='product'>
       {
         products.map((product) => {
           return (
-          <span key={product.id}>
-            <img 
+          <span className="product-box" key={product.id}>
+            <img className='image'
             src={product.image_url}>
             </img>
+            <div className='product_name'>
             {product.product_name}
+            </div>
             {product.price}
-            {product.description}
+            <div className='description'>
+            <button>Add to Cart</button>
+            {/* {product.description} */}
+            </div>
+            
           </span>
           )
         })
