@@ -24,22 +24,22 @@ router.use('/api/auth', AuthRoutes);
 router.use('/api/products', ProductsRoutes);
 
 // CRUD REST API PRODUCTS-INVENTORY ROUTES
-router.use('./api/products_inventory', ProductsInventoryRoutes);
+router.use('/api/products_inventory', ProductsInventoryRoutes);
 
 //CRUD REST API PRODUCTS-CATEGORY ROUTES
-router.use('./api/products_category', ProductsCategoryRoutes);
+router.use('/api/products_category', ProductsCategoryRoutes);
 
 //CRUD REST API ORDER ROUTES
-router.use('./api/orders', OrdersRoutes);
+router.use('/api/orders', OrdersRoutes);
 
 //CRUD REST API ORDER-DETAILS ROUTES
-router.use('./api/order_details', OrderDetailsRoutes);
+router.use('/api/order_details', OrderDetailsRoutes);
 
 //CRUD REST API DISCOUNTS ROUTES
-router.use('./api/discounts', DiscountsRoutes);
+router.use('/api/discounts', DiscountsRoutes);
 
 //CRUD REST API CART ITEM ROUTES
-router.use('./api/cart_items', CartItemsRoutes);
+router.use('/api/cart_items', CartItemsRoutes);
 
 
 // Catch all route
