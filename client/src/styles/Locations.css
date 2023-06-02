@@ -1,0 +1,25 @@
+.locations-page {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Divide the page into two equal columns */
+  grid-gap: 20px; /* Add some gap between the columns */
+  padding: 20px;
+}
+
+.locations-list {
+  background-color: #f1f1f1;
+  padding: 10px;
+}
+
+.location-item {
+  margin: 1em;
+  margin-bottom: 10px;
+}
+
+.location-name {
+  font-weight: bold;
+}
+
+.leaflet-container {
+  height: 75vh;
+  background-color: #f1f1f1;
+}
