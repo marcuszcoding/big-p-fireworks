@@ -8,6 +8,7 @@ import Locations from './pages/Locations'
 import Cart from './pages/Cart'
 import Login from './pages/Login'
 import Footer from './components/Footer'
+import ProductDetails from './pages/ProductDetails'
 
 function App() {
 
@@ -19,11 +20,12 @@ function App() {
         <Routes>
           {/* <Route path='/'/> */}
           <Route path='/' element={<Home />}/>
-          <Route path='shop' element={<Shop />}/>
-          <Route path='contact' element={<Contact />}/>
-          <Route path='locations' element={<Locations />}/>
-          <Route path='cart' element={<Cart />}/>
-          <Route path='login' element={<Login />}/>
+          <Route path='/shop' element={<Shop />}/>
+          <Route path='/shop/:product_name' element={<ProductDetails />}/>
+          <Route path='/contact' element={<Contact />}/>
+          <Route path='/locations' element={<Locations />}/>
+          <Route path='/cart' element={<Cart />}/>
+          <Route path='/login' element={<Login />}/>
         </Routes>
       <Footer />
       </Router>
@@ -32,6 +34,7 @@ function App() {
 }
 
 export default App
+
 
   // const [backendData, setBackendData] = useState([{}])
 
