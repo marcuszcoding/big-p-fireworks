@@ -13,8 +13,8 @@ const [selectedCategory ,setSelectedCategory] = useState(null)
 
 const navigate = useNavigate()
 
-const handleClickProduct = (product_name) => {
-  navigate(`/shop/${product_name.toLowerCase().split(" ").join("-")}`)
+const handleClickProduct = (id, product_name) => {
+  navigate(`/shop/${product_name.toLowerCase().split(" ").join("-")}`, {state:{productId: id}})
 }
 
 useEffect( () => {
@@ -64,13 +64,13 @@ useEffect( () => {
            <span className="product-box" key={product.id}>
              <img className='image'
               src={product.image_url}
-              onClick={() => handleClickProduct(product.product_name)}
+              onClick={() => handleClickProduct(product.id, product.product_name)}
               >
              </img>
              <div className='product_name'>
               {product.product_name}
              </div>
-              {product.price}
+              ${product.price}
             <div>
             <button onClick={() => handleClickProduct(product.product_name)}>See Details</button>
             </div>
