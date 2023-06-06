@@ -71,9 +71,9 @@ useEffect( () => {
               {product.product_name}
              </div>
               ${product.price}
-            {/* <div>
-            <button onClick={() => handleClickProduct(product.product_name)}>See Details</button>
-            </div> */}
+            <div>
+            {/* <button onClick={() => handleClickProduct(product.product_name)}>See Details</button> */}
+            </div>
           </span>
           )
         })

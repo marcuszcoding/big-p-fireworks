@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faCircle } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import logo from "../images/bigpfireworksLogo.webp"
 import { useShopCart } from '../hooks/ShopContext'
@@ -49,8 +49,10 @@ const Navbar = () => {
           Login
         </Link>
         <Link to="/cart" className="cart-link">
-          <span>{cartItemsCount()}</span>
+          <span className="fa-stack">
           <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" />
+          {cartItemsCount() > 0 && <span className="cart-count">{cartItemsCount()}</span>}
+          </span>
         </Link>
       </div>
     </nav>
