@@ -72,7 +72,7 @@ useEffect( () => {
              </div>
               ${product.price}
             <div>
-            <button onClick={() => handleClickProduct(product.product_name)}>See Details</button>
+            {/* <button onClick={() => handleClickProduct(product.product_name)}>See Details</button> */}
             </div>
           </span>
           )
