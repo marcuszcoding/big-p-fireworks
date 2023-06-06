@@ -9,12 +9,12 @@ import Cart from './pages/Cart'
 import Login from './pages/Login'
 import Footer from './components/Footer'
 import ProductDetails from './pages/ProductDetails'
+import { ShopContext } from './hooks/ShopContext'
 
 function App() {
 
   return (
     <div className='App'>
-
       <Router>
       <Navbar />
         <Routes>
