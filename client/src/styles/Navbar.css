@@ -2,9 +2,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(13, 13, 14, 0.791);
+  background-color: rgba(255, 255, 255, 0.791);
   padding: 20px 80px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+  z-index: 10;
 }
 
 .navbar-logo img {
@@ -13,13 +14,24 @@
 }
 
 .nav-link {
-  color:rgb(243, 240, 235);
+  color:rgb(0, 0, 0);
 }
 .login-link{
-  color:rgb(243, 240, 235);
+  color:rgb(0, 0, 0);
 }
+
+.navbar-right{
+  display: flex;
+  align-items: center;
+  font-size: 1.3rem;
+  font-weight: 600;
+  transition: 0.3s ease-in-out
+}
+
 .cart-icon{
-  color:rgb(243, 240, 235);
+  color:rgb(0, 0, 0);
+  padding-left: 1.5rem;
+  margin-top: 0.5em;
 }
 
 .navbar-nav{
@@ -37,39 +49,45 @@
   transition: 0.3s ease-in-out;
 }
 
+.cart-link {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+
 .navbar-nav :hover{
-  color: rgba(219, 22, 22, 0.78);
+  color: lightslategray;
+  text-decoration: underline;
 }
 
-.navbar-nav :hover::after{
-  content: "";
-  width: 30%;
-  height: 2px;
-  background: red;
-  position: absolute;
-  bottom: -4px;
-  left: 20px;
-}
-
-.navbar-right{
-  font-size: 1.3rem;
-  font-weight: 600;
-  transition: 0.3s ease-in-out
-}
-
-.navbar-right:hover{
-  color: rgba(219, 22, 22, 0.78);
-}
-
-.cart-icon {
-  padding-left: 1.5rem;
+.navbar-right :hover{
+  color: lightslategray;
+  text-decoration: underline;
 }
 
 .login-link:hover{
-  color: rgba(219, 22, 22, 0.78);
+  text-decoration: underline;
 }
 
 .cart-icon:hover{
-  color: rgba(219, 22, 22, 0.78);
+  color: lightslategray;
+  text-decoration: underline;;
+}
+
+.cart-count {
+  position: absolute;
+  top: -2px;
+  right: -7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background-color: #ff0000;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 50%;
 }
 
