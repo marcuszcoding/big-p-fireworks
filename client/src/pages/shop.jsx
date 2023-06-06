@@ -39,7 +39,7 @@ useEffect( () => {
   return (
     <section className="shop-section">
       <div className='sidebar-category'>
-      <span className="category-box" style={{backgroundColor: !selectedCategory && "tomato"}}>
+      <span className={`category-box${!selectedCategory ? ' category-box--selected': ""}`}>
             <div onClick={() => setSelectedCategory(null)} className='category-name'>
             All Products
             </div>
@@ -47,7 +47,7 @@ useEffect( () => {
       {
         categories.map((category) => {
           return (
-          <span className="category-box" key={category.id} style={{backgroundColor: selectedCategory === category.id && "tomato"}}>
+          <span className={`category-box${selectedCategory === category.id ? ' category-box--selected': ""}`} key={category.id}>
             <div onClick={() => setSelectedCategory(category.id)} className='category-name'>
             {category.category_name}
             </div>
