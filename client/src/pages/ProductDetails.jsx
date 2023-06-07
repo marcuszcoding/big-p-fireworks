@@ -35,14 +35,16 @@ function ProductDetails() {
         <p className="product-description">{product.description}</p>
         <p className="product-price">Price: ${product.price}</p>
 
-        {/* <div className="video-container">
-          <iframe
-            title="Product Video"
-            className="product-video"
-            src={product.video_url}
-            allowFullScreen
-          ></iframe>
-        </div> */}
+        <div className="video-container">
+        <iframe width="560" 
+        height="315" 
+        src={product.video_url}
+        title="Product Video" 
+        frameborder="0" 
+        allow="fullscreen;" 
+        >
+        </iframe>
+        </div>
 
         <div className="quantity-container">
           <label htmlFor="quantity">Quantity:</label>

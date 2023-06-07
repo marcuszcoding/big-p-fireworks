@@ -13,6 +13,7 @@
   padding: 20px;
 }
 
+
 .image:hover {
   transform: translateY(-20px) scale(1.1,1.1);
   /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.692); */
@@ -63,6 +64,10 @@
   transition: background-color 0.5s, transform 0.5s;
   transform: scale(1.05);
 }
+
+/* .sidebar-category{
+  z-index: -5;
+} */
 
 @media (max-width: 768px) {
   .category-box {
