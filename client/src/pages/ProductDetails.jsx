@@ -6,29 +6,60 @@ import { useShopCart } from '../hooks/ShopContext'
 
 
 function ProductDetails() {
+  const [product, setProduct] = useState([]);
+  const [quantity, setQuantity] = useState(1); // Added quantity state
+  const location = useLocation();
+  const { addToCart, removeFromCart } = useShopCart();
 
-const [product, setproduct] = useState([]);
-const location = useLocation()
+  useEffect(() => {
+    axios
+      .get(`/api/products/${location.state.productId}`)
+      .then((response) => {
+        setProduct(response.data.product);
+      })
+      .catch(() => {});
+  }, []);
 
-const {addToCart, removeFromCart} = useShopCart()
+  const handleQuantityChange = (event) => {
+    const newQuantity = parseInt(event.target.value);
+    setQuantity(newQuantity);
+  };
 
-useEffect( () => {
-  axios.get(`/api/products/${location.state.productId}`)
-  .then( (response) => {
-    setproduct(response.data.product)
-  })
-  .catch( () => {} )
-}, []);
+  return (
+    <div className="single-product">
+      <div className="product-image-container">
+        <img className="product-image" src={product.image_url} alt="Product" />
+      </div>
+      <div className="product-details-container">
+        <h2 className="product-title">{product.product_name}</h2>
+        <p className="product-description">{product.description}</p>
+        <p className="product-price">Price: ${product.price}</p>
 
-return (
-  <div className="single-product">
-    <div className="product-title">{product.product_name}</div>
-    <img className="product-image" src={product.image_url} />
-    <div className="product-description">{product.description}</div>
-    <div className="product-price">Price: ${product.price}</div>
-    <button className="add-to-cart-button" onClick={() => addToCart(product)}>Add to Cart</button>
-  </div>
-);
-};
+        {/* <div className="video-container">
+          <iframe
+            title="Product Video"
+            className="product-video"
+            src={product.video_url}
+            allowFullScreen
+          ></iframe>
+        </div> */}
+
+        <div className="quantity-container">
+          <label htmlFor="quantity">Quantity:</label>
+          <input
+            id="quantity"
+            type="number"
+            min="1"
+            value={quantity}
+            onChange={handleQuantityChange}
+          />
+        </div>
+        <button className="add-to-cart-button" onClick={() => addToCart(product)}>
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  );
+}
 
 export default ProductDetails

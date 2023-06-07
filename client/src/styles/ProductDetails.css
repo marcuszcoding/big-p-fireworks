@@ -1,48 +1,89 @@
 .single-product {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 20px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
+  align-items: flex-start;
+  gap: 20px;
 }
 
+/* Product image container */
+.product-image-container {
+  flex-basis: 50%;
+}
+
+/* Product image */
+.product-image {
+  max-width: 50%;
+  margin-left: 10em;
+  margin-top: 2em;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Product details container */
+.product-details-container {
+  flex-basis: 50%;
+  display: flex;
+  flex-direction: column;
+  margin-right: 40px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+/* Product title */
 .product-title {
   font-size: 24px;
   font-weight: bold;
+  text-align: center;
   margin-bottom: 10px;
 }
 
-.product-image {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-  margin-bottom: 10px;
-}
-
+/* Product description */
 .product-description {
-  margin-bottom: 10px;
-}
-
-.product-price {
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.add-to-cart-button {
-  padding: 10px 20px;
   font-size: 16px;
+  text-align: justify;
+  margin-bottom: 20px;
+}
+
+/* Product price */
+.product-price {
+  font-size: 20px;
   font-weight: bold;
+  color: #000000;
+  margin-bottom: 20px;
+}
+
+/* Add to cart button */
+.add-to-cart-button {
+  padding: 12px 24px;
+  background-color: #141414;
   color: #fff;
-  background-color: #007bff;
-  border: none;
-  border-radius: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s;
   cursor: pointer;
 }
 
 .add-to-cart-button:hover {
-  background-color: #0056b3;
+  background-color: #26ff00;
 }
+
+.quantity-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.quantity-container label {
+  margin-right: 10px;
+}
+
+.quantity-container input {
+  width: 50px;
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
