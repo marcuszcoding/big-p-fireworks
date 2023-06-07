@@ -14,7 +14,7 @@ const Footer = () => {
       <div className="links">
         <a href="/privacy-policy">Privacy Policy</a>
         <a href="/terms-and-conditions">Terms and Conditions</a>
-        <p>&copy; {new Date().getFullYear()} Marcus & Domarra. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Marcus & Domara. All rights reserved.</p>
       </div>
     </footer>
   );

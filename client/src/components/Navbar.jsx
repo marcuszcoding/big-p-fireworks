@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faCircle } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import logo from "../images/bigpfireworksLogo.webp"
+import logo from "../images/BIGPlogowp.png"
 import { useShopCart } from '../hooks/ShopContext'
 import "../styles/Navbar.css"
 
@@ -17,7 +17,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-brand">
         <Link to="/" className="navbar-logo">
-          <img src={logo} alt="Fireworks Website Logo"/>
+          <img src={logo} alt="Fireworks Website Logo" className='navbar-logo-img'/>
         </Link>
       </div>
       <div className="navbar-menu">
