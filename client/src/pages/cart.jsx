@@ -3,8 +3,20 @@ import "../styles/Cart.css"
 import { useShopCart } from '../hooks/ShopContext'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import CheckoutModal from '../components/CheckoutModal'
+
 
 function Cart() {
+  const [isCheckoutOpen, setCheckoutOpen] = useState(false);
+
+  const openCheckout = () => {
+    setCheckoutOpen(true);
+  };
+
+  const closeCheckout = () => {
+    setCheckoutOpen(false);
+  };
+
   const {cartItemsContainer} = useShopCart()
 
   return (
@@ -31,6 +43,12 @@ function Cart() {
       </tr> ))}
       </tbody>
     </table>
+    <div>
+      {/* Cart items and details go here */}
+      <button className='checkout-button' onClick={openCheckout}>Checkout</button>
+
+      <CheckoutModal isOpen={isCheckoutOpen} onClose={closeCheckout} cartItems={cartItemsContainer}/>
+    </div>
 
     {/* Add other elements, such as a "Checkout" button */}
     {/* Example: */}
