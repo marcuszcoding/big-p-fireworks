@@ -1,20 +1,3 @@
-const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey('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');
-
-const msg = {
-  to: 'marcuszcoding@gmail.com',
-  from: 'marcuszcoding@gmail.com', // Use the email address or domain you verified above
-  subject: 'Order Confirmed',
-  text: 'hello there marcus welcome to big D fireworks',
-  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-  // "mail_settings": {
-  //     "sandbox_mode": {
-  //         "enable": true
-  //     }
-  // }
-};
-
-
 const { OrderDetailsModel } = require('../models');
 
 
@@ -23,31 +6,24 @@ const create = (req, res) => {
   // if (!userId) {
   //   return res.status(401).send({ message: 'User is not logged in' });
   // }
-
+console.log(req.body)
   const { order_id, product_id, quantity, price } = req.body;
   if (!order_id || !product_id || !quantity || !price) {
     return res
       .status(400)
       .send({ message: 'Provide order_id, product_id, quantity, price' });
   }
-  sgMail
-    .send(msg)
-    .then((data) => {
-      console.log("data", data)
+  
+  OrderDetailsModel.create(order_id, product_id, quantity, price)
+    .then(order_details => {
+      res.status(201).send({ message: 'Created!', order_details });
     })
-    .catch((err) => {
-      console.log("errerrerrerr--", err)
-    })
-  // OrderDetailsModel.create(order_id, product_id, quantity, price)
-  //   .then(order_details => {
-  //     res.status(201).send({ message: 'Created!', order_details });
-  //   })
-  //   .catch(error => {
-  //     console.log(error.message);
-  //     res
-  //       .status(500)
-  //       .send({ message: 'Error creating order', error: error.message });
-  //   });
+    .catch(error => {
+      console.log(error.message);
+      res
+        .status(500)
+        .send({ message: 'Error creating order', error: error.message });
+    });
 };
 
 const getAll = (req, res) => {

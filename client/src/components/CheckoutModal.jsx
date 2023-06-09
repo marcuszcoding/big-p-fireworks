@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import '../styles/CheckoutModal.css';
+import axios from 'axios';
 
 const CheckoutModal = ({ isOpen, onClose, cartItems }) => {
 
@@ -23,6 +24,33 @@ const CheckoutModal = ({ isOpen, onClose, cartItems }) => {
   if (!isOpen) {
     return null;
   }
+
+  const placeOrder = () =>  {
+
+    axios.post('/api/orders', {user_id: 1})// grab from json webtoken
+    .then(response => {
+      return response.data.order.id
+    })
+    .then(order_id => {
+      const newCartItems = []
+
+      cartItems.forEach(element => {
+        const orderDetailBody = {order_id, product_id: element.id, price:element.price, quantity: element.quantity}
+        
+        const detailRequest = axios.post('/api/order_details', orderDetailBody)
+        newCartItems.push(detailRequest)
+      });
+      
+      return Promise.all(newCartItems);
+    })
+  .then((response) => {
+    console.log(response.data); 
+  })
+  .catch((error) => {
+    console.error(error); // Error handling
+  });
+};
+
 
   return (
     <div className="modal-overlay">
@@ -60,7 +88,7 @@ const CheckoutModal = ({ isOpen, onClose, cartItems }) => {
           <input type="email" placeholder="Email" />
           <button type="submit">Submit</button>
         </form> */}
-        <button className="checkout-button" onClick={onClose}>
+        <button className="checkout-button" onClick={placeOrder}>
           Confirm Order
         </button>
       </div>
