@@ -19,7 +19,7 @@ const discountsSchema = require ('./schemas/discounts')
 
 const orderDetailsSchema = require('./schemas/order_details')
 
-const orderSchema = require('./schemas/order_details')
+const orderSchema = require('./schemas/orders')
 
 
 db.connect();

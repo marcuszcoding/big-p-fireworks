@@ -1,21 +1,35 @@
 const { OrdersModel } = require('../models');
 
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey('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');
+
 const create = (req, res) => {
   // const { userId } = req.session;
   // if (!userId) {
   //   return res.status(401).send({ message: 'User is not logged in' });
   // }
 
-  const {user_id, created_at, order_status} = req.body;
-  if (!user_id || !created_at || !order_status) {
+  const {user_id} = req.body;
+  if (!user_id) {
     return res
       .status(400)
-      .send({ message: 'Provide user, timestamp and order status to create a order' });
+      .send({ message: 'Provide user to create a order' });
   }
 
-  OrdersModel.create(user_id, created_at, order_status)
+  OrdersModel.create(user_id)
     .then(order => {
       res.status(201).send({ message: 'Created!', order });
+      return order.id
+    })
+    .then( (order_id) => {
+      const msg = {
+        to: 'marcuszcoding@gmail.com',// the user in the argument
+        from: 'marcuszcoding@gmail.com', 
+        subject: 'Order Confirmed!',
+        text: 'Thank you for shopping at Big P Fireworks',
+        html: `<strong>Your order #${order_id} has been confirmed</strong>`,
+      };
+      return sgMail.send(msg)
     })
     .catch(error => {
       console.log(error.message);

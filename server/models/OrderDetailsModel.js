@@ -3,7 +3,7 @@ const { db } = require('../db');
 const create = (order_id, product_id, quantity, price) => {
   return db
     .query(
-      'INSERT INTO orders_details (order_id, product_id, quantity, price) VALUES ($1, $2, $3, $4) RETURNING *',
+      'INSERT INTO order_details (order_id, product_id, quantity, price) VALUES ($1, $2, $3, $4) RETURNING *',
       [order_id, product_id, quantity, price]
     )
     .then(data => data.rows[0])
@@ -12,14 +12,14 @@ const create = (order_id, product_id, quantity, price) => {
 
 const getAll = () => {
   return db
-    .query('SELECT * FROM orders_details')
+    .query('SELECT * FROM order_details')
     .then(data => data.rows)
     .catch(err => console.error(err.stack));
 };
 
 const getById = id => {
   return db
-    .query('SELECT * FROM orders_details WHERE id = $1', [id])
+    .query('SELECT * FROM order_details WHERE id = $1', [id])
     .then(data => data.rows[0])
     .catch(err => console.error(err.stack));
 };
@@ -36,7 +36,7 @@ const update = (quantity, price, id) => {
 
 const remove = id => {
   return db
-    .query('DELETE FROM orders_details WHERE order_id = $1', [id])
+    .query('DELETE FROM order_details WHERE order_id = $1', [id])
     .then(data => data.rows)
     .catch(err => console.error(err.stack));
 };
