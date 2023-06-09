@@ -49,14 +49,37 @@ export const ShopContextProvider = (props) => {
       const newCart = {
         ...cartItems,
       }
-      if (newCart[product.id] && newCart[product.id].quantity > 0) {
+      if (newCart[product.id] && newCart[product.id].quantity > 1) {
         newCart[product.id].quantity -= 1
-      } else {
+      } else if (newCart[product.id] && newCart[product.id].quantity === 1){
+        const confirmRemove = window.confirm("Are you sure you want to remove this item from your cart?")
+        if (!confirmRemove) return
         delete newCart[product.id]
       }
+      const results = []
+
+      for (let itemId in newCart) {
+        const item = newCart[itemId]
+        results.push(item)
+      }
+      setCartItemsContainer(results)
 
       setCartItems(newCart);
     };
+
+    const deleteFromCart = (product) => {
+      setCartItems(prev => {
+        const newCart = {
+          ...prev,
+        }
+        console.log("Previous", newCart)
+          delete newCart[product.id]
+          return newCart
+      })
+      setCartItemsContainer(prev => {
+        return prev.filter(item => item.id !== product.id) 
+      })
+    }
 
     const checkout = () => {
       const results = []
@@ -71,7 +94,7 @@ export const ShopContextProvider = (props) => {
   
     
     return (
-      <ShopContext.Provider value={{addToCart, removeFromCart, checkout, cartItemsCount, cartItemsContainer}}>
+      <ShopContext.Provider value={{addToCart, removeFromCart, checkout, cartItemsCount, cartItemsContainer, deleteFromCart}}>
              { props.children }
       </ShopContext.Provider>
     )
