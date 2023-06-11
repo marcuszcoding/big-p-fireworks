@@ -9,28 +9,29 @@ import Cart from './pages/Cart'
 import Login from './pages/Login'
 import Footer from './components/Footer'
 import ProductDetails from './pages/ProductDetails'
-import { ShopContext } from './hooks/ShopContext'
+import './styles/App.css'
 
 function App() {
-
   return (
-    <div className='App'>
+    <div className="App">
       <Router>
-      <Navbar />
-        <Routes>
-          {/* <Route path='/'/> */}
-          <Route path='/' element={<Home />}/>
-          <Route path='/shop' element={<Shop />}/>
-          <Route path='/shop/:product_name' element={<ProductDetails />}/>
-          <Route path='/contact' element={<Contact />}/>
-          <Route path='/locations' element={<Locations />}/>
-          <Route path='/cart' element={<Cart />}/>
-          <Route path='/login' element={<Login />}/>
-        </Routes>
-      <Footer />
+        <Navbar />
+        <div className="content">
+          <Routes>
+            {/* <Route path='/'/> */}
+            <Route path="/" element={<Home />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/shop/:product_name" element={<ProductDetails />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/locations" element={<Locations />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </div>
+        <Footer />
       </Router>
     </div>
-  )
+  );
 }
 
 export default App
