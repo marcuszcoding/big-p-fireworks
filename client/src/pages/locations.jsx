@@ -6,7 +6,7 @@ import "leaflet/dist/leaflet.css"
 
 const LocationsPage = () => {
   // const map = useMap()
-  const [centerPosition, setCenterPositon] = useState([30.339980, -98.039540])
+  const [centerPosition, setCenterPosition] = useState([30.339980, -98.039540])
   const [zoomLevel, setZoomLevel] = useState(9)
   // Sample data for locations
   const locations = [
@@ -24,38 +24,47 @@ const LocationsPage = () => {
 
   const markers = [
     {
+      number: 1,
       geocode: [30.514890, -98.315610],
       popUp: "BigP Indoor Store"
     },
     {
+      number: 2,
       geocode: [30.661680, -98.446610],
       popUp: "The O.G Stand"
     },
     {
+      number: 3,
       geocode: [30.656840, -98.426240],
       popUp: "Near Wakepoint LBJ Stand"
     },
     {
+      number: 4,
       geocode: [30.339980, -98.039540],
       popUp: "Spicewood Stand #1"
     },
     {
+      number: 5,
       geocode: [30.458576, -98.155568],
       popUp: "Spicewood Stand #2"
     },
     {
+      number: 6,
       geocode: [30.412570, -97.926830],
       popUp: "Hudson Bend Stand"
     },
     {
+      number: 7,
       geocode: [30.504310, -97.718170],
       popUp: "Bushy Creek Stand"
     },
     {
+      number: 8,
       geocode: [29.438970, -97.180890],
       popUp: "Shiner TX Stand, Across From Dollar Family"
     },
     {
+      number: 9,
       geocode: [31.126500, -99.335050],
       popUp: "Brady Stand"
     },
@@ -64,14 +73,12 @@ const LocationsPage = () => {
 
   const customIcon = new Icon({
     iconUrl: "https://cdn-icons-png.flaticon.com/128/684/684908.png",
-    iconSize: [38, 38] // size of icon
+    iconSize: [38, 38], // size of icon
   })
 
   const handleClickMarker = (marker) => {
-    console.log("clicked", marker.geocode)
-    setZoomLevel(3)
-    setCenterPositon(marker.geocode)
-    // map.flyTo(marker.geocode)
+    setCenterPosition(marker.geocode);
+    setZoomLevel(12);
   }
 
   // Render the list of locations
@@ -97,7 +104,7 @@ const LocationsPage = () => {
           url='https://tile.openstreetmap.org/{z}/{x}/{y}.png'
           />
           {markers.map(marker => 
-            <Marker position={marker.geocode} icon={customIcon}  eventHandlers={{
+            <Marker key={marker.geocode.toString()} position={marker.geocode} icon={customIcon}  eventHandlers={{
               click: () => handleClickMarker(marker)
             }}>
               <Popup>
