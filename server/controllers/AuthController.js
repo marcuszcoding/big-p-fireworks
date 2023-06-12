@@ -1,6 +1,13 @@
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
 const { AuthModel } = require('../models');
+const secretKey = process.env.SECRET_KEY;
+
+const generateToken = (userId) => {
+  const token = jwt.sign({ userId }, secretKey, { expiresIn: '1h' });
+  return token;
+};
 
 const register = (req, res) => {
   const { email, password } = req.body;
@@ -14,7 +21,9 @@ const register = (req, res) => {
 
   AuthModel.register(email, hashedPassword)
     .then(user => {
-      res.status(201).send({ message: 'User registered successfully!', user });
+      console.log(user)
+      const token = generateToken(user.id);
+      res.status(201).send({ message: 'User registered successfully!', token });
     })
     .catch(error => {
       console.log(error.message);
@@ -41,9 +50,9 @@ const login = (req, res) => {
         return res.status(401).send({ message: 'Invalid credentials!' });
       }
 
-      req.session.userId = user.id;
+      const token = generateToken(user.id);
 
-      res.status(200).send({ message: 'User logged in successfully!' });
+      res.status(200).send({ message: 'User logged in successfully!', token });
     })
     .catch(error => {
       console.log(error.message);
@@ -54,7 +63,7 @@ const login = (req, res) => {
 };
 
 const logout = (req, res) => {
-  req.session = null;
+  // Implement your logout logic here if needed
   res.status(200).send({ message: 'User successfully logged out' });
 };
 

@@ -1,3 +1,4 @@
+const  { validateJWT } = require('../middlewares') 
 const express = require('express');
 
 const { ProductsController } = require('../controllers');
@@ -6,7 +7,7 @@ const router = express.Router();
 
 // CRUD REST API FRUITS ROUTES
 // CREATE - post
-router.post('/', ProductsController.create);
+router.post('/', validateJWT, ProductsController.create);
 
 // READ - get
 // Read All
