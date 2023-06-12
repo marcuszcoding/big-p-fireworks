@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import '../styles/Login.css';
+import React from 'react';
+import '../styles/Register.css';
 
-
-const Login = () => {
+const Register = () => {
   return (
-    <div className="login-container">
-      <h2>Login</h2>
+    <div className="register-container">
+      <h2>Register</h2>
       <form>
         <div className="form-group">
           <label htmlFor="email">Email</label>
@@ -15,11 +14,11 @@ const Login = () => {
           <label htmlFor="password">Password</label>
           <input type="password" id="password" />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
       </form>
-      <p className='register-link'>Don't have an account? <a className='register-button'href="/register">Sign Up</a></p>
+      <p>Already have an account? <a href="/login">Login</a></p>
     </div>
   );
 };
 
-export default Login;
+export default Register;
