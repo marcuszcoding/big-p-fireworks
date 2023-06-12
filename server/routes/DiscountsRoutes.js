@@ -1,6 +1,7 @@
 const express = require('express');
 
 const { DiscountsController } = require('../controllers');
+const { validateJWT } = require('../middlewares')
 
 const router = express.Router();
 

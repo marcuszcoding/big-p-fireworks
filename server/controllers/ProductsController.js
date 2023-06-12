@@ -1,10 +1,7 @@
 const { ProductsModel } = require('../models');
 
 const create = (req, res) => {
-  // const { userId } = req.session;
-  // if (!userId) {
-  //   return res.status(401).send({ message: 'User is not logged in' });
-  // }
+  const { userId } = req;
 
   const { category_id, product_name, price, description, video_url, image_url } = req.body;
   if (!category_id || !product_name || !price || !description || !video_url || !image_url) {
