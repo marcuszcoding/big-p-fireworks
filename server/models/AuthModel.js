@@ -11,6 +11,9 @@ const register = (email, password) => {
 };
 
 const login = email => {
+  console.log(email)
+  db.query('SELECT * FROM users')
+  .then(data => console.log( data.rows))
   return db
     .query('SELECT * FROM users WHERE email = $1', [email])
     .then(data => data.rows[0])
