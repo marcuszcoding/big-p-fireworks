@@ -47,7 +47,7 @@ const login = (req, res) => {
 
       const passwordsMatch = bcrypt.compareSync(password, user.password);
       if (!passwordsMatch) {
-        return res.status(401).send({ message: 'Invalid credentials!' });
+        return res.status(401).send({ message: 'Invalid Password!' });
       }
 
       const token = generateToken(user.id);

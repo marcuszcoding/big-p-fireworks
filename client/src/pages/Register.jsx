@@ -11,13 +11,14 @@ const Register = () => {
 
     try {
       // Send registration request to the server
-      const response = await axios.post('/auth/register', { email, password });
+      const response = await axios.post('/api/auth/register', { email, password });
       console.log(response.data);
 
       // Reset the form fields
       setEmail('');
       setPassword('');
       // Redirect to the login page or perform other necessary actions
+      window.location.href = '/login';
     } catch (error) {
       console.log('Registration failed:', error);
       // Handle registration error, show error message, etc.
