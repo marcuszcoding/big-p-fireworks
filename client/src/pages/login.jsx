@@ -1,47 +1,23 @@
 import React, { useState } from 'react';
 import '../styles/Login.css';
 
+
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle login logic here
-    // You can send the email and password to the server or perform any other necessary operations
-    // For this example, let's just log the values
-    console.log('Email:', email);
-    console.log('Password:', password);
-  };
-
   return (
     <div className="login-container">
-      <form className="login-form" onSubmit={handleSubmit}>
-        <h2>Login</h2>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={handleEmailChange}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={handlePasswordChange}
-          required
-        />
+      <h2>Login</h2>
+      <form>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input type="email" id="email" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input type="password" id="password" />
+        </div>
         <button type="submit">Login</button>
       </form>
+      <p className='register-link'>Don't have an account? <a className='register-button'href="#!">Sign Up</a></p>
     </div>
   );
 };

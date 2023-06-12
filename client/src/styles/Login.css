@@ -1,41 +1,56 @@
 .login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.login-form {
-  width: 300px;
-  padding: 20px;
-  background-color: #f0f0f0;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-}
-
-.login-form h2 {
-  margin-top: 0;
+  width: 500px; /* Increased width */
+  height: 400px; /* Increased height */
+  margin: 100px auto;
+  padding: 40px;
+  background-color: #f2f2f2;
+  border-radius: 8px;
   text-align: center;
 }
 
-.login-form input {
-  width: 100%;
+.login-container h2 {
+  margin-bottom: 2px;
+  color: #000000;
+}
+
+.login-container form {
+  margin-bottom: 25px;
+}
+
+.login-container .form-group {
+  margin-bottom: 25px;
+  text-align: left;
+}
+
+.login-container label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.login-container input {
+  width: 95.7%;
   padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 1px solid #ccc;
 }
 
-.login-form button {
+.login-container button {
   width: 100%;
   padding: 10px;
-  background-color: #4caf50;
-  color: white;
+  background-color: #000000;
+  color: #fff;
   border: none;
-  border-radius: 3px;
+  border-radius: 4px;
   cursor: pointer;
 }
 
-.login-form button:hover {
-  background-color: #45a049;
+.login-container p {
+  margin-top: 30px;
 }
+
+.login-container a {
+  color: #000000;
+}
+
+
