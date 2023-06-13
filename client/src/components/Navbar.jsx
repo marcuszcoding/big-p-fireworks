@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart, faCircle } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faCircle, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from "../images/BIGPlogowp.png"
 import { useShopCart } from '../hooks/ShopContext'
@@ -62,13 +62,38 @@ const Navbar = () => {
               Locations
             </Link>
           </li>
-          {currentUser && isAdmin && ( // Condition to show the "Admin" link
-            <li className="nav-item">
-              <Link style={{ textDecoration: 'none' }} to="/admin" className="nav-link">
-                Admin
-              </Link>
-            </li>
-          )}
+          {currentUser && isAdmin && (
+  <li className="nav-item dropdown">
+    <Link
+      to="/admin"
+      className="nav-link dropdown-toggle"
+      id="adminDropdown"
+      role="button"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >
+      Admin <FontAwesomeIcon icon={faAngleDown} />
+    </Link>
+    <ul className="dropdown-menu" aria-labelledby="adminDropdown">
+      <li>
+        <Link to="/admin/products/create" className="dropdown-item">
+          Create Product
+        </Link>
+      </li>
+      <li>
+        <Link to="/admin/products/edit" className="dropdown-item">
+          Edit Product
+        </Link>
+      </li>
+      <li>
+        <Link to="/admin/orders/view" className="dropdown-item">
+          View Orders
+        </Link>
+      </li>
+    </ul>
+  </li>
+)}
+
         </ul>
       </div>
       <div className="navbar-right">

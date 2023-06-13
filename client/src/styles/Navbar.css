@@ -106,3 +106,35 @@
   background-color: #ffffff;
   font:bold;
 }
+
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: rgb(0, 0, 0); /* Add text color */
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 1); /* Change background color */
+  padding: 10px;
+  z-index: 1;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6); /* Add box shadow */
+}
+
+.dropdown-item {
+  display: block;
+  padding: 5px;
+  color: rgb(0, 0, 0); /* Add text color */
+  text-decoration: none;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* Change background color */
+  color: lightslategray; /* Add text color on hover */
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
