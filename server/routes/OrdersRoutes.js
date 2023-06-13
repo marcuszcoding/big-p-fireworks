@@ -1,3 +1,4 @@
+const  { validateJWT, jwtIsAdmin } = require('../middlewares') 
 const express = require('express');
 
 const { OrdersController } = require('../controllers');
@@ -11,16 +12,16 @@ router.post('/', OrdersController.create);
 
 // READ - get
 // Read All
-router.get('/', OrdersController.getAll);
+router.get('/', validateJWT, jwtIsAdmin, OrdersController.getAll);
 
 // Read One
 router.get('/:id', OrdersController.getById);
 
 // UPDATE - put
-router.put('/:id', OrdersController.update);
+router.put('/:id', validateJWT, jwtIsAdmin, OrdersController.update);
 
 // DELETE - delete
-router.delete('/:id', OrdersController.remove);
+router.delete('/:id', validateJWT, jwtIsAdmin, OrdersController.remove);
 
 
 module.exports = router;

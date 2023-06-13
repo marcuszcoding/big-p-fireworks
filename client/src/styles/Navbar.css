@@ -98,3 +98,11 @@
   border-radius: 50%;
 }
 
+.logout-button{
+  color:rgb(0, 0, 0);
+  border: 0ch;
+  font-size: 1em;
+  font-weight: 520;
+  background-color: #ffffff;
+  font:bold;
+}
