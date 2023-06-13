@@ -11,6 +11,9 @@ import Footer from './components/Footer'
 import ProductDetails from './pages/ProductDetails'
 import Register from './pages/Register'
 import './styles/App.css'
+import CreateProduct from './pages/CreateProduct'
+import EditProduct from './pages/EditProduct'
+import ViewOrder from './pages/ViewOrder'
 
 function App() {
   return (
@@ -28,6 +31,9 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/admin/products/create" element={<CreateProduct />} />
+            <Route path="/admin/products/edit" element={<EditProduct />} />
+            <Route path="/admin/orders/view" element={<ViewOrder />} />
           </Routes>
         </div>
         <Footer />
