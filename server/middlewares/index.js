@@ -14,9 +14,16 @@ const validateJWT = (req, res, next) => {
       return res.status(403).json({ message: 'Failed to authenticate token.' });
     }
 
-    req.userId = decoded.userId;
+    req.user = decoded;
     next();
   });
 };
 
-module.exports = { validateJWT };
+const jwtIsAdmin = (req, res, next) => {
+  if(!req.user.admin_role) {
+    return res.status(401).send({message: "You are not an admin"})
+  }
+  next();
+}
+
+module.exports = { validateJWT, jwtIsAdmin };

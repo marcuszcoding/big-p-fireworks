@@ -1,4 +1,4 @@
-const  { validateJWT } = require('../middlewares') 
+const  { validateJWT, jwtIsAdmin } = require('../middlewares') 
 const express = require('express');
 
 const { ProductsController } = require('../controllers');
@@ -7,7 +7,7 @@ const router = express.Router();
 
 // CRUD REST API FRUITS ROUTES
 // CREATE - post
-router.post('/', validateJWT, ProductsController.create);
+router.post('/', validateJWT, jwtIsAdmin, ProductsController.create);
 
 // READ - get
 // Read All
@@ -17,9 +17,9 @@ router.get('/', ProductsController.getAll);
 router.get('/:id', ProductsController.getById);
 
 // UPDATE - put
-router.put('/:id', ProductsController.update);
+router.put('/:id', validateJWT, jwtIsAdmin, ProductsController.update);
 
 // DELETE - delete
-router.delete('/:id', ProductsController.remove);
+router.delete('/:id', validateJWT, jwtIsAdmin, ProductsController.remove);
 
 module.exports = router;

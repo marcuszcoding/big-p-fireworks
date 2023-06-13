@@ -11,25 +11,22 @@ function useAuth() {
 function AuthProvider({ children }) {
   const [ token, setToken ] = useState(null);
   const [ currentUser, setCurrentUser ] = useState(null);
-  const [ isAuth, setIsAuth ] = useState(false);
   
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if(!isAuth && token){
+    if( token){
       setToken(token)
       const decoded = decode(token)
       setCurrentUser(decoded)
-      setIsAuth(true)
     }
-    return token;
-  }, [isAuth])
+    return () => localStorage.removeItem('token')
+  }, [])
 
   function register(email, password){
     const URL_PRODUCTS_API = 'http://localhost:3001/api/auth/register';
     return axios
       .post(URL_PRODUCTS_API, { email, password })
       .then(response => response.data.user)
-      .catch(error => error.message);
   }
 
   function login(email, password){
@@ -41,16 +38,23 @@ function AuthProvider({ children }) {
         localStorage.setItem('token', response.data.token)
         const decoded = decode(response.data.token)
         setCurrentUser(decoded)
-        setIsAuth(true)
-        return decoded;
       })
-      .catch(error => error.message);
   }
 
   function logout(){
     localStorage.removeItem('token')
     setCurrentUser(null)
-    setIsAuth(false)
+    setToken(null)
+  }
+
+  function tokenRequest (method, url, data) {
+    const headers = {
+      'Authorization': `Bearer ${token}`
+    }
+    return axios({
+      method, url, data, headers
+    })
+    .then(res => res.data)
   }
 
 const value = {
@@ -58,7 +62,7 @@ const value = {
   register,
   login,
   logout,
-  token
+  tokenRequest
 }
 
   return (

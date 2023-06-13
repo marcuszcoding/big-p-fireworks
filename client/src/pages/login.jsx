@@ -1,25 +1,24 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../styles/Login.css';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/AuthContext';
 
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
       // Send login request to the server
-      const response = await axios.post('/api/auth/login', { email, password });
-      const { token } = response.data;
-
-      // Save the token to local storage or session storage
-      localStorage.setItem('token', token);
-
+       await login(email, password)
       // Redirect to the desired page (e.g., dashboard)
-      window.location.href = '/';
+      navigate('/');
     } catch (error) {
       console.log('Login failed:', error);
       // Handle login error, show error message, etc.

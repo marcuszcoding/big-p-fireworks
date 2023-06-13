@@ -4,8 +4,8 @@ const bcrypt = require('bcryptjs');
 const { AuthModel } = require('../models');
 const secretKey = process.env.SECRET_KEY;
 
-const generateToken = (userId) => {
-  const token = jwt.sign({ userId }, secretKey, { expiresIn: '1h' });
+const generateToken = (payload) => {
+  const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
   return token;
 };
 
@@ -22,8 +22,8 @@ const register = (req, res) => {
   AuthModel.register(email, hashedPassword)
     .then(user => {
       console.log(user)
-      const token = generateToken(user.id);
-      res.status(201).send({ message: 'User registered successfully!', token });
+      delete user.password
+      res.status(201).send({ message: 'User registered successfully!', user});
     })
     .catch(error => {
       console.log(error.message);
@@ -32,6 +32,7 @@ const register = (req, res) => {
         .send({ message: 'Error creating user', error: error.message });
     });
 };
+
 
 const login = (req, res) => {
   const { email, password } = req.body;
@@ -50,7 +51,9 @@ const login = (req, res) => {
         return res.status(401).send({ message: 'Invalid Password!' });
       }
 
-      const token = generateToken(user.id);
+      delete user.password
+
+      const token = generateToken(user);
 
       res.status(200).send({ message: 'User logged in successfully!', token });
     })

@@ -1,24 +1,25 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import '../styles/Register.css';
+import { useAuth } from '../hooks/AuthContext';
 
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { register } = useAuth()
+  const navigate = useNavigate()
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
     try {
       // Send registration request to the server
-      const response = await axios.post('/api/auth/register', { email, password });
-      console.log(response.data);
-
+       await register(email, password)
       // Reset the form fields
       setEmail('');
       setPassword('');
       // Redirect to the login page or perform other necessary actions
-      window.location.href = '/login';
+       navigate('/login')
     } catch (error) {
       console.log('Registration failed:', error);
       // Handle registration error, show error message, etc.
