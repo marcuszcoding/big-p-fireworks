@@ -9,7 +9,7 @@ function useAuth() {
 }
 
 function AuthProvider({ children }) {
-  const [ token, setToken ] = useState(null);
+  const [ token, setToken ] = useState(localStorage.getItem('token') || null);
   const [ currentUser, setCurrentUser ] = useState(null);
   
   useEffect(() => {
@@ -19,7 +19,6 @@ function AuthProvider({ children }) {
       const decoded = decode(token)
       setCurrentUser(decoded)
     }
-    return () => localStorage.removeItem('token')
   }, [])
 
   function register(email, password){

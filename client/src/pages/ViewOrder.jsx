@@ -1,54 +1,54 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useAuth } from '../hooks/AuthContext';
 
-const ViewOrder = () => {
-  const { orderId } = useParams();
-
-  const [order, setOrder] = useState(null);
+const ViewOrders = () => {
+  const [orders, setOrders] = useState(null);
+  const { tokenRequest } = useAuth();
 
   useEffect(() => {
-    // Fetch order data from API based on orderId
-    axios.get(`/api/orders/${orderId}`)
-      .then(response => {
-        setOrder(response.data);
-      })
-      .catch(error => {
+    const fetchOrder = async () => {
+      try {
+        const response = await tokenRequest("get", "http://localhost:3001/api/orders")
+        console.log(response)
+        setOrders(response.orders);
+      } catch (error) {
         console.log(error);
-      });
-  }, [orderId]);
+      }
+    };
 
-  if (!order) {
+    fetchOrder();
+  }, []);
+
+  if (!orders) {
     return <div>No Current Orders</div>;
   }
-
-  const handleGoBack = () => {
-    // Implement your own logic for navigating back
-    // For example, you can use window.history.back()
-    // or programmatically navigate to the previous page using a router library
-  };
-
   return (
     <div className="container">
-      <h2>Order Details</h2>
-      <p>Order ID: {order.id}</p>
-      <p>Customer Name: {order.customerName}</p>
-      <p>Order Date: {order.orderDate}</p>
-
-      <h3>Order Items</h3>
-      <ul>
-        {order.items.map(item => (
-          <li key={item.id}>
-            <p>Product: {item.productName}</p>
-            <p>Quantity: {item.quantity}</p>
-            <p>Price: {item.price}</p>
-          </li>
-        ))}
-      </ul>
-
-      <button onClick={handleGoBack}>Go Back</button>
+      <h2>Orders</h2>
+      <table>
+  <thead>
+    <tr>
+      <th>orderid</th>
+      <th>Customer</th>
+      <th>Date</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {orders.map(order => (
+    <tr key={order.id}>
+      <td>{order.id}</td>
+      <td>{order.user_id}</td>
+      <td>{new Date(order.created_at).toDateString()}</td>
+      <td>{order.order_status? "Ready" : "Pending"}</td>
+    </tr>
+      ))}
+  </tbody>
+</table>
+      
     </div>
   );
 };
 
-export default ViewOrder;
+export default ViewOrders;
