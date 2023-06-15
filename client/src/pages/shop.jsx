@@ -5,11 +5,9 @@ import "../styles/Shop.css"
 
 
 
-function Shop() {
+function Shop(props) {
 
-const [products, setProducts] = useState([]);
-const [categories, setCategories] = useState([])
-const [selectedCategory ,setSelectedCategory] = useState(null)
+  const {fetchProducts, selectedCategory, setCategories, setSelectedCategory, products, categories} = props
 
 const navigate = useNavigate()
 
@@ -18,21 +16,10 @@ const handleClickProduct = (id, product_name) => {
 }
 
 useEffect( () => {
-  axios.get('/api/products')
-  .then( (response) => {
-    !selectedCategory
-    ?setProducts(response.data.products)
-    :setProducts(response.data.products.filter(p => p.category_id === selectedCategory))
-  })
-  .catch( () => {} )
-}, [selectedCategory]);
-
-useEffect( () => {
   axios.get('/api/products_category')
   .then( (response) => {
     setCategories(response.data.products_categories)
   })
-  .catch( () => {} )
 }, []);
 
 

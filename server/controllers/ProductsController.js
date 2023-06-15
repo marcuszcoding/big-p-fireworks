@@ -73,7 +73,7 @@ const update = (req, res) => {
 
   const { id } = req.params;
 
-  ProductsModel.update(category_id, product_name, price, description, video_url, image_url)
+  ProductsModel.update(category_id, product_name, price, description, video_url, image_url, id)
     .then(product => {
       if (!product) {
         return res.status(404).send({ message: 'Product not found!' });
