@@ -10,6 +10,8 @@ const router = express.Router();
 // router.get('/', IndexController.helloWorld);
 router.post('/', OrdersController.create);
 
+router.post('/:id/send', OrdersController.sendEmail)
+
 // READ - get
 // Read All
 router.get('/', validateJWT, jwtIsAdmin, OrdersController.getAll);

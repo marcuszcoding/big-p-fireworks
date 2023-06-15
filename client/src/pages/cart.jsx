@@ -1,15 +1,12 @@
-import React from 'react'
-import "../styles/Cart.css"
-import { useShopCart } from '../hooks/ShopContext'
-import { useState } from 'react'
-import { useEffect } from 'react'
-import CheckoutModal from '../components/CheckoutModal'
-
+import React from 'react';
+import "../styles/Cart.css";
+import { useShopCart } from '../hooks/ShopContext';
+import { useState, useEffect } from 'react';
+import CheckoutModal from '../components/CheckoutModal';
 
 function Cart() {
   const [isCheckoutOpen, setCheckoutOpen] = useState(false);
-
-  const {cartItemsContainer, removeFromCart, addToCart, deleteFromCart} = useShopCart()
+  const { cartItemsContainer, removeFromCart, addToCart, deleteFromCart } = useShopCart();
 
   const openCheckout = () => {
     setCheckoutOpen(true);
@@ -19,6 +16,17 @@ function Cart() {
     setCheckoutOpen(false);
   };
 
+  const subtotal = cartItemsContainer.reduce(
+    (accumulator, item) => accumulator + item.price * item.quantity,
+    0
+  ).toFixed(2);
+  
+  // Calculate tax amount (assuming taxRate is a decimal, e.g., 0.15 for 15%)
+  const taxRate = 0.0625;
+  const taxAmount = (subtotal * taxRate).toFixed(2);
+  
+  // Calculate grand total by converting subtotal, tax amount, and grand total to numbers
+  const grandTotal = (Number(subtotal) + Number(taxAmount)).toFixed(2);
 
   return (
     <div className="cart-page">
@@ -45,7 +53,7 @@ function Cart() {
                     <img src={item.image_url} width="80px" alt="" />
                   </td>
                   <td>{item.product_name}</td>
-                  <td>{item.price}</td>
+                  <td>${item.price}</td>
                   <td>
                     <div className="quantity-counter">
                       <button
@@ -69,14 +77,27 @@ function Cart() {
                       </button>
                     </div>
                   </td>
-                  <td>{item.price * item.quantity}</td>
+                  <td>${(item.price * item.quantity).toFixed(2)}</td>
                   <td><button onClick={() => deleteFromCart(item)}>X</button></td>
                 </tr>
               ))}
             </tbody>
           </table>
-          <div>
-            {/* Cart items and details go here */}
+          <div className="cart-summary">
+            <div className="subtotal">
+              <span>Subtotal: </span>
+              <span>${subtotal}</span>
+            </div>
+            <div className="tax">
+              <span>Tax: </span>
+              <span>${taxAmount}</span>
+            </div>
+            <div className="grand-total">
+              <span>Grand Total: </span>
+              <span>${grandTotal}</span>
+            </div>
+          </div>
+          <div className="checkout-container">
             <button className="checkout-button" onClick={openCheckout}>
               Checkout
             </button>
@@ -84,6 +105,9 @@ function Cart() {
               isOpen={isCheckoutOpen}
               onClose={closeCheckout}
               cartItems={cartItemsContainer}
+              subtotal={subtotal}
+              taxAmount={taxAmount}
+              grandTotal={grandTotal}
             />
           </div>
         </>
@@ -92,4 +116,4 @@ function Cart() {
   );
 }
 
-export default Cart
+export default Cart;
