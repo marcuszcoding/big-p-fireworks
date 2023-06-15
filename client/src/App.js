@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
@@ -14,8 +14,27 @@ import './styles/App.css'
 import CreateProduct from './pages/CreateProduct'
 import EditProduct from './pages/EditProduct'
 import ViewOrder from './pages/ViewOrder'
+import axios from 'axios'
 
 function App() {
+
+const [products, setProducts] = useState([]);
+const [categories, setCategories] = useState([])
+const [selectedCategory ,setSelectedCategory] = useState(null)
+
+  const fetchProducts = () => {
+    axios.get('/api/products')
+    .then( (response) => {
+      !selectedCategory
+      ?setProducts(response.data.products)
+      :setProducts(response.data.products.filter(p => p.category_id === selectedCategory))
+    })
+  }
+
+  useEffect( () => {
+    fetchProducts()
+  }, [selectedCategory]);
+
   return (
     <div className="App">
       <Router>
@@ -24,7 +43,7 @@ function App() {
           <Routes>
             {/* <Route path='/'/> */}
             <Route path="/" element={<Home />} />
-            <Route path="/shop" element={<Shop />} />
+            <Route path="/shop" element={<Shop fetchProducts = {fetchProducts} selectedCategory = {selectedCategory} setCategories = {setCategories} setSelectedCategory = {setSelectedCategory} products = {products} categories = {categories}/>} />
             <Route path="/shop/:product_name" element={<ProductDetails />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/locations" element={<Locations />} />
@@ -32,7 +51,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/admin/products/create" element={<CreateProduct />} />
-            <Route path="/admin/products/edit" element={<EditProduct />} />
+            <Route path="/admin/products/edit" element={<EditProduct fetchProducts = {fetchProducts} products = {products}/>} />
             <Route path="/admin/orders/view" element={<ViewOrder />} />
           </Routes>
         </div>
