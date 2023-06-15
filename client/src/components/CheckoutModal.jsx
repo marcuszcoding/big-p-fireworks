@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import '../styles/CheckoutModal.css';
 import axios from 'axios';
 
-const CheckoutModal = ({ isOpen, onClose, cartItems }) => {
+const CheckoutModal = ({ isOpen, onClose, cartItems, subtotal, taxAmount, grandTotal }) => {
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -35,12 +35,22 @@ const CheckoutModal = ({ isOpen, onClose, cartItems }) => {
       const newCartItems = []
 
       cartItems.forEach(element => {
-        const orderDetailBody = {order_id, product_id: element.id, price:element.price, quantity: element.quantity}
+        const product_total_price = (element.price * element.quantity).toFixed(2);
+        const orderDetailBody = { 
+          order_id,
+          product_id: element.id,
+          price: element.price,
+          quantity: element.quantity,
+          product_total_price,
+          subtotal,
+          tax: taxAmount,
+          grand_total: grandTotal,}
         
         const detailRequest = axios.post('/api/order_details', orderDetailBody)
         newCartItems.push(detailRequest)
       });
       
+      newCartItems.push(axios.post(`/api/orders/${order_id}/send`))
       return Promise.all(newCartItems);
     })
   .then((response) => {
@@ -73,21 +83,27 @@ const CheckoutModal = ({ isOpen, onClose, cartItems }) => {
               <tr key={item.id}>
                 <td><img src={item.image_url} width="80px" alt="" /></td>
                 <td>{item.product_name}</td>
-                <td>{item.price}</td>
+                <td>${item.price}</td>
                 <td>{item.quantity}</td>
-                <td>{item.price * item.quantity}</td>
+                <td>${(item.price * item.quantity).toFixed(2)}</td>
               </tr>
             ))}
           </tbody>
         </table>
-
-        {/* Additional checkout form elements can be added here */}
-        {/* Example: */}
-        {/* <form>
-          <input type="text" placeholder="Name" />
-          <input type="email" placeholder="Email" />
-          <button type="submit">Submit</button>
-        </form> */}
+        <div className="cart-summary">
+            <div className="subtotal">
+              <span>Subtotal: </span>
+              <span>${subtotal}</span>
+            </div>
+            <div className="tax">
+              <span>Tax: </span>
+              <span>${taxAmount}</span>
+            </div>
+            <div className="grand-total">
+              <span>Grand Total: </span>
+              <span>${grandTotal}</span>
+            </div>
+          </div>
         <button className="checkout-button" onClick={placeOrder}>
           Confirm Order
         </button>

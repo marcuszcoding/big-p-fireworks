@@ -7,14 +7,14 @@ const create = (req, res) => {
   //   return res.status(401).send({ message: 'User is not logged in' });
   // }
 console.log(req.body)
-  const { order_id, product_id, quantity, price } = req.body;
-  if (!order_id || !product_id || !quantity || !price) {
+  const { order_id, product_id, quantity, price, tax, product_total_price, subtotal, grand_total } = req.body;
+  if (!order_id || !product_id || !quantity || !price || !product_total_price || !tax || !subtotal || !grand_total) {
     return res
       .status(400)
-      .send({ message: 'Provide order_id, product_id, quantity, price' });
+      .send({ message: 'Provide order_id, product_id, quantity, price, product_total_price, tax, subtotal, grand_total' });
   }
   
-  OrderDetailsModel.create(order_id, product_id, quantity, price)
+  OrderDetailsModel.create(order_id, product_id, quantity, price, tax, product_total_price, subtotal, grand_total)
     .then(order_details => {
       res.status(201).send({ message: 'Created!', order_details });
     })

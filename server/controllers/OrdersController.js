@@ -1,6 +1,7 @@
-const { OrdersModel } = require('../models');
+const { OrdersModel, OrderDetailsModel, ProductsModel } = require('../models');
 
 const sgMail = require('@sendgrid/mail');
+const order_details = require('../db/schemas/order_details');
 sgMail.setApiKey('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');
 
 const create = (req, res) => {
@@ -19,17 +20,6 @@ const create = (req, res) => {
   OrdersModel.create(user_id)
     .then(order => {
       res.status(201).send({ message: 'Created!', order });
-      return order.id
-    })
-    .then( (order_id) => {
-      const msg = {
-        to: 'marcuszcoding@gmail.com',// the user in the argument
-        from: 'marcuszcoding@gmail.com', 
-        subject: 'Order Confirmed!',
-        text: 'Thank you for shopping at Big P Fireworks',
-        html: `<strong>Your order #${order_id} has been confirmed</strong>`,
-      };
-      return sgMail.send(msg)
     })
     .catch(error => {
       console.log(error.message);
@@ -38,6 +28,46 @@ const create = (req, res) => {
         .send({ message: 'Error creating order', error: error.message });
     });
 };
+
+const sendEmail = (req, res) => {
+  const {id} = req.params
+  OrderDetailsModel.getByOrderId(id)
+  .then( (order_details) => {
+
+    console.log(order_details)
+    
+      const msg = {
+        from: {
+          email: "marcuszcoding@gmail.com"
+        }, 
+        personalizations: [
+          {
+            to: [
+              {
+                email: "marcuszcoding@gmail.com",
+              }
+            ], 
+            dynamic_template_data: {
+              orderId: order_details[0].order_id,
+              order_details,
+              subtotal: order_details[0].subtotal,
+              grand_total: order_details[0].grand_total,
+              tax: order_details[0].tax
+            }
+          }
+        ],
+        template_id: "d-17bcbf71bb3e46d7ac6a0b4fa0efbe65"
+      };
+      return sgMail.send(msg)
+    })
+  .catch(error => {
+    console.log(error.message);
+    res
+      .status(500)
+      .send({ message: 'Error creating order', error: error.message });
+  });
+
+}
 
 const getAll = (req, res) => {
   OrdersModel.getAll()
@@ -126,4 +156,12 @@ const remove = (req, res) => {
     });
 };
 
-module.exports = { create, getAll, getById, update, remove };
+module.exports = { create, getAll, getById, update, remove, sendEmail };
+
+      // const msg = {
+      //   to: 'marcuszcoding@gmail.com',// the user in the argument
+      //   from: 'marcuszcoding@gmail.com', 
+      //   subject: 'Order Confirmed!',
+      //   text: 'Thank you for shopping at Big P Fireworks',
+      //   html: `<strong>Your order #${order_id} has been confirmed</strong>`,
+      // };
