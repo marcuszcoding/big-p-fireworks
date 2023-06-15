@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/AuthContext';
+import axios from 'axios';
 import '../styles/CreateProduct.css';
 import { useNavigate } from 'react-router-dom'
 
@@ -10,7 +11,8 @@ const CreateProduct = () => {
   const [description, setDescription] = useState('');
   const [photoURL, setPhotoURL] = useState('');
   const [videoURL, setVideoURL] = useState('');
-  const [category, setCategory] = useState('');
+  const [categoryId, setCategoryId] = useState('');
+  const [categories, setCategories] = useState([]);
   const { tokenRequest } = useAuth()
   const navigate = useNavigate()
 
@@ -35,8 +37,25 @@ const CreateProduct = () => {
   };
 
   const handleCategoryChange = (event) => {
-    setCategory(event.target.value);
+    setCategoryId(event.target.value);
   };
+
+  useEffect(() => {
+    // Fetch the categories from the backend and update the state
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/api/products_category');
+        // console.log(response)
+        console.log(response.data.products_categories)
+        setCategories(response.data.products_categories);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+  
+    fetchCategories();
+  }, []);
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -48,7 +67,7 @@ const CreateProduct = () => {
       description: description,
       image_url: photoURL,
       video_url: videoURL,
-      category_id: category
+      category_id: categoryId
     };
 
     console.log(data)
@@ -63,7 +82,7 @@ const CreateProduct = () => {
     setDescription('');
     setPhotoURL('');
     setVideoURL('');
-    setCategory('');
+    setCategoryId('');
 
     navigate('/shop')
   };
@@ -123,13 +142,19 @@ const CreateProduct = () => {
         </div>
         <div>
           <label htmlFor="category">Category:</label>
-          <input
-            type="text"
-            id="category"
-            value={category}
-            onChange={handleCategoryChange}
-            required
-          />
+          <select
+          id="category"
+          value={categoryId}
+          onChange={handleCategoryChange}
+          required
+          >
+          <option value="">Select a category</option>
+          {categories.map((category) => (
+            <option key={category.id} value={category.id}>
+            {category.category_name} {/* Display the category name */}
+          </option>
+        ))}
+        </select>
         </div>
         <button type="submit" className="create-product-button">Create</button>
       </form>
