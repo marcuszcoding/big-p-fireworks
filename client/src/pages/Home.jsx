@@ -28,8 +28,8 @@ const divStyle = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  height: '800px',
-  backgroundSize: 'cover',
+  height: '775px',
+  backgroundSize: 'cover'
 }
 
 const Home = () => {
