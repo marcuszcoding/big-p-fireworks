@@ -10,7 +10,7 @@ const create = (req, res) => {
   //   return res.status(401).send({ message: 'User is not logged in' });
   // }
 
-  const {user_id} = req.body;
+  const user_id = req.user.id;
   if (!user_id) {
     return res
       .status(400)

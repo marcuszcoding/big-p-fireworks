@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../hooks/AuthContext';
+import { Link } from 'react-router-dom';
 
 const ViewOrders = () => {
   const [orders, setOrders] = useState(null);
@@ -27,26 +28,31 @@ const ViewOrders = () => {
     <div className="container">
       <h2>Orders</h2>
       <table>
-  <thead>
-    <tr>
-      <th>orderid</th>
-      <th>Customer</th>
-      <th>Date</th>
-      <th>Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    {orders.map(order => (
-    <tr key={order.id}>
-      <td>{order.id}</td>
-      <td>{order.user_id}</td>
-      <td>{new Date(order.created_at).toDateString()}</td>
-      <td>{order.order_status? "Ready" : "Pending"}</td>
-    </tr>
-      ))}
-  </tbody>
-</table>
-      
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {orders.map(order => (
+            <tr key={order.id}>
+              <td>{order.id}</td>
+              <td>{order.user_id}</td>
+              <td>{new Date(order.created_at).toDateString()}</td>
+              <td>{order.order_status ? "Ready" : "Pending"}</td>
+              <td>
+                <Link to={`/orders/${order.id}`}>
+                  View Details
+                </Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

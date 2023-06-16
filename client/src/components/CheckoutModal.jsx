@@ -2,8 +2,11 @@ import React from 'react';
 import { useEffect } from 'react';
 import '../styles/CheckoutModal.css';
 import axios from 'axios';
+import { useAuth } from '../hooks/AuthContext'
 
 const CheckoutModal = ({ isOpen, onClose, cartItems, subtotal, taxAmount, grandTotal }) => {
+
+  const { tokenRequest } = useAuth()
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -26,18 +29,15 @@ const CheckoutModal = ({ isOpen, onClose, cartItems, subtotal, taxAmount, grandT
   }
 
   const placeOrder = () =>  {
-
-    axios.post('/api/orders', {user_id: 1})// grab from json webtoken
-    .then(response => {
-      return response.data.order.id
-    })
-    .then(order_id => {
+    tokenRequest("post", 'http://localhost:3001/api/orders', {})
+    .then(order_response => {
+      const order_id = order_response.order.id
       const newCartItems = []
 
       cartItems.forEach(element => {
         const product_total_price = (element.price * element.quantity).toFixed(2);
         const orderDetailBody = { 
-          order_id,
+          order_id: order_id,
           product_id: element.id,
           price: element.price,
           quantity: element.quantity,
@@ -46,11 +46,11 @@ const CheckoutModal = ({ isOpen, onClose, cartItems, subtotal, taxAmount, grandT
           tax: taxAmount,
           grand_total: grandTotal,}
         
-        const detailRequest = axios.post('/api/order_details', orderDetailBody)
+        const detailRequest = axios.post('http://localhost:3001/api/order_details', orderDetailBody)
         newCartItems.push(detailRequest)
       });
       
-      newCartItems.push(axios.post(`/api/orders/${order_id}/send`))
+      newCartItems.push(axios.post(`http://localhost:3001/api/orders/${order_id}/send`))
       return Promise.all(newCartItems);
     })
   .then((response) => {

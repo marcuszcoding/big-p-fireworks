@@ -8,7 +8,7 @@ const router = express.Router();
 
 // ----------------------- ROUTES / ENDPOINTS
 // router.get('/', IndexController.helloWorld);
-router.post('/', OrdersController.create);
+router.post('/', validateJWT, OrdersController.create);
 
 router.post('/:id/send', OrdersController.sendEmail)
 

@@ -43,6 +43,24 @@ const getAll = (req, res) => {
     });
 };
 
+const getByOrderId = (req, res) => {
+  const { orderId } = req.params;
+console.log(orderId)
+  OrderDetailsModel.getByOrderId(orderId)
+    .then(orderDetails => {
+      console.log(orderDetails)
+      if (!orderDetails) {
+        return res.status(404).send({ message: 'Order details not found!' });
+      }
+
+      res.status(200).send({ message: 'Here are the order details!', orderDetails });
+    })
+    .catch(error => {
+      console.log(error.message);
+      res.status(500).send({ message: 'Error reading order details', error: error.message });
+    });
+};
+
 const getById = (req, res) => {
   const { id } = req.params;
 
@@ -113,4 +131,4 @@ const remove = (req, res) => {
     });
 };
 
-module.exports = { create, getAll, getById, update, remove };
+module.exports = { create, getAll, getById, update, remove, getByOrderId };

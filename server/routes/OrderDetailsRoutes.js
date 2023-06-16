@@ -15,6 +15,10 @@ router.get('/', OrderDetailsController.getAll);
 // Read One
 router.get('/:id', OrderDetailsController.getById);
 
+// Read order details by order ID
+router.get('/order-details/:orderId', OrderDetailsController.getByOrderId);
+
+
 // UPDATE - put
 router.put('/:id', OrderDetailsController.update);
 
