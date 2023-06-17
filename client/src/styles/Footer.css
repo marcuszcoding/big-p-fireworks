@@ -83,6 +83,7 @@
 
 .privacy-terms a {
   margin-right: 5px;
+  color: inherit; /* Keep the same color when active */
 }
 
 .social-section {
