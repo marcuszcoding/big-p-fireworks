@@ -1,7 +1,7 @@
 .locations-page {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Divide the page into two equal columns */
-  grid-gap: 20px; /* Add some gap between the columns */
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
   padding: 20px;
 }
 
@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Align items to the top */
+  justify-content: flex-start;
   background-color: #f1f1f1;
   padding: 20px;
 }
@@ -18,22 +18,34 @@
   font-size: 50px;
   text-align: center;
   margin-bottom: 40px;
-  border-bottom: 3px solid black; /* Add a 2px solid underline */
-  line-height: 1.2; /* Adjust line height to reduce the height of the underline */
+  border-bottom: 3px solid black;
+  margin-top: 10px;
+  line-height: 1.2;
 }
 
 .location-item {
-  margin-bottom: 20px;
+  margin-bottom: 26px;
 }
 
 .location-name {
   font-weight: bold;
   font-size: 20px;
   text-align: center;
-  margin-top: 20px; /* Add margin to separate items */
+  margin-top: 20px;
+  color: inherit; /* Add this line to preserve the original color */
+  text-decoration: underline; /* Add this line to remove underline */
+}
+
+.location-name:hover{
+  color: lightslategray;
+}
+
+.location-name.active {
+  color: inherit; /* Keep the same color when active */
 }
 
 .leaflet-container {
   height: 75vh;
   background-color: #f1f1f1;
+  z-index: 0;
 }
