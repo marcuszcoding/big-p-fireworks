@@ -56,7 +56,7 @@ const LocationsPage = () => {
   return (
     <div className="locations-page">
       <div className="locations-list">
-        <h1>Our Locations</h1>
+        <h1>Locations</h1>
         {renderLocations()}
       </div>
       <div className="leaflet-container">

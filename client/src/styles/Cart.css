@@ -5,7 +5,7 @@
 
 .cart-title {
   text-align: center;
-  font-size: 34px;
+  font-size: 32px;
   margin-bottom: 30px;
 }
 
@@ -45,12 +45,12 @@
 }
 
 .checkout-button:hover {
-  background-color: #3836a8;
+  background-color: #3b39b2;
 }
 
 .empty-cart-message {
   text-align: center;
-  font-size: 18px;
+  font-size: 20px;
   margin-bottom: 20px;
 }
 
@@ -68,6 +68,11 @@
   border: none;
   cursor: pointer;
   font-size: 14px;
+}
+
+.quantity-btn:hover{
+  cursor: pointer;
+  background-color: rgb(184, 184, 184)
 }
 
 .quantity-input {
@@ -112,4 +117,9 @@
 .grand-total {
   margin-top: 25px;
   font-size: 18px;
+}
+
+.delete-cart-button:hover{
+  cursor: pointer;
+  background-color: rgb(184, 184, 184)
 }

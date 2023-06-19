@@ -45,3 +45,7 @@ p {
   border-radius: 4px;
   font-size: 16px;
 }
+
+.shop-now-link:hover {
+  background-color: #3b39b2;
+}
