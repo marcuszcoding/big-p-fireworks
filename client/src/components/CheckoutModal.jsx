@@ -49,12 +49,12 @@ const CheckoutModal = ({ isOpen, onClose, cartItems, subtotal, taxAmount, grandT
         const detailRequest = axios.post('http://localhost:3001/api/order_details', orderDetailBody)
         newCartItems.push(detailRequest)
       });
-      
-      newCartItems.push(axios.post(`http://localhost:3001/api/orders/${order_id}/send`))
       return Promise.all(newCartItems);
     })
   .then((response) => {
-    console.log(response.data); 
+    // console.log(response); 
+    const order_id = response[0].data.order_details.order_id
+    return axios.post(`http://localhost:3001/api/orders/${order_id}/send`)
   })
   .catch((error) => {
     console.error(error); // Error handling

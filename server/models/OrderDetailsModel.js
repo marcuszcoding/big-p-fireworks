@@ -26,7 +26,7 @@ const getById = id => {
 
 const getByOrderId = order_id => {
   return db
-    .query('SELECT order_details.*, products.product_name, products.image_url FROM order_details JOIN products ON order_details.product_id = products.id WHERE order_id = $1;', [order_id])
+    .query('SELECT order_details.*, products.* FROM order_details JOIN products ON products.id = order_details.product_id WHERE order_id = $1;', [order_id])
     .then(data => data.rows)
 };
 
