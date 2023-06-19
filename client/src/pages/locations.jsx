@@ -8,7 +8,6 @@ const LocationsPage = () => {
   const [centerPosition, setCenterPosition] = useState([30.339980, -98.039540]);
   const [zoomLevel, setZoomLevel] = useState(9);
   const [selectedLocation, setSelectedLocation] = useState(null);
-  const mapRef = useRef(null)
   const locations = [
     { id: 1, name: 'BigP Indoor Store: ', address: "10501 SH 71 Burnet, TX 78611", geocode: [30.514890, -98.315610] },
     { id: 2, name: 'The O.G Stand: ', address: "2093 Ranch Rd 1431 Kingsland, TX 78639", geocode: [30.661680, -98.446610] },
@@ -33,13 +32,6 @@ const LocationsPage = () => {
   };
 
   const handleClickLocationName = (location) => {
-    // setCenterPosition(location.geocode);
-    // setZoomLevel(12);
-    // console.log("Hello Location", location.id)
-    // console.log("maprefer", mapRef.current._targets)
-    // for (let markerId in mapRef.current._targets) {
-    //   console.log("marker", mapRef.current._targets[markerId].openOn(mapRef))
-    // }
     setSelectedLocation(location.id);
   };
 
@@ -68,7 +60,7 @@ const LocationsPage = () => {
         {renderLocations()}
       </div>
       <div className="leaflet-container">
-        <MapContainer center={centerPosition} zoom={zoomLevel} ref={mapRef}>
+        <MapContainer center={centerPosition} zoom={zoomLevel}>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url='https://tile.openstreetmap.org/{z}/{x}/{y}.png'
