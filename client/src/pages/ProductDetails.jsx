@@ -3,6 +3,8 @@ import axios from 'axios';
 import '../styles/ProductDetails.css';
 import { useLocation } from 'react-router-dom';
 import { useShopCart } from '../hooks/ShopContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTruck } from '@fortawesome/free-solid-svg-icons';
 
 function ProductDetails() {
   const [product, setProduct] = useState([]);
@@ -30,46 +32,55 @@ function ProductDetails() {
   };
 
   return (
-    <div className="single-product">
-      <div className="product-image-container">
-        <img className="product-image" src={product.image_url} alt="Product" />
-      </div>
-      <div className="product-details-container">
-        <h2 className="product-title">{product.product_name}</h2>
-        <p className="product-description">{product.description}</p>
-        <p className="product-price">Price: ${product.price}</p>
-
-        <div className="dropdown-container">
-          <button className="dropdown-toggle" onClick={handleVideoToggle}>
-            {showVideo ? 'Hide Video' : 'Show Video'}
-          </button>
-          {showVideo && (
-            <div className="video-container">
-              <iframe
-                width="560"
-                height="315"
-                src={product.video_url}
-                title="Product Video"
-                frameBorder="0"
-                allowFullScreen
-              ></iframe>
+    <div className="container">
+      <div className="single-product">
+        <div className="product-image-container">
+          <img className="product-image" src={product.image_url} alt="Product" />
+        </div>
+        <div className="product-details-container">
+          <h2 className="product-title">{product.product_name}</h2>
+          <p className="product-description">{product.description}</p>
+          <p className="product-price">Price: ${product.price}</p>
+  
+          <div className="pickup-container">
+            <div className="pickup-icon">
+              <FontAwesomeIcon icon={faTruck} />
             </div>
-          )}
+            <p className="pickup-message">Available for pickup only</p>
+          </div>
+  
+          <div className="dropdown-container">
+            <button className="dropdown-toggle" onClick={handleVideoToggle}>
+              {showVideo ? 'Hide Video' : 'Show Video'}
+            </button>
+            {showVideo && (
+              <div className="video-container">
+                <iframe
+                  width="560"
+                  height="315"
+                  src={product.video_url}
+                  title="Product Video"
+                  frameBorder="0"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            )}
+          </div>
+  
+          <div className="quantity-container">
+            <label htmlFor="quantity">Quantity:</label>
+            <input
+              id="quantity"
+              type="number"
+              min="1"
+              value={quantity}
+              onChange={handleQuantityChange}
+            />
+          </div>
+          <button className="add-to-cart-button" onClick={() => addToCart(product)}>
+            Add to Cart
+          </button>
         </div>
-
-        <div className="quantity-container">
-          <label htmlFor="quantity">Quantity:</label>
-          <input
-            id="quantity"
-            type="number"
-            min="1"
-            value={quantity}
-            onChange={handleQuantityChange}
-          />
-        </div>
-        <button className="add-to-cart-button" onClick={() => addToCart(product)}>
-          Add to Cart
-        </button>
       </div>
     </div>
   );
