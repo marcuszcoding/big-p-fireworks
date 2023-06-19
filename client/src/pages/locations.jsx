@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import '../styles/Locations.css';
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
@@ -32,8 +32,6 @@ const LocationsPage = () => {
   };
 
   const handleClickLocationName = (location) => {
-    setCenterPosition(location.geocode);
-    setZoomLevel(12);
     setSelectedLocation(location.id);
   };
 
@@ -44,7 +42,7 @@ const LocationsPage = () => {
           href="#"
           className="location-name"
           onClick={(e) => {
-            e.preventDefault();
+            // e.preventDefault();
             handleClickLocationName(location);
           }}
         >
@@ -58,7 +56,7 @@ const LocationsPage = () => {
   return (
     <div className="locations-page">
       <div className="locations-list">
-        <h1>Our Locations</h1>
+        <h1>Locations</h1>
         {renderLocations()}
       </div>
       <div className="leaflet-container">
@@ -78,7 +76,7 @@ const LocationsPage = () => {
               opacity={selectedLocation === location.id ? 1 : 0.5}
             >
               {selectedLocation === location.id && (
-                <Popup>
+                <Popup data-id={location.id}>
                   <h3>{location.name}</h3>
                 </Popup>
               )}

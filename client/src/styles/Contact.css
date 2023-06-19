@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding: 20px;
   text-align: center;
+  margin-top: 20px;
 }
 
 .contact-container h1 {
@@ -10,7 +11,12 @@
   margin-bottom: 20px;
 }
 
-.contact-container p {
+.p1 {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.p2 {
   font-size: 18px;
   margin-bottom: 30px;
 }
@@ -47,7 +53,7 @@ textarea {
 }
 
 .submit-button {
-  background-color: #0b09a7;;
+  background-color: #0b09a7;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -58,5 +64,5 @@ textarea {
 }
 
 .submit-button:hover {
-  background-color: lightslategray;
+  background-color: #3b39b2;
 }

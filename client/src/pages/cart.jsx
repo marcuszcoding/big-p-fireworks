@@ -78,7 +78,7 @@ function Cart() {
                     </div>
                   </td>
                   <td>${(item.price * item.quantity).toFixed(2)}</td>
-                  <td><button onClick={() => deleteFromCart(item)}>X</button></td>
+                  <td><button className='delete-cart-button' onClick={() => deleteFromCart(item)}>X</button></td>
                 </tr>
               ))}
             </tbody>
