@@ -46,3 +46,18 @@
 .close-button::after {
   transform: translate(-50%, -50%) rotate(-45deg);
 }
+
+.order-received-message-title{
+  margin-top: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  text-align: center;
+}
+
+.order-received-message {
+  margin-top: 20px;
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+  text-align: center;
+}

@@ -1,12 +1,11 @@
 .cart-page {
   margin: 20px;
   padding: 20px;
-  background-color: #f9f9f9;
 }
 
 .cart-title {
   text-align: center;
-  font-size: 30px;
+  font-size: 34px;
   margin-bottom: 30px;
 }
 
@@ -14,12 +13,14 @@
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
+  table-layout: fixed; /* Ensure equal width for all columns */
 }
 
 .cart-table th,
 .cart-table td {
   padding: 10px;
   text-align: center;
+  border: none; /* Remove the border */
 }
 
 .cart-table th {
@@ -35,7 +36,7 @@
   display: block;
   margin: 0 auto;
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: #0b09a7;
   color: #fff;
   border: none;
   cursor: pointer;
@@ -44,7 +45,7 @@
 }
 
 .checkout-button:hover {
-  background-color: #45a049;
+  background-color: #3836a8;
 }
 
 .empty-cart-message {
@@ -104,11 +105,11 @@
   justify-content: flex-end;
 }
 
-.tax{
+.tax {
   margin-top: 5px;
 }
 
-.grand-total{
+.grand-total {
   margin-top: 25px;
   font-size: 18px;
 }

@@ -1,10 +1,11 @@
 import React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import '../styles/CheckoutModal.css';
 import axios from 'axios';
 import { useAuth } from '../hooks/AuthContext'
 
 const CheckoutModal = ({ isOpen, onClose, cartItems, subtotal, taxAmount, grandTotal }) => {
+  const [isOrderReceived, setIsOrderReceived] = useState(false);
 
   const { tokenRequest } = useAuth()
 
@@ -54,6 +55,7 @@ const CheckoutModal = ({ isOpen, onClose, cartItems, subtotal, taxAmount, grandT
   .then((response) => {
     // console.log(response); 
     const order_id = response[0].data.order_details.order_id
+    setIsOrderReceived(true);
     return axios.post(`http://localhost:3001/api/orders/${order_id}/send`)
   })
   .catch((error) => {
@@ -61,13 +63,18 @@ const CheckoutModal = ({ isOpen, onClose, cartItems, subtotal, taxAmount, grandT
   });
 };
 
-
   return (
     <div className="modal-overlay">
       <div className="modal-content">
       <button className="close-button" onClick={onClose} />
+      {isOrderReceived ? (
+        <div>
+          <h1 className='order-received-message-title'>Order Received!</h1>
+        <div className="order-received-message">Please check your email for a reciept of your order! If you don't see an email please check your spam folder or call us at 361-772-3141</div>
+        </div>
+      ) : (
+        <div>
         <h2>Checkout</h2>
-
         <table className="cart-table">
           <thead>
             <tr>
@@ -107,6 +114,8 @@ const CheckoutModal = ({ isOpen, onClose, cartItems, subtotal, taxAmount, grandT
         <button className="checkout-button" onClick={placeOrder}>
           Confirm Order
         </button>
+        </div>
+      )}
       </div>
     </div>
   );

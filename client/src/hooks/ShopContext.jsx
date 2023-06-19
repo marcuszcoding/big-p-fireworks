@@ -18,8 +18,8 @@ export const ShopContextProvider = (props) => {
 
     const cartItemsCount = () => {
       let count = 0
-      for (let item in cartItems) {
-        count += 1
+      for (let itemId in cartItems) {
+        count += cartItems[itemId].quantity;
       }
       return count
     }
