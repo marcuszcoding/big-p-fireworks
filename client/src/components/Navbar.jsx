@@ -66,7 +66,7 @@ const Navbar = () => {
   <li className="nav-item dropdown">
     <Link
       to="/admin"
-      className="nav-link dropdown-toggle"
+      className="nav-link dropdown-toggle-admin"
       id="adminDropdown"
       role="button"
       data-bs-toggle="dropdown"
