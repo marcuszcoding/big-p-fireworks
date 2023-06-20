@@ -52,8 +52,8 @@ export const ShopContextProvider = (props) => {
       if (newCart[product.id] && newCart[product.id].quantity > 1) {
         newCart[product.id].quantity -= 1
       } else if (newCart[product.id] && newCart[product.id].quantity === 1){
-        const confirmRemove = window.confirm("Are you sure you want to remove this item from your cart?")
-        if (!confirmRemove) return
+        // const confirmRemove = window.confirm("Are you sure you want to remove this item from your cart?")
+        // if (!confirmRemove) return
         delete newCart[product.id]
       }
       const results = []
@@ -66,6 +66,11 @@ export const ShopContextProvider = (props) => {
 
       setCartItems(newCart);
     };
+
+    const resetCart = () => {
+      setCartItemsContainer([])
+      setCartItems({})
+    }
 
     const deleteFromCart = (product) => {
       setCartItems(prev => {
@@ -94,7 +99,7 @@ export const ShopContextProvider = (props) => {
   
     
     return (
-      <ShopContext.Provider value={{addToCart, removeFromCart, checkout, cartItemsCount, cartItemsContainer, deleteFromCart}}>
+      <ShopContext.Provider value={{addToCart, removeFromCart, checkout, cartItemsCount, cartItemsContainer, deleteFromCart, resetCart}}>
              { props.children }
       </ShopContext.Provider>
     )

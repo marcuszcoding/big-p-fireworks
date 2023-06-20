@@ -6,7 +6,7 @@ import CheckoutModal from '../components/CheckoutModal';
 
 function Cart() {
   const [isCheckoutOpen, setCheckoutOpen] = useState(false);
-  const { cartItemsContainer, removeFromCart, addToCart, deleteFromCart } = useShopCart();
+  const { cartItemsContainer, removeFromCart, addToCart, deleteFromCart, resetCart } = useShopCart();
 
   const openCheckout = () => {
     setCheckoutOpen(true);
@@ -59,7 +59,7 @@ function Cart() {
                       <button
                         className="quantity-btn"
                         onClick={() => removeFromCart(item)}
-                        // disabled={item.quantity === 1}
+                        disabled={item.quantity === 1}
                       >
                         -
                       </button>
@@ -108,6 +108,7 @@ function Cart() {
               subtotal={subtotal}
               taxAmount={taxAmount}
               grandTotal={grandTotal}
+              resetCart={resetCart}
             />
           </div>
         </>
