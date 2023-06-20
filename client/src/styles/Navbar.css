@@ -9,39 +9,33 @@
   position: relative;
 }
 
-.navbar-menu{
-  padding-left: 115px;
-}
-
 .navbar-logo-img {
-  width: 200px;
-  /* height: 50px; */
-  position: absolute;
-  top: -80px;
+  height: 62px;
 }
 
 .nav-link {
-  color:rgb(0, 0, 0);
-}
-.login-link{
-  color:rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
 }
 
-.navbar-right{
+.login-link {
+  color: rgb(0, 0, 0);
+}
+
+.navbar-right {
   display: flex;
   align-items: center;
   font-size: 1.3rem;
   font-weight: 600;
-  transition: 0.3s ease-in-out
+  transition: 0.3s ease-in-out;
 }
 
-.cart-icon{
-  color:rgb(0, 0, 0);
+.cart-icon {
+  color: rgb(0, 0, 0);
   padding-left: 1.5rem;
   margin-top: 0.5em;
 }
 
-.navbar-nav{
+.navbar-nav {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -49,9 +43,9 @@
   font-weight: 600;
 }
 
-.navbar-nav li{
+.navbar-nav li {
   list-style: none;
-  padding:0 20px;
+  padding: 0 20px;
   position: relative;
   transition: 0.3s ease-in-out;
 }
@@ -62,24 +56,23 @@
   align-items: center;
 }
 
-
-.navbar-nav :hover{
+.navbar-nav :hover {
   color: lightslategray;
   text-decoration: underline;
 }
 
-.navbar-right :hover{
+.navbar-right :hover {
   color: lightslategray;
   text-decoration: underline;
 }
 
-.login-link:hover{
+.login-link:hover {
   text-decoration: underline;
 }
 
-.cart-icon:hover{
+.cart-icon:hover {
   color: lightslategray;
-  text-decoration: underline;;
+  text-decoration: underline;
 }
 
 .cart-count {
@@ -98,42 +91,42 @@
   border-radius: 50%;
 }
 
-.logout-button{
-  color:rgb(0, 0, 0);
-  border: 0ch;
+.logout-button {
+  color: rgb(0, 0, 0);
+  border: 0;
   font-size: 1em;
   font-weight: 520;
   background-color: #ffffff;
-  font:bold;
+  font: bold;
 }
 
 .dropdown-toggle {
   display: flex;
   align-items: center;
   cursor: pointer;
-  padding: 0px;
-  color: rgb(0, 0, 0); /* Add text color */
+  padding: 0;
+  color: rgb(0, 0, 0);
 }
 
 .dropdown-menu {
   display: none;
   position: absolute;
-  background-color: rgba(255, 255, 255, 1); /* Change background color */
+  background-color: rgba(255, 255, 255, 1);
   padding: 10px;
   z-index: 1;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6); /* Add box shadow */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
 }
 
 .dropdown-item {
   display: block;
   padding: 5px;
-  color: rgb(0, 0, 0); /* Add text color */
+  color: rgb(0, 0, 0);
   text-decoration: none;
 }
 
 .dropdown-item:hover {
-  background-color: rgba(0, 0, 0, 0.1); /* Change background color */
-  color: lightslategray; /* Add text color on hover */
+  background-color: rgba(0, 0, 0, 0.1);
+  color: lightslategray;
 }
 
 .dropdown:hover .dropdown-menu {

@@ -28,7 +28,7 @@
 
 .create-product-button {
   margin-top: 10px;
-  background-color: #007bff;
+  background-color: #0b09a7;
   color: #fff;
   border: none;
   padding: 8px 16px;
@@ -41,7 +41,7 @@
 }
 
 .create-product-button:hover {
-  background-color: #0056b3;
+  background-color: #3b39b2;
 }
 
 .create-product-form select {
