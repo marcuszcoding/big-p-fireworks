@@ -6,13 +6,14 @@
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  border-radius: 15px;
+  /* border-radius: 15px; */
   font-size: 18px;
-  width: 180px;
+  width: 200px;
   padding: 20px;
   cursor: pointer;
   margin-right: 20px;
   text-align: right;
+  border-right: 2px solid #ddd;
 }
 
 .product {
@@ -23,6 +24,8 @@
   text-align: center;
   border-radius: 8px;
   padding: 10px;
+  margin-bottom: 50px;
+  margin-right: 24px;
 }
 
 .image:hover {
@@ -32,7 +35,7 @@
 }
 
 .product-box {
-  margin: 1em;
+  margin: 1.5em 1em;
   padding: 10px;
   margin-bottom: auto;
   background-color: #ffffff;
@@ -58,7 +61,7 @@
   align-items: center;
   justify-content: flex-start;
   width: 180px;
-  padding: 10px;
+  padding: 16px 10px 10px 10px;
   font-size: 18px;
   border-radius: 15px;
   cursor: pointer;

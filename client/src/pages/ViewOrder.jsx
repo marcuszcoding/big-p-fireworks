@@ -25,35 +25,35 @@ const ViewOrders = () => {
     return <div>No Current Orders</div>;
   }
   return (
-    <div className="container">
-      <h2>Orders</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Order ID</th>
-            <th>Customer</th>
-            <th>Date</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {orders.map(order => (
-            <tr key={order.id}>
-              <td>{order.id}</td>
-              <td>{order.user_id}</td>
-              <td>{new Date(order.created_at).toDateString()}</td>
-              <td>{order.order_status ? "Ready" : "Pending"}</td>
-              <td>
-                <Link to={`/orders/${order.id}`}>
-                  View Details
-                </Link>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <div className="order-container">
+  <h2 className="order-heading">Orders</h2>
+  <table className="order-table">
+    <thead>
+      <tr>
+        <th className="order-table__header">Order ID</th>
+        <th className="order-table__header">Customer</th>
+        <th className="order-table__header">Date</th>
+        <th className="order-table__header">Status</th>
+        <th className="order-table__header">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {orders.map(order => (
+        <tr key={order.id} className="order-row">
+          <td className="order-cell">{order.id}</td>
+          <td className="order-cell">{order.user_id}</td>
+          <td className="order-cell">{new Date(order.created_at).toDateString()}</td>
+          <td className="order-cell">{order.order_status ? "Ready" : "Pending"}</td>
+          <td className="order-cell">
+            <Link to={`/orders/${order.id}`} className="order-link">
+              View Details
+            </Link>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
   );
 };
 
