@@ -2,11 +2,10 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faCircle, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
-import logo from "../images/BIGPlogowp.png"
+import logo from "../images/bigplogoweb.png"
 import { useShopCart } from '../hooks/ShopContext'
 import "../styles/Navbar.css"
 import { useState, useEffect } from 'react';
-import decode from "jwt-decode";
 import { useAuth } from '../hooks/AuthContext';
 
 
@@ -72,7 +71,7 @@ const Navbar = () => {
       data-bs-toggle="dropdown"
       aria-expanded="false"
     >
-      Admin <FontAwesomeIcon icon={faAngleDown} />
+      Admin
     </Link>
     <ul className="dropdown-menu" aria-labelledby="adminDropdown">
       <li>

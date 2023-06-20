@@ -40,13 +40,13 @@
   font-size: 16px;
   border: none;
   border-radius: 4px;
-  background-color: #4285f4;
+  background-color: #0b09a7;
   color: #fff;
   cursor: pointer;
 }
 
 .save-button:hover {
-  background-color: #3276b1;
+  background-color: #3b39b2;;
 }
 
 .save-button:disabled {
