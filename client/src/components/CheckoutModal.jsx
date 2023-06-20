@@ -3,10 +3,11 @@ import { useEffect, useState } from 'react';
 import '../styles/CheckoutModal.css';
 import axios from 'axios';
 import { useAuth } from '../hooks/AuthContext'
+import { useNavigate } from 'react-router-dom';
 
-const CheckoutModal = ({ isOpen, onClose, cartItems, subtotal, taxAmount, grandTotal }) => {
+const CheckoutModal = ({ isOpen, onClose, cartItems, subtotal, taxAmount, grandTotal, resetCart }) => {
   const [isOrderReceived, setIsOrderReceived] = useState(false);
-
+  const navigate = useNavigate()
   const { tokenRequest } = useAuth()
 
   useEffect(() => {
@@ -56,6 +57,11 @@ const CheckoutModal = ({ isOpen, onClose, cartItems, subtotal, taxAmount, grandT
     // console.log(response); 
     const order_id = response[0].data.order_details.order_id
     setIsOrderReceived(true);
+    setTimeout(()=> {
+      resetCart()
+      setIsOrderReceived(false);
+      navigate('/')
+    }, 4000)
     return axios.post(`http://localhost:3001/api/orders/${order_id}/send`)
   })
   .catch((error) => {
