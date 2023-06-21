@@ -38,6 +38,7 @@
 
 .location-name:hover{
   color: lightslategray;
+  cursor: pointer;
 }
 
 .location-name.active {
