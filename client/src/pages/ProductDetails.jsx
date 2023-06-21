@@ -50,7 +50,7 @@ function ProductDetails() {
             <div className="pickup-icon">
               <FontAwesomeIcon icon={faTruck} />
             </div>
-            <p className="pickup-message">Available for pickup only</p>
+            <p className="pickup-message">Available for pickup only at BigP Indoor Store</p>
           </div>
   
           <div className="dropdown-container">
