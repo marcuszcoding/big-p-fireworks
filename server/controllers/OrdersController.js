@@ -5,10 +5,6 @@ const order_details = require('../db/schemas/order_details');
 sgMail.setApiKey('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');
 
 const create = (req, res) => {
-  // const { userId } = req.session;
-  // if (!userId) {
-  //   return res.status(401).send({ message: 'User is not logged in' });
-  // }
 
   const user_id = req.user.id;
   if (!user_id) {
