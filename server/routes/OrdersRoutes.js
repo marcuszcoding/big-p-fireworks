@@ -10,14 +10,14 @@ const router = express.Router();
 // router.get('/', IndexController.helloWorld);
 router.post('/', validateJWT, OrdersController.create);
 
-router.post('/:id/send', OrdersController.sendEmail)
+router.post('/:id/send', validateJWT, OrdersController.sendEmail)
 
 // READ - get
 // Read All
 router.get('/', validateJWT, jwtIsAdmin, OrdersController.getAll);
 
 // Read One
-router.get('/:id', OrdersController.getById);
+router.get('/:id', validateJWT, OrdersController.getById);
 
 // UPDATE - put
 router.put('/:id', validateJWT, jwtIsAdmin, OrdersController.update);

@@ -31,8 +31,12 @@ const create = (req, res) => {
 
 const sendEmail = (req, res) => {
   const {id} = req.params
-  console.log("Send Log Hello", req.params)
-  OrderDetailsModel.getByOrderId(id)
+  let userEmail = null
+  OrdersModel.getById(id)
+  .then((order) => {
+    userEmail = order.email
+    return OrderDetailsModel.getByOrderId(id)
+  })
   .then( (order_details) => {
 
     console.log(order_details)
@@ -45,7 +49,7 @@ const sendEmail = (req, res) => {
           {
             to: [
               {
-                email: "marcuszcoding@gmail.com",
+                email: userEmail,
               }
             ], 
             dynamic_template_data: {

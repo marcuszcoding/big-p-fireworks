@@ -70,4 +70,11 @@ const logout = (req, res) => {
   res.status(200).send({ message: 'User successfully logged out' });
 };
 
-module.exports = { register, login, logout };
+const getUserById = (req, res) => {
+  AuthModel.getUserById(req.params.id)
+  .then(user => {
+    res.status(200).send({message: 'User id was found', user});
+  })
+};
+
+module.exports = { register, login, logout, getUserById };

@@ -11,14 +11,18 @@ const register = (email, password) => {
 };
 
 const login = email => {
-  console.log(email)
-  db.query('SELECT * FROM users')
-  .then(data => console.log( data.rows))
   return db
     .query('SELECT * FROM users WHERE email = $1', [email])
     .then(data => data.rows[0])
     .catch(err => console.error(err.stack));
 };
 
+const getUserById = (id) => {
+  return db
+    .query('SELECT * FROM users WHERE id = $1', [id])
+    .then(data => data.rows[0])
+    .catch(err => console.error(err.stack));
+};
 
-module.exports = { register, login };
+
+module.exports = { register, login, getUserById };

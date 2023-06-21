@@ -33,6 +33,7 @@ const Register = () => {
         <div className="form-group">
           <label htmlFor="email">Email</label>
           <input
+            autoComplete="false"
             type="email"
             id="email"
             value={email}
@@ -42,6 +43,7 @@ const Register = () => {
         <div className="form-group">
           <label htmlFor="password">Password</label>
           <input
+            autoComplete="false"
             type="password"
             id="password"
             value={password}

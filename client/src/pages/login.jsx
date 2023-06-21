@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import '../styles/Login.css';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/AuthContext';
@@ -32,6 +31,7 @@ const Login = () => {
         <div className="form-group">
           <label htmlFor="email">Email</label>
           <input
+            autoComplete="false"
             type="email"
             id="email"
             value={email}
@@ -41,6 +41,7 @@ const Login = () => {
         <div className="form-group">
           <label htmlFor="password">Password</label>
           <input
+            autoComplete="false"
             type="password"
             id="password"
             value={password}

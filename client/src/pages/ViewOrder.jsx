@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useAuth } from '../hooks/AuthContext';
 import { Link } from 'react-router-dom';
 
@@ -11,7 +10,6 @@ const ViewOrders = () => {
     const fetchOrder = async () => {
       try {
         const response = await tokenRequest("get", "http://localhost:3001/api/orders")
-        console.log(response)
         setOrders(response.orders);
       } catch (error) {
         console.log(error);
@@ -19,6 +17,7 @@ const ViewOrders = () => {
     };
 
     fetchOrder();
+    // eslint-disable-next-line
   }, []);
 
   if (!orders) {
@@ -41,7 +40,7 @@ const ViewOrders = () => {
       {orders.map(order => (
         <tr key={order.id} className="order-row">
           <td className="order-cell">{order.id}</td>
-          <td className="order-cell">{order.user_id}</td>
+          <td className="order-cell">{order.email}</td>
           <td className="order-cell">{new Date(order.created_at).toDateString()}</td>
           <td className="order-cell">{order.order_status ? "Ready" : "Pending"}</td>
           <td className="order-cell">

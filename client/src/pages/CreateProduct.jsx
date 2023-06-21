@@ -46,7 +46,6 @@ const CreateProduct = () => {
       try {
         const response = await axios.get('http://localhost:3001/api/products_category');
         // console.log(response)
-        console.log(response.data.products_categories)
         setCategories(response.data.products_categories);
       } catch (error) {
         console.error('Error fetching categories:', error);

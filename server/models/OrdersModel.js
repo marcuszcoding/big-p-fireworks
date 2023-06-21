@@ -13,14 +13,14 @@ const create = (user_id) => {
 
 const getAll = () => {
   return db
-    .query('SELECT * FROM orders;')
+    .query('SELECT orders.*, users.email FROM orders JOIN users ON orders.user_id = users.id;')
     .then(data => data.rows)
     .catch(err => console.error(err.stack));
 };
 
 const getById = id => {
   return db
-    .query('SELECT * FROM orders WHERE id = $1;', [id])
+    .query('SELECT orders.*, users.email FROM orders JOIN users ON orders.user_id = users.id WHERE orders.id = $1;', [id])
     .then(data => data.rows[0])
     .catch(err => console.error(err.stack));
 };
