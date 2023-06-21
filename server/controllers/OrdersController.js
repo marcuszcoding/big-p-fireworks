@@ -5,10 +5,6 @@ const order_details = require('../db/schemas/order_details');
 sgMail.setApiKey('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');
 
 const create = (req, res) => {
-  // const { userId } = req.session;
-  // if (!userId) {
-  //   return res.status(401).send({ message: 'User is not logged in' });
-  // }
 
   const user_id = req.user.id;
   if (!user_id) {
@@ -31,8 +27,12 @@ const create = (req, res) => {
 
 const sendEmail = (req, res) => {
   const {id} = req.params
-  console.log("Send Log Hello", req.params)
-  OrderDetailsModel.getByOrderId(id)
+  let userEmail = null
+  OrdersModel.getById(id)
+  .then((order) => {
+    userEmail = order.email
+    return OrderDetailsModel.getByOrderId(id)
+  })
   .then( (order_details) => {
 
     console.log(order_details)
@@ -45,7 +45,7 @@ const sendEmail = (req, res) => {
           {
             to: [
               {
-                email: "marcuszcoding@gmail.com",
+                email: userEmail,
               }
             ], 
             dynamic_template_data: {

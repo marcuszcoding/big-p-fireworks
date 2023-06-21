@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../hooks/AuthContext';
@@ -9,16 +10,15 @@ const OrderDetails = () => {
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [userEmail, setUserEmail] = useState(null)
 
   useEffect(() => {
     const fetchOrder = async () => {
       try {
         const orderData = await tokenRequest("get", `/api/orders/${orderId}`);
-        console.log(orderData)
 
         const orderDetailsResponse = await tokenRequest("get", `/api/order_details/order-details/${orderId}`);
         const orderDetails = orderDetailsResponse.orderDetails;
-        console.log(orderDetails)
 
         const mergedOrder = { ...orderData.order, details: orderDetails };
         setOrder(mergedOrder);
@@ -31,6 +31,13 @@ const OrderDetails = () => {
 
     fetchOrder();
   }, [orderId, tokenRequest]);
+
+  useEffect(() => {
+    order && axios.get(`/api/auth/users/${order.user_id}`)
+    .then((response) => {
+      setUserEmail(response.data.user.email)
+    })
+  })
 
   if (loading) {
     return <div>Loading order details...</div>;
@@ -51,7 +58,7 @@ const OrderDetails = () => {
           <div className="order-details">
             <div className="order-details-info">
               <p>Order ID: {order.id}</p>
-              <p>Customer: {order.user_id}</p>
+              <p>Customer: {userEmail}</p>
               <p>Date: {new Date(order.created_at).toDateString()}</p>
               <p>Status: {order.status ? "Approved" : "Pending"}</p>
             </div>

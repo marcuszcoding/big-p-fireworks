@@ -1,5 +1,5 @@
 import React from 'react';
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState} from "react";
 
 
 const ShopContext = createContext(null); // Keeps track of state and functions for the project
@@ -39,7 +39,6 @@ export const ShopContextProvider = (props) => {
         const item = newCart[itemId]
         results.push(item)
       }
-      console.log(results)
       setCartItemsContainer(results)
 
       setCartItems(newCart);

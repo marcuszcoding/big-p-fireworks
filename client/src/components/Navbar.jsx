@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart, faCircle, faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart} from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from "../images/bigplogoweb.png"
 import { useShopCart } from '../hooks/ShopContext'
@@ -29,8 +29,6 @@ const Navbar = () => {
     await logout()
     navigate('/login')
   };
-
-  console.log(currentUser, isAdmin)
 
   return (
     <nav className="navbar">
