@@ -9,7 +9,7 @@ const ViewOrders = () => {
   useEffect(() => {
     const fetchOrder = async () => {
       try {
-        const response = await tokenRequest("get", "http://localhost:3001/api/orders")
+        const response = await tokenRequest("get", "/api/orders")
         setOrders(response.orders);
       } catch (error) {
         console.log(error);

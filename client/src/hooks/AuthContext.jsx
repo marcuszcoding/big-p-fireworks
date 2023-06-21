@@ -22,14 +22,14 @@ function AuthProvider({ children }) {
   }, [])
 
   function register(email, password){
-    const URL_PRODUCTS_API = 'http://localhost:3001/api/auth/register';
+    const URL_PRODUCTS_API = '/api/auth/register';
     return axios
       .post(URL_PRODUCTS_API, { email, password })
       .then(response => response.data.user)
   }
 
   function login(email, password){
-    const URL_PRODUCTS_API = 'http://localhost:3001/api/auth/login';
+    const URL_PRODUCTS_API = '/api/auth/login';
     return axios
       .post(URL_PRODUCTS_API, { email, password })
       .then(response => {

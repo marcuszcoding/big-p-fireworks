@@ -44,7 +44,7 @@ const CreateProduct = () => {
     // Fetch the categories from the backend and update the state
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/products_category');
+        const response = await axios.get('/api/products_category');
         // console.log(response)
         setCategories(response.data.products_categories);
       } catch (error) {
@@ -73,7 +73,7 @@ const CreateProduct = () => {
 
     // Send the product data to the backend or perform other actions
 
-    await tokenRequest('post', 'http://localhost:3001/api/products', data)
+    await tokenRequest('post', '/api/products', data)
 
     // Reset the form fields
     setProductName('');

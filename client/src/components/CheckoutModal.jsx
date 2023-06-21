@@ -31,7 +31,7 @@ const CheckoutModal = ({ isOpen, onClose, cartItems, subtotal, taxAmount, grandT
   }
 
   const placeOrder = () =>  {
-    tokenRequest("post", 'http://localhost:3001/api/orders', {})
+    tokenRequest("post", '/api/orders', {})
     .then(order_response => {
       const order_id = order_response.order.id
       const newCartItems = []
@@ -48,7 +48,7 @@ const CheckoutModal = ({ isOpen, onClose, cartItems, subtotal, taxAmount, grandT
           tax: taxAmount,
           grand_total: grandTotal,}
         
-        const detailRequest = axios.post('http://localhost:3001/api/order_details', orderDetailBody)
+        const detailRequest = axios.post('/api/order_details', orderDetailBody)
         newCartItems.push(detailRequest)
       });
       return Promise.all(newCartItems);
@@ -62,7 +62,7 @@ const CheckoutModal = ({ isOpen, onClose, cartItems, subtotal, taxAmount, grandT
       setIsOrderReceived(false);
       navigate('/')
     }, 5000)
-    return tokenRequest('post', `http://localhost:3001/api/orders/${order_id}/send`)
+    return tokenRequest('post', `/api/orders/${order_id}/send`)
   })
   .catch((error) => {
     console.error(error); // Error handling
