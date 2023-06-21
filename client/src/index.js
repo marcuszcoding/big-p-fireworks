@@ -5,6 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ShopContextProvider } from './hooks/ShopContext';
 import { AuthProvider } from './hooks/AuthContext';
+import axios from 'axios';
+
+axios.defaults.baseURL = "https://bigp-backend.onrender.com/"
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
