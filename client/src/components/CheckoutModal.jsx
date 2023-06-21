@@ -77,7 +77,7 @@ const CheckoutModal = ({ isOpen, onClose, cartItems, subtotal, taxAmount, grandT
         <div>
           <h1 className='order-received-message-title'>Order Received! Redirecting to Home...</h1>
         <div className="order-received-message">Please check your email for a reciept of your order! If you don't see an email please check your spam folder or call us at 361-772-3141</div>
-        <div style={{maxWidth: "50px", margin: "1em auto"}}><img src="https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca_w200.gif" width="100%" /></div>
+        <div style={{maxWidth: "50px", margin: "1em auto"}}><img src="https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca_w200.gif" width="100%" alt="loading" /></div>
         </div>
       ) : (
         <div>
