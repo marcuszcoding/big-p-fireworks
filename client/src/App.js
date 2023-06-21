@@ -34,6 +34,7 @@ const [selectedCategory ,setSelectedCategory] = useState(null)
 
   useEffect( () => {
     fetchProducts()
+    // eslint-disable-next-line
   }, [selectedCategory]);
 
   return (

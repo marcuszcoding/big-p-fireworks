@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import "../styles/Shop.css"
@@ -7,7 +7,7 @@ import "../styles/Shop.css"
 
 function Shop(props) {
 
-  const {fetchProducts, selectedCategory, setCategories, setSelectedCategory, products, categories} = props
+  const {selectedCategory, setCategories, setSelectedCategory, products, categories} = props
 
 const navigate = useNavigate()
 
@@ -20,6 +20,7 @@ useEffect( () => {
   .then( (response) => {
     setCategories(response.data.products_categories)
   })
+  // eslint-disable-next-line
 }, []);
 
 
@@ -50,6 +51,7 @@ useEffect( () => {
            return (
            <span className="product-box" key={product.id}>
              <img className='image'
+              alt={product.product_name}
               src={product.image_url}
               onClick={() => handleClickProduct(product.id, product.product_name)}
               >
@@ -59,7 +61,6 @@ useEffect( () => {
              </div>
               ${product.price}
             <div>
-            {/* <button onClick={() => handleClickProduct(product.product_name)}>See Details</button> */}
             </div>
           </span>
           )

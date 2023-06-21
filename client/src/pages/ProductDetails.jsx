@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/ProductDetails.css';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useShopCart } from '../hooks/ShopContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTruck } from '@fortawesome/free-solid-svg-icons';
@@ -11,15 +11,19 @@ function ProductDetails() {
   const [quantity, setQuantity] = useState(1);
   const [showVideo, setShowVideo] = useState(false); // State to track the visibility of the video
   const location = useLocation();
-  const { addToCart, removeFromCart } = useShopCart();
+  const { addToCart } = useShopCart();
+  const navigate = useNavigate()
 
   useEffect(() => {
-    axios
+    location.state 
+    ? axios
       .get(`/api/products/${location.state.productId}`)
       .then((response) => {
         setProduct(response.data.product);
       })
-      .catch(() => {});
+      .catch(() => {})
+      : navigate('/shop')
+      // eslint-disable-next-line
   }, []);
 
   const handleQuantityChange = (event) => {

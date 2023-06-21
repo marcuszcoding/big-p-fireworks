@@ -1,5 +1,5 @@
 import React from 'react';
-import { Slide, Fade } from 'react-slideshow-image';
+import { Slide } from 'react-slideshow-image';
 import '../styles/Home.css'; // Import your custom CSS file for styling
 import 'react-slideshow-image/dist/styles.css';
 
@@ -17,12 +17,6 @@ const slideImages = [
     caption: 'Slide 3'
   },
 ];
-
-const spanStyle = {
-  fontSize: '20px',
-  background: '#efefef',
-  color: '#000000'
-}
 
 const divStyle = {
   display: 'flex',

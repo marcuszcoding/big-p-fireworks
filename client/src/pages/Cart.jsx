@@ -1,7 +1,7 @@
 import React from 'react';
 import "../styles/Cart.css";
 import { useShopCart } from '../hooks/ShopContext';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import CheckoutModal from '../components/CheckoutModal';
 
 function Cart() {

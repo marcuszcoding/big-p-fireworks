@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import '../styles/Locations.css';
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
@@ -38,8 +38,7 @@ const LocationsPage = () => {
   const renderLocations = () => {
     return locations.map(location => (
       <div key={location.id} className="location-item">
-        <a
-          href="#"
+        <span
           className="location-name"
           onClick={(e) => {
             // e.preventDefault();
@@ -47,7 +46,7 @@ const LocationsPage = () => {
           }}
         >
           {location.name}
-        </a>
+        </span>
         <span className="location-address">{location.address}</span>
       </div>
     ));
