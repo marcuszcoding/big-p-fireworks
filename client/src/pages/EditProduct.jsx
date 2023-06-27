@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/AuthContext';
 
 const EditProduct = (props) => {
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedProduct, setSelectedProduct] = useState('');
   const [editedProduct, setEditedProduct] = useState({});
   const [categories, setCategories] = useState([]);
@@ -40,8 +41,7 @@ const EditProduct = (props) => {
     fetchCategories();
   }, []);
 
-  const handleProductChange = (e) => {
-    const productId = e.target.value;
+  const handleProductChange = (productId) => {
     setSelectedProduct(productId);
   };
 
@@ -73,17 +73,35 @@ const EditProduct = (props) => {
     }
   };
 
+  const filteredProducts = searchQuery !== ''
+    ? products.filter((product) =>
+        product.product_name.toLowerCase().startsWith(searchQuery.toLowerCase())
+      )
+    : [];
+
   return (
     <div className="edit-product-container">
       <h2>Edit Product</h2>
-      <select className="product-select" value={selectedProduct} onChange={handleProductChange}>
-        <option value="">Select a product</option>
-        {products.map((product) => (
-          <option key={product.id} value={product.id}>
+      <div className="search-container">
+        <input
+          type="text"
+          className="search-input"
+          placeholder="Search for a product..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </div>
+      <div className="product-list">
+        {filteredProducts.map((product) => (
+          <div
+            key={product.id}
+            className={`product-item ${selectedProduct === product.id ? 'selected' : ''}`}
+            onClick={() => handleProductChange(product.id)}
+          >
             {product.product_name}
-          </option>
+          </div>
         ))}
-      </select>
+      </div>
 
       {selectedProduct && (
         <div className="form-container">
