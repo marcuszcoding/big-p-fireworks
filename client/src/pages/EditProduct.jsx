@@ -90,17 +90,22 @@ const EditProduct = (props) => {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-      </div>
-      <div className="product-list">
-        {filteredProducts.map((product) => (
-          <div
-            key={product.id}
-            className={`product-item ${selectedProduct === product.id ? 'selected' : ''}`}
-            onClick={() => handleProductChange(product.id)}
-          >
-            {product.product_name}
+        {filteredProducts.length > 0 && (
+          <div className="product-dropdown">
+            {filteredProducts.map((product) => (
+              <div
+                key={product.id}
+                className={`product-item ${selectedProduct === product.id ? 'selected' : ''}`}
+                onClick={() => {
+                  handleProductChange(product.id);
+                  setSearchQuery('');
+                }}
+              >
+                {product.product_name}
+              </div>
+            ))}
           </div>
-        ))}
+        )}
       </div>
 
       {selectedProduct && (
