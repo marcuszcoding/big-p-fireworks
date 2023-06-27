@@ -4,17 +4,18 @@ import '../styles/EditProduct.css';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/AuthContext';
 
-
 const EditProduct = (props) => {
   const [selectedProduct, setSelectedProduct] = useState('');
   const [editedProduct, setEditedProduct] = useState({});
+  const [categories, setCategories] = useState([]);
   const { tokenRequest } = useAuth();
   const navigate = useNavigate();
-  const {fetchProducts, products} = props
+  const { fetchProducts, products } = props;
 
   useEffect(() => {
     if (selectedProduct) {
-      axios.get(`/api/products/${selectedProduct}`)
+      axios
+        .get(`/api/products/${selectedProduct}`)
         .then((response) => {
           setEditedProduct(response.data.product);
         })
@@ -25,6 +26,19 @@ const EditProduct = (props) => {
       setEditedProduct({});
     }
   }, [selectedProduct]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get('/api/products_category');
+        setCategories(response.data.products_categories);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   const handleProductChange = (e) => {
     const productId = e.target.value;
@@ -38,9 +52,8 @@ const EditProduct = (props) => {
 
   const handleSaveChanges = async (event) => {
     event.preventDefault();
-  
+
     try {
-      // Create an object to hold the updated product data
       const data = {
         product_name: editedProduct.product_name,
         price: editedProduct.price,
@@ -49,18 +62,16 @@ const EditProduct = (props) => {
         video_url: editedProduct.video_url,
         category_id: editedProduct.category_id
       };
-  
-      // Send the updated product data to the backend
+
       await tokenRequest('put', `/api/products/${selectedProduct}`, data);
-  
+
       console.log('Changes saved successfully');
-      fetchProducts()
+      fetchProducts();
       navigate('/shop');
     } catch (error) {
       console.log(error);
     }
   };
-  
 
   return (
     <div className="edit-product-container">
@@ -103,6 +114,22 @@ const EditProduct = (props) => {
               value={editedProduct.description || ''}
               onChange={(e) => handleFieldChange(e, 'description')}
             />
+          </div>
+
+          <div className="form-group">
+            <label className="label">Category:</label>
+            <select
+              className="input-field"
+              value={editedProduct.category_id || ''}
+              onChange={(e) => handleFieldChange(e, 'category_id')}
+            >
+              <option value="">Select a category</option>
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.category_name}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="form-group">
