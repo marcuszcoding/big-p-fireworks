@@ -5,7 +5,7 @@ import "../styles/Shop.css"
 
 function Shop(props) {
 
-  const {selectedCategory, setCategories, setSelectedCategory, products, categories} = props
+const {selectedCategory, setCategories, setSelectedCategory, products, categories} = props
 
 const navigate = useNavigate()
 
