@@ -3,8 +3,6 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import "../styles/Shop.css"
 
-
-
 function Shop(props) {
 
   const {selectedCategory, setCategories, setSelectedCategory, products, categories} = props
@@ -22,7 +20,6 @@ useEffect( () => {
   })
   // eslint-disable-next-line
 }, []);
-
 
   return (
     <section className="shop-section">
@@ -75,8 +72,3 @@ useEffect( () => {
 }
 
 export default Shop
-        
-
-    
-    
-            
