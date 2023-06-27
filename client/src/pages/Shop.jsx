@@ -64,11 +64,8 @@ useEffect( () => {
         })
       }
     </div>
-
     </section>
   )
-    
-  
 }
 
 export default Shop
