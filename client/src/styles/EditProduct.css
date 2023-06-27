@@ -7,12 +7,12 @@
 .search-container {
   position: relative;
   margin-bottom: 20px;
-  display: inline-block; /* Added */
-  width: 100%; /* Added */
+  display: inline-block;
+  width: 100%; 
 }
 
 .search-input {
-  width: calc(100% - 20px); /* Updated */
+  width: calc(100% - 20px); 
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
@@ -23,7 +23,7 @@
   position: absolute;
   top: 100%;
   left: 0;
-  width: 100%; /* Updated */
+  width: 100%; 
   max-height: 200px;
   overflow-y: auto;
   background-color: #fff;
