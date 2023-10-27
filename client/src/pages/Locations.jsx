@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/Locations.css';
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
@@ -24,6 +24,27 @@ const LocationsPage = () => {
     iconUrl: "https://cdn-icons-png.flaticon.com/128/684/684908.png",
     iconSize: [38, 38],
   });
+
+  const [showMap, setShowMap] = useState(true); // State to control map visibility
+
+  useEffect(() => {
+    // Check if the screen width is below the mobile breakpoint (e.g., 768px)
+    const mobileBreakpoint = 768;
+    setShowMap(window.innerWidth > mobileBreakpoint);
+
+    // Add an event listener to handle changes in window size
+    const handleResize = () => {
+      setShowMap(window.innerWidth > mobileBreakpoint);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      // Clean up the event listener when the component unmounts
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
 
   const handleClickMarker = (location) => {
     setCenterPosition(location.geocode);

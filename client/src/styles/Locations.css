@@ -1,6 +1,6 @@
 .locations-page {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-gap: 20px;
   padding: 20px;
 }
@@ -53,4 +53,16 @@
   height: 75vh;
   background-color: #f1f1f1;
   z-index: 0;
+}
+
+@media (max-width: 768px) {
+  .leaflet-container {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .locations-page {
+    grid-template-columns: 1fr 1fr; /* Restore the two-column layout for larger screens */
+  }
 }
