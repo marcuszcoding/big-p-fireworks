@@ -22,7 +22,7 @@ const LocationsPage = () => {
 
   const customIcon = new Icon({
     iconUrl: "https://cdn-icons-png.flaticon.com/128/684/684908.png",
-    iconSize: [38, 38],
+    iconSize: [38, 38]
   });
 
   const handleClickMarker = (location) => {
