@@ -49,3 +49,39 @@ p {
 .shop-now-link:hover {
   background-color: #3b39b2;
 }
+
+@media (max-width: 768px) {
+  .homepage-container {
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center;
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+
+  .slideshow-container {
+    width: 100%; /* Full width for the slideshow container */
+    margin-right: 0; /* Remove margin on the right */
+    margin-top: 20px; /* Adjust top margin */
+    height: 200px; /* Let the height adapt to content */
+  }
+
+  .text-container {
+    width: 100%; /* Full width for the text container */
+    height: auto; /* Let the height adapt to content */
+    margin-right: 0; /* Remove margin on the right */
+    text-align: center; /* Center text */
+  }
+
+  .shop-now-link {
+    width: auto; /* Let the width adapt to content */
+    margin-top: 20px; /* Add top margin */
+  }
+
+  h1 {
+    font-size: 30px; /* Reduce font size for mobile */
+  }
+
+  p {
+    font-size: 18px; /* Reduce font size for mobile */
+    margin-bottom: 20px; /* Adjust margin */
+  }
+}

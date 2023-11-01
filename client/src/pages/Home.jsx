@@ -38,7 +38,7 @@ const Home = () => {
         <Slide autoplay={true} duration={4000}>
           {slideImages.map((image, index) => (
             <div key={index} className="each-slide">
-              <div style={{ ...divStyle, backgroundImage:`url(${image.url})` }}></div>
+              <div style={{ ...divStyle, backgroundImage: `url(${image.url})` }}></div>
             </div>
           ))}
         </Slide>

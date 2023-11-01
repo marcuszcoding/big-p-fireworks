@@ -136,3 +136,51 @@
 .dropdown:hover .dropdown-menu {
   display: block;
 }
+
+/* Mobile CSS */
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden; /* Prevent horizontal overflow */
+  }
+
+  .navbar {
+    width: 100%; /* Force the navbar to span the entire width */
+    padding: 15px 20px; /* Adjust padding for smaller screens */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+    justify-content: space-between; /* Ensure items are spaced evenly */
+    align-items: center; /* Center items vertically */
+  }
+
+  .navbar-logo-img {
+    max-width: 100%; /* Make sure the logo fits within the narrower navbar */
+  }
+
+  .navbar-nav {
+    flex-direction: row; /* Stack navigation links horizontally */
+    align-items: center; /* Center links vertically */
+    justify-content: space-between; /* Space links evenly */
+    width: 60%; /* Adjust width to prevent overcrowding */
+  }
+
+  .navbar-nav li {
+    padding: 0; /* Remove the padding on mobile */
+    margin: 0; /* Remove margin */
+    text-align: center; /* Center text */
+    flex: 1; /* Distribute available space evenly */
+  }
+
+  .navbar-right {
+    margin-top: 0px; /* Adjust spacing between right-aligned items */
+  }
+
+  .cart-icon {
+    padding-left: 0.5rem; /* Adjust padding for cart icon */
+  }
+
+  .cart-count {
+    top: -1px; /* Adjust position */
+    right: -6px; /* Adjust position */
+  }
+
+  /* Add additional styles or overrides for mobile here */
+}
