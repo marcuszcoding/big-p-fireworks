@@ -123,14 +123,29 @@
   font-size: 12px;
 }
 
-@media (max-width: 600px) {
-  .newsletter form {
-    flex-direction: column;
+@media (max-width: 768px) {
+  .footer {
+    padding: 10px; /* Adjust padding for smaller screens */
+    flex-direction: column; /* Stack sections on top of each other */
+    text-align: center; /* Center text within sections */
+  }
+
+  .footer-section {
+    padding: 10px;
+    border-right: none; /* Remove border from all sections */
+    margin-bottom: 10px; /* Add spacing between sections */
   }
 
   .newsletter input[type="email"] {
-    width: 100%;
-    margin-right: 0;
-    margin-bottom: 10px;
+    width: 100%; /* Make the input full width */
+    margin: 10px 0; /* Add spacing between input and button */
+  }
+
+  .links-section a {
+    margin: 5px 0; /* Adjust spacing between links */
+  }
+
+  .social-links a {
+    margin: 5px 10px; /* Adjust spacing between social icons */
   }
 }

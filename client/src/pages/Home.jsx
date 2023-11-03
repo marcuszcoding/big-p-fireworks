@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Slide } from 'react-slideshow-image';
 import '../styles/Home.css'; // Import your custom CSS file for styling
 import 'react-slideshow-image/dist/styles.css';
@@ -27,6 +27,35 @@ const divStyle = {
 }
 
 const Home = () => {
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    // Check the screen width and set the isSmallScreen state
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth <= 768);
+    };
+
+    // Initial check
+    handleResize();
+
+    // Add event listener to handle window resize
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const divStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: isSmallScreen ? '200px' : '775px', // Change height for small screens
+    width: isSmallScreen ? '100%' : 'auto', // Change width for small screens
+    backgroundSize: 'cover'
+  }
+
   return (
     <div className="homepage-container">
       <div className="text-container">

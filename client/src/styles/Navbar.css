@@ -169,6 +169,10 @@
     flex: 1; /* Distribute available space evenly */
   }
 
+  .nav-item {
+    display: none;
+  }
+
   .navbar-right {
     margin-top: 0px; /* Adjust spacing between right-aligned items */
   }
