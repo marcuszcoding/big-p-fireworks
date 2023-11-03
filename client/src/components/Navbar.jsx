@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart} from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from "../images/bigplogoweb.png"
 import { useShopCart } from '../hooks/ShopContext'
@@ -15,17 +15,17 @@ const Navbar = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
 
-  const {cartItemsCount} = useShopCart()
+  const { cartItemsCount } = useShopCart()
 
 
   useEffect(() => {
-    if(currentUser) {
+    if (currentUser) {
       setIsAdmin(currentUser.admin_role)
     }
-   
+
   }, [currentUser]);
 
-  const handleLogout = async() => {
+  const handleLogout = async () => {
     await logout()
     navigate('/login')
   };
@@ -60,36 +60,36 @@ const Navbar = () => {
             </Link>
           </li>
           {currentUser && isAdmin && (
-  <li className="nav-item dropdown">
-    <Link
-      to="/admin"
-      className="nav-link dropdown-toggle-admin"
-      id="adminDropdown"
-      role="button"
-      data-bs-toggle="dropdown"
-      aria-expanded="false"
-    >
-      Admin
-    </Link>
-    <ul className="dropdown-menu" aria-labelledby="adminDropdown">
-      <li>
-        <Link to="/admin/products/create" className="dropdown-item">
-          Create Product
-        </Link>
-      </li>
-      <li>
-        <Link to="/admin/products/edit" className="dropdown-item">
-          Edit Product
-        </Link>
-      </li>
-      <li>
-        <Link to="/admin/orders/view" className="dropdown-item">
-          View Orders
-        </Link>
-      </li>
-    </ul>
-  </li>
-)}
+            <li className="nav-item dropdown">
+              <Link
+                to="/admin"
+                className="nav-link dropdown-toggle-admin"
+                id="adminDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Admin
+              </Link>
+              <ul className="dropdown-menu" aria-labelledby="adminDropdown">
+                <li>
+                  <Link to="/admin/products/create" className="dropdown-item">
+                    Create Product
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/admin/products/edit" className="dropdown-item">
+                    Edit Product
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/admin/orders/view" className="dropdown-item">
+                    View Orders
+                  </Link>
+                </li>
+              </ul>
+            </li>
+          )}
 
         </ul>
       </div>
