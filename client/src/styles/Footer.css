@@ -148,4 +148,13 @@
   .social-links a {
     margin: 5px 10px; /* Adjust spacing between social icons */
   }
+
+  .footer-section:not(:last-child) {
+    border-right: 0px solid #ddd;
+  }
+
+  .spacer {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
 }
