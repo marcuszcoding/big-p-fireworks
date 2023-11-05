@@ -55,6 +55,7 @@ p {
     flex-direction: column; /* Stack elements vertically */
     align-items: center;
     padding: 10px; /* Adjust padding for smaller screens */
+    height: 35rem;
   }
 
   .slideshow-container {
