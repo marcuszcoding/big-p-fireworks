@@ -18,13 +18,13 @@ const slideImages = [
   },
 ];
 
-const divStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  height: '775px',
-  backgroundSize: 'cover'
-}
+// const divStyle = {
+//   display: 'flex',
+//   alignItems: 'center',
+//   justifyContent: 'center',
+//   height: '775px',
+//   backgroundSize: 'cover'
+// }
 
 const Home = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
