@@ -84,11 +84,43 @@
 }
 
 @media (max-width: 768px) {
+  .sidebar-category {
+    width: 30%;
+    padding: 10px;
+    padding-top: 1em;
+    margin-right: 0;
+    border-right: none;
+    text-align: left;
+  }
+
+  .product {
+    flex-direction: row;
+    margin-bottom: 20px;
+    margin-right: 0;
+  }
+
+  .image:hover {
+    transform: none;
+  }
+
+  .product-box {
+    width: 100%;
+  }
+
+  .image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 0;
+  }
+
   .category-box {
+    width: 100%;
     padding: 10px;
   }
 
   .category-box--selected {
     padding: 10px;
+    transform: none;
   }
 }
