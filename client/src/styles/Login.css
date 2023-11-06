@@ -57,4 +57,50 @@
   color: #000000;
 }
 
+/* Mobile */
+@media (max-width: 768px) {
+  .login-container {
+    width: 60%; /* Adjust the width to your desired size */
+    max-width: 300px; /* Limit the maximum width to prevent it from getting too wide */
+    height: auto; /* Allow the height to adjust automatically based on content */
+    margin: 50px auto; /* Reduce margin for mobile */
+    padding: 20px; /* Reduce padding for mobile */
+  }
 
+  .login-container h2 {
+    margin-top: 10px;
+    margin-bottom: 10px; /* Increase spacing below the header */
+  }
+
+  .login-container form {
+    margin-bottom: 20px; /* Reduce margin for mobile */
+  }
+
+  .login-container .form-group {
+    margin-bottom: 20px; /* Reduce margin for mobile */
+    text-align: center; /* Center align form fields */
+  }
+
+  .login-container label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .login-container input {
+    width: 90%; /* Make the input full width on mobile */
+  }
+
+  .login-container button {
+    width: 100%; /* Make the button full width on mobile */
+  }
+
+  .login-container p {
+    margin-top: 20px; /* Increase spacing above the "Don't have an account" link */
+    text-align: center; /* Center align the link */
+  }
+
+  .login-container a {
+    color: #000000;
+  }
+}
