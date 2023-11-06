@@ -194,10 +194,10 @@
   }
 
   .logout-button {
-    height: 1.1rem; /* Adjusted height */
-    width: 1.1rem; /* Adjusted width */
-    font-size: 1.1rem; /* Adjusted font size to match the "login" link */
-    padding-right: 2.6em; /* Remove padding to prevent overlapping */
+    height: 1.1rem; 
+    width: 1.1rem;
+    font-size: 1.1rem; 
+    padding-right: 2.6em; 
     padding-bottom: 1.2em;
   }
 
