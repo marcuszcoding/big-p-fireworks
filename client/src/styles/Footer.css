@@ -136,9 +136,18 @@
     margin-bottom: 10px; /* Add spacing between sections */
   }
 
+  .newsletter h3 {
+    font-size: 0.9em;
+  }
+
+  .newsletter button {
+    font-size: .75em;
+  }
+
   .newsletter input[type="email"] {
     width: 100%; /* Make the input full width */
     margin: 10px 0; /* Add spacing between input and button */
+    font-size: .75em;
   }
 
   .links-section a {
@@ -156,5 +165,17 @@
   .spacer {
     padding-left: 1em;
     padding-right: 1em;
+  }
+
+  .subscribe-button {
+    size: .75em;
+  }
+
+  .social-text {
+    font-size: .8em;
+  }
+
+  .privacy-terms {
+    font-size: .75em;
   }
 }
