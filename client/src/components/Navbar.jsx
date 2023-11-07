@@ -8,15 +8,12 @@ import "../styles/Navbar.css"
 import { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/AuthContext';
 
-
-
 const Navbar = () => {
   const { currentUser, logout } = useAuth();
   const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
 
   const { cartItemsCount } = useShopCart()
-
 
   useEffect(() => {
     if (currentUser) {
