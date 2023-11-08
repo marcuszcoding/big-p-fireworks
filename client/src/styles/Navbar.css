@@ -175,8 +175,8 @@
     flex: 1; /* Distribute available space evenly */
   }
 
-  .nav-item {
-    display: none;
+  .navbar-brand {
+    display: flex;
   }
 
   .navbar-right {

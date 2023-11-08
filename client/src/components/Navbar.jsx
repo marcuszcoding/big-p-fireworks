@@ -1,30 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
-import logo from "../images/bigplogoweb.png"
-import { useShopCart } from '../hooks/ShopContext'
-import "../styles/Navbar.css"
-import { useState, useEffect } from 'react';
+import logo from "../images/bigplogoweb.png";
+import { useShopCart } from '../hooks/ShopContext';
 import { useAuth } from '../hooks/AuthContext';
+
+import DropdownMenu from './DropdownMenu';
+
+import "../styles/Navbar.css";
 
 const Navbar = () => {
   const { currentUser, logout } = useAuth();
-  const [isAdmin, setIsAdmin] = useState(false);
+  const { cartItemsCount } = useShopCart();
   const navigate = useNavigate();
 
-  const { cartItemsCount } = useShopCart()
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
-    if (currentUser) {
-      setIsAdmin(currentUser.admin_role)
-    }
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
 
-  }, [currentUser]);
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const handleLogout = async () => {
-    await logout()
-    navigate('/login')
+    await logout();
+    navigate('/login');
   };
 
   return (
@@ -33,61 +40,43 @@ const Navbar = () => {
         <Link to="/" className="navbar-logo">
           <img src={logo} alt="Fireworks Website Logo" className="navbar-logo-img" />
         </Link>
+        {isMobile && (
+          <DropdownMenu currentUser={currentUser} />
+        )}
       </div>
       <div className="navbar-menu">
         <ul className="navbar-nav">
-          <li className="nav-item">
-            <Link style={{ textDecoration: 'none' }} to="/" className="nav-link">
-              Home
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link style={{ textDecoration: 'none' }} to="/shop" className="nav-link">
-              Shop
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link style={{ textDecoration: 'none' }} to="/contact" className="nav-link">
-              Contact
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link style={{ textDecoration: 'none' }} to="/locations" className="nav-link">
-              Locations
-            </Link>
-          </li>
-          {currentUser && isAdmin && (
-            <li className="nav-item dropdown">
-              <Link
-                to="/admin"
-                className="nav-link dropdown-toggle-admin"
-                id="adminDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
+          {!isMobile && (
+            <>
+              <li className="nav-item">
+                <Link style={{ textDecoration: 'none' }} to="/" className="nav-link">
+                  Home
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link style={{ textDecoration: 'none' }} to="/shop" className="nav-link">
+                  Shop
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link style={{ textDecoration: 'none' }} to="/contact" className="nav-link">
+                  Contact
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link style={{ textDecoration: 'none' }} to="/locations" className="nav-link">
+                  Locations
+                </Link>
+              </li>
+            </>
+          )}
+          {currentUser && (
+            <li className="nav-item">
+              <Link to="/admin" className="nav-link">
                 Admin
               </Link>
-              <ul className="dropdown-menu" aria-labelledby="adminDropdown">
-                <li>
-                  <Link to="/admin/products/create" className="dropdown-item">
-                    Create Product
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/admin/products/edit" className="dropdown-item">
-                    Edit Product
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/admin/orders/view" className="dropdown-item">
-                    View Orders
-                  </Link>
-                </li>
-              </ul>
             </li>
           )}
-
         </ul>
       </div>
       <div className="navbar-right">
