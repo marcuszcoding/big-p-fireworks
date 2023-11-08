@@ -63,6 +63,7 @@ p {
     margin-right: 0; /* Remove margin on the right */
     margin-top: 20px; /* Adjust top margin */
     height: 200px; /* Let the height adapt to content */
+    padding-top: 1em;
   }
 
   .text-container {

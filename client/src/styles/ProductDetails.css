@@ -158,3 +158,79 @@
   font-size: 16px;
   font-style: bold;
 }
+
+/* Your existing CSS rules here */
+
+@media (max-width: 768px) {
+  .container {
+    align-items: center; /* Center content vertically on smaller screens */
+    padding: 20px; /* Reduce padding for smaller screens */
+  }
+
+  .single-product {
+    width: 100%; /* Make the product container full width on mobile */
+    flex-direction: column; /* Stack elements vertically on mobile */
+    padding: 20px; /* Reduce padding for smaller screens */
+  }
+
+  .product-image-container {
+    flex-basis: 100%; /* Make the product image full width on mobile */
+    margin-bottom: 20px; /* Add space between image and details */
+  }
+
+  .product-details-container {
+    flex-basis: 100%; /* Make the product details full width on mobile */
+    padding-left: 0; /* Remove left padding for smaller screens */
+  }
+
+  .product-title {
+    font-size: 20px; /* Reduce font size for smaller screens */
+  }
+
+  .product-description {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  .product-price {
+    font-size: 18px; /* Reduce font size for smaller screens */
+    margin-bottom: 20px;
+  }
+
+  .quantity-container {
+    margin-bottom: 20px;
+  }
+
+  .quantity-container label {
+    margin-right: 10px;
+  }
+
+  .quantity-container input {
+    width: 100px; /* Adjust input width for smaller screens */
+  }
+
+  .add-to-cart-button {
+    padding: 12px 24px;
+    font-size: 18px; /* Reduce font size for smaller screens */
+    border-radius: 8px;
+  }
+
+  .pickup-container {
+    margin-bottom: 20px;
+  }
+
+  .pickup-icon {
+    margin-right: 10px;
+  }
+
+  .pickup-message {
+    font-size: 16px;
+  }
+
+  .video-container iframe {
+    width: 100%; /* Adjust the width as needed for mobile */
+    height: auto; /* Let the height adjust proportionally based on the width */
+  }
+
+  /* Additional mobile styles or overrides can be added here */
+}

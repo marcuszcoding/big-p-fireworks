@@ -56,3 +56,51 @@
 .register-container a {
   color: #000000;
 }
+
+/* Mobile */
+@media (max-width: 768px) {
+  .register-container {
+    width: 60%; /* Adjust the width to your desired size */
+    max-width: 300px; /* Limit the maximum width to prevent it from getting too wide */
+    height: auto; /* Allow the height to adjust automatically based on content */
+    margin: 50px auto; /* Reduce margin for mobile */
+    padding: 20px; /* Reduce padding for mobile */
+  }
+
+  .register-container h2 {
+    margin-top: 10px;
+    margin-bottom: 10px; /* Increase spacing below the header */
+  }
+
+  .register-container form {
+    margin-bottom: 20px; /* Reduce margin for mobile */
+  }
+
+  .register-container .form-group {
+    margin-bottom: 20px; /* Reduce margin for mobile */
+    text-align: center; /* Center align form fields */
+  }
+
+  .register-container label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .register-container input {
+    width: 90%; /* Make the input full width on mobile */
+  }
+
+  .register-container button {
+    width: 100%; /* Make the button full width on mobile */
+  }
+
+  .register-container p {
+    margin-top: 20px; /* Increase spacing above the "Already have an account" link */
+    text-align: center; /* Center align the link */
+  }
+
+  .register-container a {
+    color: #000000;
+  }
+}
