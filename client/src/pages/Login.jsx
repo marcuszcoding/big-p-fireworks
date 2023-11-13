@@ -15,7 +15,7 @@ const Login = () => {
 
     try {
       // Send login request to the server
-       await login(email, password)
+      await login(email, password)
       // Redirect to the desired page (e.g., dashboard)
       navigate('/');
     } catch (error) {
