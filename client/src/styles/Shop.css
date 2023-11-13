@@ -99,7 +99,7 @@
   }
 
   .sidebar-category select {
-    width: 98.5%; /* Take up 100% of the width */
+    width: 97%; /* Take up 100% of the width */
     padding: 10px;
     border-radius: 8px;
     font-size: 18px;
@@ -107,6 +107,7 @@
     border: 1px solid #ddd;
     text-align: center;
     background-color: #ffffff;
+    color: rgb(0, 0, 0);
   }
 
   .product {
@@ -120,7 +121,7 @@
   }
 
   .product-box {
-    width: 35%;
+    width: 34.7%;
     height: 170px;
   }
 
