@@ -99,13 +99,14 @@
   }
 
   .sidebar-category select {
-    width: 100%; /* Take up 100% of the width */
+    width: 98.5%; /* Take up 100% of the width */
     padding: 10px;
     border-radius: 8px;
     font-size: 18px;
     cursor: pointer;
     border: 1px solid #ddd;
     text-align: center;
+    background-color: #ffffff;
   }
 
   .product {
