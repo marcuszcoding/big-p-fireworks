@@ -89,7 +89,7 @@
   }
 
   .sidebar-category {
-    width: auto;
+    width: 98%;
     padding: 10px;
     padding-top: 1.5em;
     margin-right: 0.8em;
@@ -99,7 +99,7 @@
   }
 
   .sidebar-category select {
-    width: 98.5%; /* Take up 100% of the width */
+    width: 98%; /* Take up 100% of the width */
     padding: 10px;
     border-radius: 8px;
     font-size: 18px;
@@ -120,7 +120,7 @@
   }
 
   .product-box {
-    width: 35%;
+    width: 34%;
     height: 170px;
   }
 
