@@ -66,3 +66,48 @@ textarea {
 .submit-button:hover {
   background-color: #3b39b2;
 }
+
+/* Mobile */
+@media (max-width: 768px) {
+  .contact-container {
+    width: 99%;
+    max-width: 300px;
+    height: auto;
+    margin: 40px auto;
+    padding: 20px;
+  }
+
+  .contact-container h1 {
+    font-size: 26px;
+    margin-bottom: 10px;
+  }
+
+  .p1,
+  .p2 {
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+
+  .contact-form {
+    align-items: center;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    text-align: left;
+  }
+
+  input,
+  textarea {
+    width: 92%;
+  }
+
+  .submit-button {
+    width: 90%;
+  }
+}
