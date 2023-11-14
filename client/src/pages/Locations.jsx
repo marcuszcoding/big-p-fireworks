@@ -8,6 +8,8 @@ const LocationsPage = () => {
   const [centerPosition, setCenterPosition] = useState([30.339980, -98.039540]);
   const [zoomLevel, setZoomLevel] = useState(9);
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [showMap, setShowMap] = useState(true);
+
   const locations = [
     { id: 1, name: 'BigP Indoor Store: ', address: "10501 SH 71 Burnet, TX 78611", geocode: [30.514890, -98.315610] },
     { id: 2, name: 'The O.G Stand: ', address: "2093 Ranch Rd 1431 Kingsland, TX 78639", geocode: [30.661680, -98.446610] },
@@ -24,8 +26,6 @@ const LocationsPage = () => {
     iconUrl: "https://cdn-icons-png.flaticon.com/128/684/684908.png",
     iconSize: [38, 38]
   });
-  // eslint-disable-next-line
-  const [showMap, setShowMap] = useState(true); // State to control map visibility
 
   useEffect(() => {
     const mobileBreakpoint = 768;
@@ -42,7 +42,6 @@ const LocationsPage = () => {
     };
   }, []);
 
-
   const handleClickMarker = (location) => {
     setCenterPosition(location.geocode);
     setZoomLevel(12);
@@ -58,14 +57,22 @@ const LocationsPage = () => {
       <div key={location.id} className="location-item">
         <span
           className="location-name"
-          onClick={(e) => {
-            // e.preventDefault();
-            handleClickLocationName(location);
-          }}
+          onClick={() => handleClickLocationName(location)}
         >
           {location.name}
         </span>
-        <span className="location-address">{location.address}</span>
+        {showMap ? (
+          <span className="location-address">{location.address}</span>
+        ) : (
+          <a
+            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location.address)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="location-address"
+          >
+            {location.address}
+          </a>
+        )}
       </div>
     ));
   };
@@ -107,3 +114,19 @@ const LocationsPage = () => {
 
 export default LocationsPage;
 
+
+/*
+
+  const locations = [
+    { id: 1, name: 'BigP Indoor Store: ', address: "10501 SH 71 Burnet, TX 78611", geocode: [30.514890, -98.315610] },
+    { id: 2, name: 'The O.G Stand: ', address: "2093 Ranch Rd 1431 Kingsland, TX 78639", geocode: [30.661680, -98.446610] },
+    { id: 3, name: 'Near Wakepoint LBJ Stand: ', address: "14609 RR 1431 Kingsland, TX 78639", geocode: [30.656840, -98.426240] },
+    { id: 4, name: 'Spicewood Stand #1: ', address: "19305 Hwy, 71 West Spicewood, TX 78669", geocode: [30.339980, -98.039540] },
+    { id: 5, name: 'Spicewood Stand #2: ', address: "10115 Hwy, 71 West Spicewood, TX 78669", geocode: [30.458576, -98.155568] },
+    { id: 6, name: 'Hudson Bend Stand: ', address: "5001 Hudson Bend Road Austin, TX 78734", geocode: [30.412570, -97.926830] },
+    { id: 7, name: 'Bushy Creek Stand: ', address: "15418 N. FM 620 Austin, TX 78717", geocode: [30.504310, -97.718170] },
+    { id: 8, name: 'Shiner TX Stand: ', address: "Hwy. 90A West (Across from Family Dollar)", geocode: [29.438970, -97.180890] },
+    { id: 9, name: 'Brady Stand: ', address: "1187 Hwy. 87 North Brady, TX 76825", geocode: [31.126500, -99.335050] }
+  ];
+
+*/
