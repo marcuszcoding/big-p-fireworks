@@ -13,6 +13,9 @@ const productsInventorySeeds= require('./seeds/productsInventorySeeds')
 const productsCategoriesSchema = require('./schemas/products_categories')
 const productsCategoriesSeeds = require('./seeds/productsCategoriesSeeds')
 
+const locationSchema = require('./schemas/locations')
+const locationSeeds = require('./seeds/locationsSeeds')
+
 const cartItemsSchema = require('./schemas/cart_items')
 
 const discountsSchema = require ('./schemas/discounts')
@@ -33,10 +36,12 @@ const promises = [
   db.query(orderSchema),
   db.query(orderDetailsSchema),
   db.query(cartItemsSchema),
+  db.query(locationSchema),
   db.query(usersSeeds),
   db.query(productsCategoriesSeeds),
   db.query(productsSeeds),
   db.query(productsInventorySeeds),
+  db.query(locationSeeds)
 
 ];
 
