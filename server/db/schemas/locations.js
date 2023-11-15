@@ -6,7 +6,8 @@ CREATE TABLE locations (
   id SERIAL PRIMARY KEY,
   name VARCHAR(255),
   address VARCHAR(255),
-  geocode POINT
+  latitude DOUBLE PRECISION,
+  longitude DOUBLE PRECISION
 );
 
 `
