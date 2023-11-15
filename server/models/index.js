@@ -7,6 +7,7 @@ const OrderDetailsModel = require('./OrderDetailsModel');
 const DiscountsModel = require('./DiscountsModel');
 const UsersModel = require('./UsersModel');
 const CartItemsModel = require('./CartItemsModel');
+const LocationsModel = require('./LocationsModel')
 
 module.exports = {
   AuthModel,
@@ -17,5 +18,6 @@ module.exports = {
   OrderDetailsModel,
   DiscountsModel,
   UsersModel,
-  CartItemsModel
+  CartItemsModel,
+  LocationsModel
 };
