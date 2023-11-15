@@ -8,7 +8,7 @@ const OrdersController = require('./OrdersController');
 const OrderDetailsController = require('./OrderDetailsController')
 const DiscountsController = require('./DiscountsController');
 const CartItemsController = require('./CartItemsController');
-const LocationsController = require('./LocationsController')
+const LocationsController = require('./LocationsController');
 
 module.exports = {
   IndexController,
