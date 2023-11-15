@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../styles/EditLocations.css'; // Make sure to adjust the CSS file path
+import '../styles/EditLocations.css';
 import { useNavigate } from 'react-router-dom';
 
 const EditLocations = () => {
@@ -54,7 +54,8 @@ const EditLocations = () => {
       const data = {
         name: editedLocation.name,
         address: editedLocation.address,
-        geocode: editedLocation.geocode,
+        latitude: editedLocation.latitude, // Updated field name
+        longitude: editedLocation.longitude, // Updated field name
         // Add more fields as needed
       };
 
@@ -95,6 +96,7 @@ const EditLocations = () => {
             <input
               type="text"
               id="locationName"
+              className="edit-location-input"
               value={editedLocation.name || ''}
               onChange={(e) => handleFieldChange('name', e.target.value)}
             />
@@ -105,22 +107,34 @@ const EditLocations = () => {
             <input
               type="text"
               id="locationAddress"
+              className="edit-location-input"
               value={editedLocation.address || ''}
               onChange={(e) => handleFieldChange('address', e.target.value)}
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="locationGeocode">Location Geocode:</label>
+            <label htmlFor="locationLatitude">Location Latitude:</label>
             <input
               type="text"
-              id="locationGeocode"
-              value={editedLocation.geocode || ''}
-              onChange={(e) => handleFieldChange('geocode', e.target.value)}
+              id="locationLatitude"
+              className="edit-location-input"
+              value={editedLocation.latitude || ''}
+              onChange={(e) => handleFieldChange('latitude', e.target.value)}
             />
           </div>
 
-          {/* Add more input fields for other location details as needed */}
+          <div className="form-group">
+            <label htmlFor="locationLongitude">Location Longitude:</label>
+            <input
+              type="text"
+              id="locationLongitude"
+              className="edit-location-input"
+              value={editedLocation.longitude || ''}
+              onChange={(e) => handleFieldChange('longitude', e.target.value)}
+            />
+          </div>
+
           <button className="save-button" onClick={handleSaveChanges} disabled={!selectedLocation}>
             Save Changes
           </button>
@@ -131,3 +145,5 @@ const EditLocations = () => {
 };
 
 export default EditLocations;
+
+
