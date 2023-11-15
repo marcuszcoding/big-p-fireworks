@@ -11,6 +11,7 @@ const OrdersRoutes = require('./OrdersRoutes');
 const OrderDetailsRoutes = require('./OrderDetailsRoutes')
 const DiscountsRoutes = require('./DiscountsRoutes')
 const CartItemsRoutes = require('./CartItemsRoutes')
+const LocationRoutes = require('./LocationsRoutes')
 
 const router = express.Router();
 
@@ -41,6 +42,8 @@ router.use('/api/discounts', DiscountsRoutes);
 //CRUD REST API CART ITEM ROUTES
 router.use('/api/cart_items', CartItemsRoutes);
 
+//CRUD REST API LOCATIONS ROUTES
+router.use('/api/locations', LocationRoutes)
 
 // Catch all route
 router.use((req, res) => {
