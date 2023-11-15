@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS discounts CASCADE;
 DROP TABLE IF EXISTS orders CASCADE;
 DROP TABLE IF EXISTS order_details CASCADE;
 DROP TABLE IF EXISTS cart_items CASCADE;
+DROP TABLE IF EXISTS locations CASCADE;
 
 
   CREATE TABLE users (
@@ -80,6 +81,13 @@ DROP TABLE IF EXISTS cart_items CASCADE;
     created_at TIMESTAMP NOT NULL, 
     updated_at TIMESTAMP NOT NULL, 
     deleted_at TIMESTAMP NOT NULL
+  );
+
+  CREATE TABLE locations (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    address VARCHAR(255),
+    geocode POINT
   );
 
 `
