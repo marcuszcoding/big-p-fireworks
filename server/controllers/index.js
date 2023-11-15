@@ -7,7 +7,8 @@ const ProductsCategoryController = require('./ProductsCategoryController');
 const OrdersController = require('./OrdersController');
 const OrderDetailsController = require('./OrderDetailsController')
 const DiscountsController = require('./DiscountsController');
-const CartItemsController = require('./CartItemsController')
+const CartItemsController = require('./CartItemsController');
+const LocationsController = require('./LocationsController');
 
 module.exports = {
   IndexController,
@@ -19,5 +20,6 @@ module.exports = {
   OrdersController,
   OrderDetailsController,
   DiscountsController,
-  CartItemsController
+  CartItemsController,
+  LocationsController
 };
