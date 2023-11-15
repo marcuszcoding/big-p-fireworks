@@ -61,11 +61,8 @@ const LocationsPage = () => {
         {locations.length > 0 ? (
           locations.map(location => (
             <div key={location.id} className="location-item">
-              <span
-                className="location-name"
-                onClick={() => handleClickLocationName(location)}
-              >
-                {location.name}
+              <span className="location-name" onClick={() => handleClickLocationName(location)}>
+                {location.name}:
               </span>
               {showMap ? (
                 <span className="location-address">{location.address}</span>

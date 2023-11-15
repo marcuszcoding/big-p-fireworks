@@ -45,6 +45,7 @@
 
 .location-address{
   font-size: 18px;
+  padding-left: 6px;
 }
 
 .leaflet-container {
@@ -78,6 +79,7 @@
   .location-address {
     font-size: 13px;
     margin-top: 6px;
+    padding-left: 0px;
     color: black;
   }
 
