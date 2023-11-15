@@ -15,6 +15,7 @@ import CreateProduct from './pages/CreateProduct'
 import EditProduct from './pages/EditProduct'
 import ViewOrder from './pages/ViewOrder'
 import OrderDetails from './pages/OrderDetails'
+import EditLocations from './pages/EditLocations'
 import axios from 'axios'
 
 function App() {
@@ -55,6 +56,7 @@ const [selectedCategory ,setSelectedCategory] = useState(null)
             <Route path="/admin/products/create" element={<CreateProduct />} />
             <Route path="/admin/products/edit" element={<EditProduct fetchProducts = {fetchProducts} products = {products}/>} />
             <Route path="/admin/orders/view" element={<ViewOrder />} />
+            <Route path="/admin/locations" element={<EditLocations />} />
             <Route path="/orders/:orderId" element={<OrderDetails />} />
           </Routes>
         </div>

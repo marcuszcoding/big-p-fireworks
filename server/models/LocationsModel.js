@@ -3,7 +3,7 @@ const { db } = require('../db');
 const createLocation = (name, address, latitude, longitude) => {
   return db
     .query(
-      'INSERT INTO locations (name, address, geocode) VALUES ($1, $2, POINT($3, $4)) RETURNING *',
+      'INSERT INTO locations (name, address, latitude, longitude) VALUES ($1, $2, $3, $4) RETURNING *',
       [name, address, latitude, longitude]
     )
     .then(data => data.rows[0])
@@ -27,7 +27,7 @@ const getLocationById = id => {
 const updateLocation = (name, address, latitude, longitude, id) => {
   return db
     .query(
-      'UPDATE locations SET name = $1, address = $2, geocode = POINT($3, $4) WHERE id = $5 RETURNING *',
+      'UPDATE locations SET name = $1, address = $2, latitude = $3, longitude = $4 WHERE id = $5 RETURNING *',
       [name, address, latitude, longitude, id]
     )
     .then(data => data.rows[0])
@@ -42,3 +42,4 @@ const removeLocation = id => {
 };
 
 module.exports = { createLocation, getAllLocations, getLocationById, updateLocation, removeLocation };
+
