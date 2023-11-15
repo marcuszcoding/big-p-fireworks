@@ -13,9 +13,17 @@ import "../styles/Navbar.css";
 const Navbar = () => {
   const { currentUser, logout } = useAuth();
   const { cartItemsCount } = useShopCart();
+  const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    if (currentUser) {
+      setIsAdmin(currentUser.admin_role)
+    }
+
+  }, [currentUser]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -70,11 +78,35 @@ const Navbar = () => {
               </li>
             </>
           )}
-          {currentUser && (
-            <li className="nav-item">
-              <Link to="/admin" className="nav-link">
+          {currentUser && isAdmin && (
+            <li className="nav-item dropdown">
+              <Link
+                to="/admin"
+                className="nav-link dropdown-toggle-admin"
+                id="adminDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
                 Admin
               </Link>
+              <ul className="dropdown-menu" aria-labelledby="adminDropdown">
+                <li>
+                  <Link to="/admin/products/create" className="dropdown-item">
+                    Create Product
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/admin/products/edit" className="dropdown-item">
+                    Edit Product
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/admin/orders/view" className="dropdown-item">
+                    View Orders
+                  </Link>
+                </li>
+              </ul>
             </li>
           )}
         </ul>
