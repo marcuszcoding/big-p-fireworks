@@ -98,6 +98,20 @@ const EditLocations = () => {
     }
   };
 
+  const handleDeleteLocation = async () => {
+    if (!window.confirm('Are you sure you want to delete this location?')) {
+      return;
+    }
+
+    try {
+      await tokenRequest('delete', `/api/locations/${selectedLocation}`);
+      console.log('Location deleted successfully');
+      navigate('/locations');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="edit-locations-container">
       <div className="edit-locations-card">
@@ -168,6 +182,10 @@ const EditLocations = () => {
             <button className="save-button" onClick={handleSaveChanges} disabled={!selectedLocation}>
               Save Changes
             </button>
+
+            <button className="save-button delete-button" onClick={handleDeleteLocation}>
+              Delete Location
+            </button>
           </div>
         )}
       </div>
@@ -229,3 +247,4 @@ const EditLocations = () => {
 };
 
 export default EditLocations;
+
