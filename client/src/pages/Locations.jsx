@@ -37,7 +37,8 @@ const LocationsPage = () => {
     axios.get('/api/locations')
       .then(response => {
         console.log('Fetched data:', response.data.locations);
-        setLocations(response.data.locations);
+        const sortedLocations = response.data.locations.slice().sort((a, b) => a.name.localeCompare(b.name));
+        setLocations(sortedLocations);
       })
       .catch(error => {
         console.error('Error fetching locations:', error);
