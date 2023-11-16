@@ -17,7 +17,7 @@ router.get('/', ProductsController.getAll);
 router.get('/:id', ProductsController.getById);
 
 // UPDATE - put
-router.put('/:id', ProductsController.update);
+router.put('/:id', validateJWT, jwtIsAdmin, ProductsController.update);
 
 // DELETE - delete
 router.delete('/:id', validateJWT, jwtIsAdmin, ProductsController.remove);
