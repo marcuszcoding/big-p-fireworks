@@ -73,10 +73,27 @@ const EditProduct = (props) => {
     }
   };
 
+  const handleDeleteProduct = async () => {
+    // Display a confirmation dialog
+    const isConfirmed = window.confirm('Are you sure you want to delete this product?');
+
+    if (isConfirmed) {
+      try {
+        await tokenRequest('delete', `/api/products/${selectedProduct}`);
+        console.log('Product deleted successfully');
+        fetchProducts();
+        navigate('/shop');
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+
   const filteredProducts = searchQuery !== ''
     ? products.filter((product) =>
-        product.product_name.toLowerCase().startsWith(searchQuery.toLowerCase())
-      )
+      product.product_name.toLowerCase().startsWith(searchQuery.toLowerCase())
+    )
     : [];
 
   return (
@@ -178,6 +195,11 @@ const EditProduct = (props) => {
           <button className="save-button" onClick={handleSaveChanges} disabled={!selectedProduct}>
             Save Changes
           </button>
+
+          {/* Add the delete button here */}
+          <button className="delete-button-product" onClick={handleDeleteProduct} disabled={!selectedProduct}>
+            Delete Product
+          </button>
         </div>
       )}
     </div>
@@ -185,3 +207,4 @@ const EditProduct = (props) => {
 };
 
 export default EditProduct;
+
