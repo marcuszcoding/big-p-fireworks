@@ -111,6 +111,11 @@ const Navbar = () => {
                     Edit Locations
                   </Link>
                 </li>
+                <li>
+                  <Link to="/admin/categories" className="dropdown-item">
+                    Edit Categories
+                  </Link>
+                </li>
               </ul>
             </li>
           )}
