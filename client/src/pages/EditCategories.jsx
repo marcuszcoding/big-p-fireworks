@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../styles/EditCategories.css'; // Make sure to update the stylesheet import
+import '../styles/EditCategories.css';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/AuthContext';
 
@@ -9,18 +9,26 @@ const EditCategories = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [editedCategory, setEditedCategory] = useState({});
   const [newCategory, setNewCategory] = useState({
-    name: '',
-    description: '',
+    category_name: '',
   });
+  const [loadingCategories, setLoadingCategories] = useState(true);
   const navigate = useNavigate();
   const { tokenRequest } = useAuth();
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('/api/categories');
-        console.log('Categories:', response.data.categories);
-        setCategories(response.data.categories);
+        const response = await axios.get('/api/products_category');
+        console.log('API Response:', response);
+
+        if (Array.isArray(response.data.products_categories)) {
+          setCategories(response.data.products_categories);
+        } else {
+          console.error('Invalid response format. Expected an array.');
+          console.log('Actual response data:', response.data);
+        }
+
+        setLoadingCategories(false);
       } catch (error) {
         console.error('Error fetching categories:', error);
       }
@@ -32,9 +40,9 @@ const EditCategories = () => {
   useEffect(() => {
     if (selectedCategory) {
       axios
-        .get(`/api/categories/${selectedCategory}`)
+        .get(`/api/products_category/${selectedCategory}`)
         .then((response) => {
-          setEditedCategory(response.data.category);
+          setEditedCategory(response.data);
         })
         .catch((error) => {
           console.log('Failed to fetch selected category:', error);
@@ -61,16 +69,14 @@ const EditCategories = () => {
 
     try {
       const data = {
-        name: editedCategory.name,
-        description: editedCategory.description,
+        category_name: editedCategory.category_name,
       };
 
-      await tokenRequest('put', `/api/categories/${selectedCategory}`, data);
-
+      await tokenRequest('put', `/api/products_category/${selectedCategory}`, { data });
       console.log('Changes saved successfully');
       navigate('/categories');
     } catch (error) {
-      console.log(error);
+      console.error('Error saving changes:', error);
     }
   };
 
@@ -79,16 +85,14 @@ const EditCategories = () => {
 
     try {
       const data = {
-        name: newCategory.name,
-        description: newCategory.description,
+        category_name: newCategory.category_name,
       };
 
-      await tokenRequest('post', '/api/categories', data);
-
+      await tokenRequest('post', '/api/products_category', data);
       console.log('New category added successfully');
       navigate('/categories');
     } catch (error) {
-      console.log(error);
+      console.error('Error adding new category:', error);
     }
   };
 
@@ -98,11 +102,11 @@ const EditCategories = () => {
     }
 
     try {
-      await tokenRequest('delete', `/api/categories/${selectedCategory}`);
+      await tokenRequest('delete', `/api/products_category/${selectedCategory}`);
       console.log('Category deleted successfully');
       navigate('/categories');
     } catch (error) {
-      console.log(error);
+      console.error('Error deleting category:', error);
     }
   };
 
@@ -113,18 +117,22 @@ const EditCategories = () => {
 
         <div className="categories-dropdown">
           <label htmlFor="categoryDropdown">Select a category:</label>
-          <select
-            id="categoryDropdown"
-            value={selectedCategory}
-            onChange={(e) => handleCategoryChange(e.target.value)}
-          >
-            <option value="">Select a category</option>
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
+          {loadingCategories ? (
+            <p>Loading categories...</p>
+          ) : (
+            <select
+              id="categoryDropdown"
+              value={selectedCategory}
+              onChange={(e) => handleCategoryChange(e.target.value)}
+            >
+              <option value="">Select a category</option>
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.category_name}
+                </option>
+              ))}
+            </select>
+          )}
         </div>
 
         {selectedCategory && (
@@ -135,19 +143,8 @@ const EditCategories = () => {
                 type="text"
                 id="categoryName"
                 className="edit-category-input"
-                value={editedCategory.name || ''}
-                onChange={(e) => handleFieldChange('name', e.target.value)}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="categoryDescription">Category Description:</label>
-              <input
-                type="text"
-                id="categoryDescription"
-                className="edit-category-input"
-                value={editedCategory.description || ''}
-                onChange={(e) => handleFieldChange('description', e.target.value)}
+                value={editedCategory.category_name || ''}
+                onChange={(e) => handleFieldChange('category_name', e.target.value)}
               />
             </div>
 
@@ -171,19 +168,8 @@ const EditCategories = () => {
               type="text"
               id="newCategoryName"
               className="edit-category-input"
-              value={newCategory.name}
-              onChange={(e) => handleNewCategoryChange('name', e.target.value)}
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="newCategoryDescription">Category Description:</label>
-            <input
-              type="text"
-              id="newCategoryDescription"
-              className="edit-category-input"
-              value={newCategory.description}
-              onChange={(e) => handleNewCategoryChange('description', e.target.value)}
+              value={newCategory.category_name}
+              onChange={(e) => handleNewCategoryChange('category_name', e.target.value)}
             />
           </div>
 
