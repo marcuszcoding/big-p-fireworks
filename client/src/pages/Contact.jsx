@@ -6,7 +6,7 @@ const Contact = () => {
     <div className="contact-container">
       <h1>Contact Us</h1>
       <p className='p1'>We would love to hear from you! Please fill out the form below to get in touch.</p>
-      <p className='p2'>If not you can also phone us at <strong>(361)-772-3141</strong>!</p>
+      <p className='p2'>If not you can also phone us at <strong>(361)-772-2141</strong>!</p>
       <form className="contact-form">
         <div className="form-group">
           <label htmlFor="name">Name:</label>
