@@ -123,3 +123,82 @@
   cursor: pointer;
   background-color: rgb(184, 184, 184)
 }
+
+.cart-img {
+  width: 80px;
+}
+
+/* Mobile styles for screens up to 768px */
+@media (max-width: 768px) {
+  .cart-page {
+    margin: 10px;
+  }
+
+  .cart-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .cart-table th,
+  .cart-table td {
+    font-size: 9px;
+  }
+
+  .quantity-btn {
+    padding: 2px 4px;
+    font-size: 8px;
+  }
+
+  .quantity-input {
+    width: 10px;
+    font-size: 8px;
+    text-align: center;
+    padding-left: 1px;
+    margin-right: 0;
+  }
+
+  .checkout-button {
+    font-size: 10px;
+    padding: 6px 12px;
+    margin-top: 10px;
+  }
+
+  .cart-summary {
+    margin-top: 10px;
+  }
+
+  .cart-summary span:first-child {
+    margin-right: 3px;
+  }
+
+  .checkout-container {
+    flex-direction: column-reverse;
+    margin-top: 10px;
+  }
+
+  .grand-total {
+    margin-top: 15px;
+    font-size: 12px;
+  }
+
+  .delete-cart-button:hover {
+    background-color: #ddd;
+  }
+
+  /* Adjust product image size */
+  .cart-img {
+    max-width: 45px
+  }
+
+  .subtotal {
+    font-size: 75%;
+  }
+
+  .tax {
+    font-size: 60%;
+  }
+
+  .grand-total{
+    font-size: 81%;
+  }
+}
