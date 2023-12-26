@@ -20,11 +20,11 @@ function Cart() {
     (accumulator, item) => accumulator + item.price * item.quantity,
     0
   ).toFixed(2);
-  
+
   // Calculate tax amount (assuming taxRate is a decimal, e.g., 0.15 for 15%)
   const taxRate = 0.0625;
   const taxAmount = (subtotal * taxRate).toFixed(2);
-  
+
   // Calculate grand total by converting subtotal, tax amount, and grand total to numbers
   const grandTotal = (Number(subtotal) + Number(taxAmount)).toFixed(2);
 
@@ -50,7 +50,7 @@ function Cart() {
               {cartItemsContainer.map((item) => (
                 <tr key={item.id}>
                   <td>
-                    <img src={item.image_url} width="80px" alt="" />
+                    <img className='cart-img' src={item.image_url} alt="" />
                   </td>
                   <td>{item.product_name}</td>
                   <td>${item.price}</td>
