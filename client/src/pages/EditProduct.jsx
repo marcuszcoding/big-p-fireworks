@@ -1,34 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../styles/EditCategories.css';
+import '../styles/EditProduct.css';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/AuthContext';
 
-const EditCategories = () => {
+const EditProduct = (props) => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedProduct, setSelectedProduct] = useState('');
+  const [editedProduct, setEditedProduct] = useState({});
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [editedCategory, setEditedCategory] = useState({});
-  const [newCategory, setNewCategory] = useState({
-    category_name: '',
-  });
-  const [loadingCategories, setLoadingCategories] = useState(true);
-  const navigate = useNavigate();
   const { tokenRequest } = useAuth();
+  const navigate = useNavigate();
+  const { fetchProducts, products } = props;
+
+  useEffect(() => {
+    if (selectedProduct) {
+      axios
+        .get(`/api/products/${selectedProduct}`)
+        .then((response) => {
+          setEditedProduct(response.data.product);
+        })
+        .catch((error) => {
+          console.log('Failed to fetch selected product:', error);
+        });
+    } else {
+      setEditedProduct({});
+    }
+  }, [selectedProduct]);
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get('/api/products_category');
-        console.log('API Response:', response);
-
-        if (Array.isArray(response.data.products_categories)) {
-          setCategories(response.data.products_categories);
-        } else {
-          console.error('Invalid response format. Expected an array.');
-          console.log('Actual response data:', response.data);
-        }
-
-        setLoadingCategories(false);
+        setCategories(response.data.products_categories);
       } catch (error) {
         console.error('Error fetching categories:', error);
       }
@@ -37,31 +41,13 @@ const EditCategories = () => {
     fetchCategories();
   }, []);
 
-  useEffect(() => {
-    if (selectedCategory) {
-      axios
-        .get(`/api/products_category/${selectedCategory}`)
-        .then((response) => {
-          setEditedCategory(response.data);
-        })
-        .catch((error) => {
-          console.log('Failed to fetch selected category:', error);
-        });
-    } else {
-      setEditedCategory({});
-    }
-  }, [selectedCategory]);
-
-  const handleCategoryChange = (categoryId) => {
-    setSelectedCategory(categoryId);
+  const handleProductChange = (productId) => {
+    setSelectedProduct(productId);
   };
 
-  const handleFieldChange = (fieldName, value) => {
-    setEditedCategory((prevCategory) => ({ ...prevCategory, [fieldName]: value }));
-  };
-
-  const handleNewCategoryChange = (fieldName, value) => {
-    setNewCategory((prevCategory) => ({ ...prevCategory, [fieldName]: value }));
+  const handleFieldChange = (e, fieldName) => {
+    const value = e.target.value;
+    setEditedProduct((prevProduct) => ({ ...prevProduct, [fieldName]: value }));
   };
 
   const handleSaveChanges = async (event) => {
@@ -69,61 +55,113 @@ const EditCategories = () => {
 
     try {
       const data = {
-        category_name: editedCategory.category_name,
+        product_name: editedProduct.product_name,
+        price: editedProduct.price,
+        description: editedProduct.description,
+        image_url: editedProduct.image_url,
+        video_url: editedProduct.video_url,
+        category_id: editedProduct.category_id
       };
 
-      await tokenRequest('put', `/api/products_category/${selectedCategory}`, { data });
+      await tokenRequest('put', `/api/products/${selectedProduct}`, data);
+
       console.log('Changes saved successfully');
-      navigate('/categories');
+      fetchProducts();
+      navigate('/shop');
     } catch (error) {
-      console.error('Error saving changes:', error);
+      console.log(error);
     }
   };
 
-  const handleAddCategory = async (event) => {
-    event.preventDefault();
+  const handleDeleteProduct = async () => {
+    // Display a confirmation dialog
+    const isConfirmed = window.confirm('Are you sure you want to delete this product?');
 
-    try {
-      const data = {
-        category_name: newCategory.category_name,
-      };
-
-      await tokenRequest('post', '/api/products_category', data);
-      console.log('New category added successfully');
-      navigate('/categories');
-    } catch (error) {
-      console.error('Error adding new category:', error);
+    if (isConfirmed) {
+      try {
+        await tokenRequest('delete', `/api/products/${selectedProduct}`);
+        console.log('Product deleted successfully');
+        fetchProducts();
+        navigate('/shop');
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
-  const handleDeleteCategory = async () => {
-    if (!window.confirm('Are you sure you want to delete this category?')) {
-      return;
-    }
 
-    try {
-      await tokenRequest('delete', `/api/products_category/${selectedCategory}`);
-      console.log('Category deleted successfully');
-      navigate('/categories');
-    } catch (error) {
-      console.error('Error deleting category:', error);
-    }
-  };
+  const filteredProducts = searchQuery !== ''
+    ? products.filter((product) =>
+      product.product_name.toLowerCase().startsWith(searchQuery.toLowerCase())
+    )
+    : [];
 
   return (
-    <div className="edit-categories-container">
-      <div className="edit-categories-card">
-        <h2 className="edit-categories-title">Edit Categories</h2>
+    <div className="edit-product-container">
+      <h2>Edit Product</h2>
+      <div className="search-container">
+        <input
+          type="text"
+          className="search-input"
+          placeholder="Search for a product..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        {filteredProducts.length > 0 && (
+          <div className="product-dropdown">
+            {filteredProducts.map((product) => (
+              <div
+                key={product.id}
+                className={`product-item ${selectedProduct === product.id ? 'selected' : ''}`}
+                onClick={() => {
+                  handleProductChange(product.id);
+                  setSearchQuery('');
+                }}
+              >
+                {product.product_name}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
 
-        <div className="categories-dropdown">
-          <label htmlFor="categoryDropdown">Select a category:</label>
-          {loadingCategories ? (
-            <p>Loading categories...</p>
-          ) : (
+      {selectedProduct && (
+        <div className="form-container">
+          <div className="form-group">
+            <label className="label">Product Name:</label>
+            <input
+              type="text"
+              className="input-field"
+              value={editedProduct.product_name || ''}
+              onChange={(e) => handleFieldChange(e, 'product_name')}
+            />
+          </div>
+
+          <div className="form-group">
+            <label className="label">Price:</label>
+            <input
+              type="number"
+              className="input-field"
+              value={editedProduct.price || ''}
+              onChange={(e) => handleFieldChange(e, 'price')}
+            />
+          </div>
+
+          <div className="form-group">
+            <label className="label">Description:</label>
+            <textarea
+              className="textarea-field"
+              value={editedProduct.description || ''}
+              onChange={(e) => handleFieldChange(e, 'description')}
+            />
+          </div>
+
+          <div className="form-group">
+            <label className="label">Category:</label>
             <select
-              id="categoryDropdown"
-              value={selectedCategory}
-              onChange={(e) => handleCategoryChange(e.target.value)}
+              className="input-field"
+              value={editedProduct.category_id || ''}
+              onChange={(e) => handleFieldChange(e, 'category_id')}
             >
               <option value="">Select a category</option>
               {categories.map((category) => (
@@ -132,54 +170,40 @@ const EditCategories = () => {
                 </option>
               ))}
             </select>
-          )}
-        </div>
-
-        {selectedCategory && (
-          <div className="form-container">
-            <div className="form-group">
-              <label htmlFor="categoryName">Category Name:</label>
-              <input
-                type="text"
-                id="categoryName"
-                className="edit-category-input"
-                value={editedCategory.category_name || ''}
-                onChange={(e) => handleFieldChange('category_name', e.target.value)}
-              />
-            </div>
-
-            <button className="save-button" onClick={handleSaveChanges} disabled={!selectedCategory}>
-              Save Changes
-            </button>
-
-            <button className="save-button delete-button" onClick={handleDeleteCategory}>
-              Delete Category
-            </button>
           </div>
-        )}
-      </div>
 
-      <div className="add-category-card">
-        <h2 className="add-category-title">Add New Category</h2>
-        <div className="form-container">
           <div className="form-group">
-            <label htmlFor="newCategoryName">Category Name:</label>
+            <label className="label">Video URL:</label>
             <input
               type="text"
-              id="newCategoryName"
-              className="edit-category-input"
-              value={newCategory.category_name}
-              onChange={(e) => handleNewCategoryChange('category_name', e.target.value)}
+              className="input-field"
+              value={editedProduct.video_url || ''}
+              onChange={(e) => handleFieldChange(e, 'video_url')}
             />
           </div>
 
-          <button className="save-button" onClick={handleAddCategory}>
-            Add Category
+          <div className="form-group">
+            <label className="label">Image URL:</label>
+            <input
+              type="text"
+              className="input-field"
+              value={editedProduct.image_url || ''}
+              onChange={(e) => handleFieldChange(e, 'image_url')}
+            />
+          </div>
+
+          <button className="save-button" onClick={handleSaveChanges} disabled={!selectedProduct}>
+            Save Changes
+          </button>
+
+          {/* Add the delete button here */}
+          <button className="delete-button-product" onClick={handleDeleteProduct} disabled={!selectedProduct}>
+            Delete Product
           </button>
         </div>
-      </div>
+      )}
     </div>
   );
 };
 
-export default EditCategories;
+export default EditProduct;
