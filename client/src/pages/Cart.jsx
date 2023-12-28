@@ -31,6 +31,7 @@ function Cart() {
   return (
     <div className="cart-page">
       <h1 className="cart-title">Your Cart</h1>
+      <h2 className="cart-na"> Currently not taking online orders!</h2>
       {cartItemsContainer.length === 0 ? (
         <p className="empty-cart-message">Your cart is empty! Please go to the Shop page to see our available products!</p>
       ) : (

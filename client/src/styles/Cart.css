@@ -9,6 +9,12 @@
   margin-bottom: 30px;
 }
 
+.cart-na{
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
 .cart-table {
   width: 100%;
   border-collapse: collapse;
