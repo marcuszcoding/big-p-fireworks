@@ -9,21 +9,27 @@ import { faTruck } from '@fortawesome/free-solid-svg-icons';
 function ProductDetails() {
   const [product, setProduct] = useState([]);
   const [quantity, setQuantity] = useState(1);
-  const [showVideo, setShowVideo] = useState(false); // State to track the visibility of the video
+  const [showVideo, setShowVideo] = useState(false);
   const location = useLocation();
   const { addToCart } = useShopCart();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const isVideoUrlValid = (url) => {
+    // Customize this regex based on your requirements for a valid video URL
+    const videoUrlRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|vimeo\.com)\/.*/;
+    return videoUrlRegex.test(url);
+  };
 
   useEffect(() => {
-    location.state 
-    ? axios
-      .get(`/api/products/${location.state.productId}`)
-      .then((response) => {
-        setProduct(response.data.product);
-      })
-      .catch(() => {})
-      : navigate('/shop')
-      // eslint-disable-next-line
+    location.state
+      ? axios
+        .get(`/api/products/${location.state.productId}`)
+        .then((response) => {
+          setProduct(response.data.product);
+        })
+        .catch(() => { })
+      : navigate('/shop');
+    // eslint-disable-next-line
   }, []);
 
   const handleQuantityChange = (event) => {
@@ -45,19 +51,21 @@ function ProductDetails() {
           <h2 className="product-title">{product.product_name}</h2>
           <p className="product-description">{product.description}</p>
           <p className="product-price">Price: ${product.price}</p>
-  
+
           <div className="pickup-container">
             <div className="pickup-icon">
               <FontAwesomeIcon icon={faTruck} />
             </div>
-            <p className="pickup-message">Available for pickup only at BigP Indoor Store</p>
+            <p className="pickup-message">
+              Available for pickup only at BigP Indoor Store
+            </p>
           </div>
-  
+
           <div className="dropdown-container">
             <button className="dropdown-toggle" onClick={handleVideoToggle}>
               {showVideo ? 'Hide Video' : 'Show Video'}
             </button>
-            {showVideo && (
+            {showVideo && isVideoUrlValid(product.video_url) && (
               <div className="video-container">
                 <iframe
                   width="560"
@@ -69,8 +77,11 @@ function ProductDetails() {
                 ></iframe>
               </div>
             )}
+            {showVideo && !isVideoUrlValid(product.video_url) && (
+              <p className="invalid-video-message">No Video URL</p>
+            )}
           </div>
-  
+
           <div className="quantity-container">
             <label htmlFor="quantity">Quantity:</label>
             <input
@@ -81,7 +92,10 @@ function ProductDetails() {
               onChange={handleQuantityChange}
             />
           </div>
-          <button className="add-to-cart-button" onClick={() => addToCart(product)}>
+          <button
+            className="add-to-cart-button"
+            onClick={() => addToCart(product)}
+          >
             Add to Cart
           </button>
         </div>
